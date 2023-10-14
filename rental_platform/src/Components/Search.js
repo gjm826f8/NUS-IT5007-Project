@@ -1,4 +1,3 @@
-import { AudioOutlined } from '@ant-design/icons';
 import React from 'react';
 import { Input, Space, Row, Col } from 'antd';
 import { Select } from 'antd';
@@ -20,6 +19,18 @@ const App = () => (
         marginLeft: 30,
       }}
     />
+    <style>
+    {`
+        .ant-input-search-button {
+        background-color: #1677ff; /* 设置按钮的背景颜色为蓝色 */
+        }
+
+        .ant-input-search-button:focus {
+        background-color: #1677ff; /* 设置按钮在获得焦点时的背景颜色为蓝色 */
+        }
+    `}
+    </style>
+
   </Space>
 );
 
