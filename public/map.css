@@ -1,0 +1,110 @@
+/* 
+ * Always set the map height explicitly to define the size of the div element
+ * that contains the map. 
+ */
+ #map {
+    height: 80%;
+    width: 55%;
+    margin-left: auto; 
+    margin-right: 0;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+  }
+  
+  /* 
+   * Optional: Makes the sample page fill the window. 
+   */
+  html,
+  body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .map-filter-btn {
+    height:50px;
+    width:50px;
+    position: relative;
+    left: 5px;
+  }
+
+  #map-all-btn {
+    position: relative;
+    top: 140;
+    height:50px;
+    width:50px;
+    border-radius: 5px;
+  }
+  #map-fav-btn {
+    position: relative;
+    top: 150;
+    height:50px;
+    width:50px;
+    border-radius: 5px;
+  }
+  #map-his-btn {
+    position: relative;
+    top: 160;
+    height:50px;
+    width:50px;
+    border-radius: 5px;
+  }
+
+  div.house-info {
+    width: 38%;
+    height: 75%;
+    overflow-x: auto;
+    overflow-y: auto;
+    text-align: center;
+    padding: 10px;
+    position: absolute;
+    left: 60px;
+    top: 135;
+    border-radius: 5px;
+  }
+
+  div#house-detail-info {
+    /* border: 2px solid rgb(176, 176, 176);
+    border-radius: 5px;*/
+    
+    margin: 10px; 
+    
+    background-color: #ffffffed;
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow:0px 0px 3px 2px rgb(214, 214, 214);
+    border-style: outset;
+  }
+
+  img {
+    border: 1px solid rgb(255, 255, 255);
+  }
+
+  table.brief-table {
+    background-color: #ffffffed;
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow:0px 0px 3px 2px rgb(214, 214, 214);
+    border-style: outset;
+  }
+
+  table.brief-table td{
+    font-size: 12px;
+  }
+  table.brief-table th{
+    font-size: 18px;
+  }
+
+  table.detail-table {
+    background-color: #e9f7ffed;
+    position: relative;
+    padding: 30px;
+  }
+  table.detail-table td{
+    font-size: 14px;
+  }
+  table.detail-table th{
+    font-size: 14px;
+  }
