@@ -1,11 +1,12 @@
 import React from 'react'
-import Header from '../Components/Header'
+import Display from '../Components/Display.js'
+import Navi from '../Components/Navi'
 
 const History = () => {
     return (  
         <div>
-            <Header />
-            <div>My History</div>
+            <Navi />
+            <Display />
         </div>
     )
 }

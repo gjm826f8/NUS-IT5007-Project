@@ -1,11 +1,12 @@
 import React from 'react'
-import Header from '../Components/Header'
+import Display from '../Components/Display.js'
+import Navi from '../Components/Navi'
 
 const AllPosts = () => {
     return (  
         <div>
-            <Header />
-            <div>My AllPosts</div>
+            <Navi />
+            <Display />
         </div>
     )
 }

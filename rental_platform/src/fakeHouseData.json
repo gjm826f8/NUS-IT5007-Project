@@ -84,18 +84,6 @@
         "postal_code": "646121"
     },
     {
-        "listing_id": 7114138,
-        "price": 1945,
-        "type": "Condo",
-        "bathrooms": 1,
-        "bedrooms": 0,
-        "area": 350,
-        "display_address": "York Avenue",
-        "street_address": "1661 York Avenue",
-        "manager_id": 2,
-        "postal_code": "676282"
-    },
-    {
         "listing_id": 7131094,
         "price": 2435,
         "type": "HDB",

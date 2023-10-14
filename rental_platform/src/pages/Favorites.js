@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import Header from "../Components/Header";
+import Display from '../Components/Display.js';
+import Navi from "../Components/Navi";
 import Table from "../Components/Table";
 
 const Favorites = () => {
@@ -8,7 +9,7 @@ const Favorites = () => {
 
   return (
     <div>
-      <Header />
+      <Navi />
 
       {/* btn */}
       <div className="flex relative items-center justify-between mx-10 my-5">
@@ -31,7 +32,7 @@ const Favorites = () => {
       </div>
       
       {/* if comparison mode is on, show the table, else show the map */}
-      {enabled ? <Table /> : <div>Map View</div>}
+      {enabled ? <Table /> : <div><Display /></div>}
     </div>
   );
 };

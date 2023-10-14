@@ -7,10 +7,9 @@ import { Route, Routes } from 'react-router-dom';
 import AllPosts from './pages/AllPosts';
 import Favorites from './pages/Favorites';
 import History from './pages/History';
-import Home from './pages/Home';
 import Login from './pages/Login';
 import New from './pages/New';
-import LandingPage from './pages/landing_page'
+import LandingPage from './pages/landing_page';
 
 // import auth context
 import { AuthWrapper } from './auth/authWrapper';

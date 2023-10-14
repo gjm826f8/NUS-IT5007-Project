@@ -2,7 +2,7 @@ import React, { useReducer } from "react";
 import { useForm } from "react-hook-form";
 
 // import the header component
-import Header from "../Components/Header";
+import Navi from "../Components/Navi";
 
 // import the auth context, when insert new data to the database, we need to know who is the manager
 import { AuthData } from "../auth/authWrapper";
@@ -59,7 +59,7 @@ const New = () => {
 
   return (
     <div>
-      <Header />
+      <Navi />
       <div className="min-h-screen flex items-center justify-center">
         <div className="bg-gray-100 shadow-lg rounded-2xl w-2/3 max-w-3xl p-10 text-center">
           {/* form elements include type, bedroom#, bathroom#, price, area, address and post code */}
