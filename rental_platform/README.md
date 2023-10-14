@@ -1,70 +1,47 @@
-# Getting Started with Create React App
+# IT5007 - Team 20
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 1. Project Init
+This project was created and tuned in a local environment. When itegrating with back-end side, we will move the whole front-end project to run in the docker.
+1. `npm install`
+2. `npm start`
 
-## Available Scripts
+## 2. Pages and Functions
+### 2.1 Landing Page
 
-In the project directory, you can run:
+### 2.2 xxxxx (map view)
 
-### `npm start`
+### 2.3 Log In Page
+Form validation is deployed. After log in, the programm will redirect you to the homepage, with the original `Log In` button been replaced by a `User Email` button (for example: `user@example.com`). This is also the entrance of 2.4 and 2.5 for tenant, or 2.6 and 2.7 for agents. 
+#### 2.3.1 Log In Flow (for both Tenant and Agent)
+1. Click `Log In` button, navigate to `/login` page.
+2. Click the red text to switch from tenant login and agent login. (by default, tenant log in)
+3. Enter the registered email, and click `Continue` button.
+4. Enter the password, and click `Log In` button. If password correct, redirect to landing page. If wrong, browser will throw an alert.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+#### 2.3.2 Sign Up Flow (only for Tenant)
+P.S.: As Real estate agents in Singapore are required to hold a series of licenses, which dictates that there are certain tedious steps required for the vetting of agent qualifications. Therefore, an agent cannot register directly as a user of the website. If they want to register, they need to contact the staff.
+1. Click `Log In` button, navigate to `/login` page.
+2. Click the red text to switch from tenant login and agent login. Tenants can only register themselves under tanant log in mode.
+3. Enter the new email account, and click `Continue` button.
+4. After setting the password and confirming the password, click `Register and Log In` button. Then will redirect to the landing page.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+#### 2.3.3 Log Out Flow
+Under log in status, user can click the `User Email` button on the right-top side of the website, and click `Log Out` option to log out from the system.
 
-### `npm test`
+### 2.4 Favorites (Tenant)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Log the properties that user clicked `Like` button. The entrance only shows after log in.
 
-### `npm run build`
+- House listing mode: The properties are shown with detailed pictures and information.
+- Comparison mode: The properties are shown in a tabular way, only important information relevant to decision-making is listed above.
+  
+Toggle between two modes with one toggle switch shows on the right-top corner.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 2.5 History (Tenant)
+Log the properties that user viewed. The entrance only shows after log in. The properties are shown with detailed pictures and information.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 2.6 View All Posts (Agent)
+Log the properties that the current agent posted before. The entrance only shows after log in. The properties are shown with detailed pictures and information.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### 2.7 Post New (Agent)
+A form that allows agent to list a new property. Form validation is deployed. 
