@@ -22,11 +22,11 @@ const App = () => (
     <style>
     {`
         .ant-input-search-button {
-        background-color: #1677ff; /* 设置按钮的背景颜色为蓝色 */
+        background-color: #1677ff; /* Set the background color of the button to blue */
         }
 
         .ant-input-search-button:focus {
-        background-color: #1677ff; /* 设置按钮在获得焦点时的背景颜色为蓝色 */
+        background-color: #1677ff; /* Set the background color of the button when it gains focus to blue */
         }
     `}
     </style>
