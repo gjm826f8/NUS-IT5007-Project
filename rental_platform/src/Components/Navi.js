@@ -3,6 +3,14 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import AccountBtn from './AccountBtn';
 
+
+const Map = () => {
+  return (
+    <div className='bg-gray-600 text-white font-bold hover:bg-gray-800 transition px-4 py-3 rounded-lg' >
+       <a href="map.html">Map-Based Search</a>
+    </div>
+  )
+}
 const items = [
   {
     label: 'Whole Unit',
@@ -22,15 +30,15 @@ const items = [
       marginLeft: 10,
     }
   },
-  {
-    label: 'Map-Based Search',
-    key: 'search',
-    style:{
-      marginTop: 10,
-      marginRight: 10,
-      marginLeft: 10,
-    }
-  },
+  // {
+  //   label: 'Map-Based Search',
+  //   key: 'search',
+  //   style:{
+  //     marginTop: 10,
+  //     marginRight: 10,
+  //     marginLeft: 10,
+  //   }
+  // },
   {
     label: 'Post Property',
     key: 'post',
@@ -66,9 +74,9 @@ const Navi = () => {
       case 'rooms':
         navigate('/');
         break;
-      case 'search':
-        navigate('/');
-        break;
+      // case 'search':
+      //   navigate('/map.html');
+      //   break;
       case 'post':
         navigate('/');
         break;
@@ -90,6 +98,7 @@ const Navi = () => {
             </Menu.Item>
           ))}
         </Menu>
+        <Map />
         <AccountBtn />
       </div>
     </div>
