@@ -7,6 +7,23 @@ This project was created and tuned in a local environment. When itegrating with 
 
 ## 2. Pages and Functions
 ### 2.1 Landing Page
+**Navigation**: 
+
+ - Whole Unit: click to see listing of whole unit for rent
+ - Rooms: click to see rooms for rent
+ - Map-Based Search: click to search properties based on map
+ - Post: click to post a property
+ - Login: click to login
+ 
+**Search**: 
+	
+ - by MRT
+ - by Price
+ - by how many Bedrooms
+ - by Property Type
+
+**Listing**: 
+Listing of new posts
 
 ### 2.2 Map-Based Search
 In this projet, this is the most important function which allows user to search for rental house in a map view. We use Google Map API to show the map and mark all the properties in Singapore. In this page, there also should have a same navigation bar and search box as the landing page on the top of the website, however we can't intergrate it since the page isn's built by React. And we will fix that later!
