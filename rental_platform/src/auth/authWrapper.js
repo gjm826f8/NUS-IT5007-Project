@@ -73,6 +73,14 @@ export const AuthWrapper = ({ children }) => {
         })
     }
 
+    // register function for tenant
+    const tenantRegister = (userEmail, password) => {
+
+        // Make a call to the mongoDB API to add user
+        console.log("Registered successfully");
+        setUser({...userdata, email: userEmail, asTenant: true, isAuthenticated: true})
+    }
+
     // logout function
     const logout = () => {
         setUser({ ...userdata, isAuthenticated: false })
@@ -81,7 +89,7 @@ export const AuthWrapper = ({ children }) => {
 
     return (
         // pass the user data to the context
-        <AuthContext.Provider value={{ userdata, tenantCheckUser, agentCheckUser, tenantLogin, agentLogin, logout }}>
+        <AuthContext.Provider value={{ userdata, tenantRegister, tenantCheckUser, agentCheckUser, tenantLogin, agentLogin, logout }}>
             {children}
         </AuthContext.Provider>
     )

@@ -29,7 +29,7 @@ const Login = () => {
                                       // tenantWelcome, agentWelcome, tenantLogin, agentLogin, register
 
   // get the functions from the auth context
-  const { tenantLogin, agentLogin, tenantCheckUser, agentCheckUser } = AuthData();
+  const { tenantRegister, tenantLogin, agentLogin, tenantCheckUser, agentCheckUser } = AuthData();
 
   // get the navigate function
   const navigate = useNavigate();
@@ -81,11 +81,8 @@ const Login = () => {
   };
 
   const handleRegister = () => {
-    if (password === passwordConfirm) {
-      alert("Registered successfully");
-    } else {
-      alert("Passwords do not match");
-    }
+    tenantRegister(email, password);
+    navigate("/");
   };
 
   // define the submit function
