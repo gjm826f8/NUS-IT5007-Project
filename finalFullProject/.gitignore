@@ -1,0 +1,30 @@
+# customize
+/node_modules
+
+# Ignore everything in the public folder
+public/*
+
+# But allow the index.html file
+!public/index.html
+
+package-lock.json
+public/App.js
+
+# dependencies
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*

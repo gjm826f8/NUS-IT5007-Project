@@ -1,0 +1,56 @@
+########## User Service Related APIs ##########
+type Tenant {
+    id: ID!
+    name: String!
+    email: String!
+    password: String!
+    favorites: [ID]
+}
+
+type Agent {
+    id: ID!
+    name: String!
+    email: String!
+    password: String!
+    properties: [ID]
+}
+
+########## Property Service Related APIs ##########
+type Property {
+    id: ID!
+    listing_id: Int!
+    price: Int!
+    type: String!
+    bathrooms: Int!
+    bedrooms: Int!
+    area: Int!
+    display_address: String!
+    street_address: String!
+    manager_id: ID!
+    postal_code: String!
+}
+
+########## Query ##########
+type Query {
+    # User Service Related Queries
+    getTenant(id: ID!): Tenant
+    getAgent(id: ID!): Agent
+
+    # Property Service Related Queries
+    getAllProperties: [Property]
+    getProperty(id: ID!): Property
+}
+
+type Mutation {
+    # User Service Related Mutations
+    addTenant(name: String!, email: String!, password: String!): Tenant
+    updateTenant(id: ID!, name: String, email: String, password: String): Tenant
+    updateAgent(id: ID!, name: String, email: String, password: String): Agent
+    deleteTenant(id: ID!): Tenant
+    deleteAgent(id: ID!): Agent
+
+    # Property Service Related Mutations
+    addProperty(listing_id: Int!, price: Int!, type: String!, bathrooms: Int!, bedrooms: Int!, area: Int!, display_address: String!, street_address: String!, manager_id: ID!, postal_code: String!): Property
+    updateProperty(id: ID!, listing_id: Int, price: Int, type: String, bathrooms: Int, bedrooms: Int, area: Int, display_address: String, street_address: String, manager_id: ID, postal_code: String): Property
+    deleteProperty(id: ID!): Property
+}
