@@ -1,12 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Test from "./Test.jsx";
+import { HashRouter } from "react-router-dom";
+import App from "./App.jsx";
 
+import './input.css'
 
 const element = (
+  <HashRouter>
     <React.StrictMode>
-      <h1>Hello, world!</h1>
-      <Test />
+      <App />
     </React.StrictMode>
+  </HashRouter>
   );
   ReactDOM.render(element, document.getElementById('contents'));
