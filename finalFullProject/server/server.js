@@ -31,8 +31,8 @@ GraphQL CODE
 const resolvers = {
   Query: {
     // User Service Resolvers
-    // getTenant: getTenantResolver,
-    // getAgent: getAgentResolver,
+    getTenant: getTenantResolver,
+    getAgent: getAgentResolver,
 
     // Property Service Resolvers
     getAllProperties: getAllPropertiesResolver,
@@ -40,7 +40,7 @@ const resolvers = {
   },
   Mutation: {
     // User Service Resolvers
-    // addTenant: addTenantResolver,
+    addTenant: addTenantResolver,
     // updateTenant: updateTenantResolver,
     // deleteTenant: deleteTenantResolver,
     // updateAgent: updateAgentResolver,
@@ -53,12 +53,62 @@ const resolvers = {
   }
 };
 
+async function getNextSequence(name) {
+  const result = await db.collection('counters').findOneAndUpdate(
+    { _id: name },
+    { $inc: { current: 1 } },
+    { returnOriginal: false },
+  );
+  return result.value.current;
+}
+
 //#region User Service Query Resolvers
+async function getTenantResolver(_, args) 
+{
+  try {
+    // Find the tenant in the tenants collection
+    const { email } = args;
+    const result = await db.collection('tenants').findOne({ email });
+    console.log(result);
+    return result;
+  } catch (error) {
+    throw new Error(`Error get Tenant: ${error.message}`);
+  }
+}
+
+async function getAgentResolver(_, args)
+{
+  try {
+    const { email } = args;
+    const result = await db.collection('agents').findOne({ email });
+    console.log(result);
+    return result;
+  } catch (error) {
+    throw new Error(`Error get Agent: ${error.message}`);
+  }
+}
 
 //#endregion
 
 //#region User Service Mutation Resolvers
-
+async function addTenantResolver(_, args) 
+{
+  try {
+    // Insert the tenant into the tenants collection
+    const { name, email, password } = args;
+    const id = await getNextSequence('tenants');
+    // create a new tenant object
+    const newTenant = {
+      id, name, email, password, favorites: [],
+    };
+    // insert the new tenant object into the database
+    const result = await db.collection('tenants').insertOne(newTenant);
+    console.log(result);
+    return result.ops[0];
+  } catch (error) {
+    throw new Error(`Error add Tenant: ${error.message}`);
+  }
+}
 //#endregion
 
 //#region Property Service Query Resolvers
@@ -80,7 +130,7 @@ async function getAllPropertiesResolver(_, args)
 //#endregion
 //#endregion
 
-
+//#region SERVER INITIALIZATION CODE
 /******************************************* 
 SERVER INITIALIZATION CODE
 ********************************************/
@@ -111,3 +161,4 @@ server.applyMiddleware({ app, path: '/graphql' });
       console.log('ERROR:', err);
     }
   })();
+//#endregion

@@ -33,8 +33,8 @@ type Property {
 ########## Query ##########
 type Query {
     # User Service Related Queries
-    getTenant(id: ID!): Tenant
-    getAgent(id: ID!): Agent
+    getTenant(email: String!): Tenant
+    getAgent(email: String!): Agent
 
     # Property Service Related Queries
     getAllProperties: [Property]

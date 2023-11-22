@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState } from "react";
 
 // Create Auth Context
 const AuthContext = createContext();
@@ -10,6 +10,7 @@ export const AuthWrapper = ({ children }) => {
             email: "",
             isAuthenticated: false,
             asTenant: false,
+            userData: {},
         }
     );
 

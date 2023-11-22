@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .dropdownItem {
+        @apply cursor-pointer hover:bg-gray-400 hover:font-semibold flex w-full items-center rounded-md px-2 py-2
+    }
+}

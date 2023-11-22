@@ -7,6 +7,12 @@
 //Perform a cleanup of existing data.
 db.dropDatabase();
 
+// Create a collection for Counters
+db.createCollection("counters");
+db.counters.insert({ _id: 'tenants', current: 5 });
+db.counters.insert({ _id: 'agents', current: 5 });
+db.counters.insert({ _id: 'properties', current: 10 });
+
 // Create collections for User Service
 db.createCollection("tenants");
 db.createCollection("agents");

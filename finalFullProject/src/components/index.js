@@ -1,5 +1,8 @@
 import NavUserService from './NavUserService.jsx';
+import { AuthWrapper, AuthData } from './AuthWrapper.jsx';
 
 export {
-    NavUserService
+    NavUserService,
+    AuthWrapper,
+    AuthData
 };
