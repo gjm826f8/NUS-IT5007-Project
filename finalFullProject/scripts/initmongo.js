@@ -7,15 +7,17 @@
 //Perform a cleanup of existing data.
 db.dropDatabase();
 
+//#region counters collection
 // Create a collection for Counters
 db.createCollection("counters");
 db.counters.insert({ _id: 'tenants', current: 5 });
 db.counters.insert({ _id: 'agents', current: 5 });
 db.counters.insert({ _id: 'properties', current: 10 });
+//#endregion
 
-// Create collections for User Service
+//#region tenant collection
+// Create collections for Tenant Service
 db.createCollection("tenants");
-db.createCollection("agents");
 
 // Insert 5 sample tenant with an "id" field
 db.tenants.insert({
@@ -24,6 +26,7 @@ db.tenants.insert({
     email: "johndoe@example.com",
     password: "john",
     favorites: [1, 2, 3, 4, 5],
+    history: [1, 2, 3, 4, 5],
 });
 
 db.tenants.insert({
@@ -32,6 +35,7 @@ db.tenants.insert({
     email: "janedoe@example.com",
     password: "jane",
     favorites: [1],
+    history: [1, 2, 3],
 });
 
 db.tenants.insert({
@@ -40,6 +44,7 @@ db.tenants.insert({
     email: "bobsmith@example.com",
     password: "bob",
     favorites: [2, 3],
+    history: [1, 2, 3, 4],
 });
 
 db.tenants.insert({
@@ -48,6 +53,7 @@ db.tenants.insert({
     email: "alicesmith@example.com",
     password: "alice",
     favorites: [1, 2, 4],
+    history: [1, 2, 3, 4, 5],
 });
 
 db.tenants.insert({
@@ -56,8 +62,12 @@ db.tenants.insert({
     email: "markjohnson@example.com",
     password: "mark",
     favorites: [],
+    history: [1, 2, 3, 4, 5],
 });
+//#endregion
 
+//#region agent collection
+db.createCollection("agents");
 // Insert 5 sample agent with an "id" field
 db.agents.insert({
     id: 1, // Unique ID for the user
@@ -98,7 +108,9 @@ db.agents.insert({
     password: "brian",
     properties: [9]
 });
+//#endregion
 
+//#region property collection
 // Create a collection for Property Service
 db.createCollection("properties");
 
@@ -113,7 +125,7 @@ db.properties.insert({
     area: 511,
     display_address: "145 Borinquen Place",
     street_address: "145 Borinquen Place",
-    manager_id: 3,
+    manager_id: 1,
     postal_code: "111211"
 });
 
@@ -127,7 +139,7 @@ db.properties.insert({
     area: 637,
     display_address: "East 44th",
     street_address: "230 East 44th",
-    manager_id: 4,
+    manager_id: 2,
     postal_code: "123456"
 });
 
@@ -141,7 +153,7 @@ db.properties.insert({
     area: 1694,
     display_address: "East 56th Street",
     street_address: "405 East 56th Street",
-    manager_id: 2,
+    manager_id: 3,
     postal_code: "635212"
 });
 
@@ -183,7 +195,7 @@ db.properties.insert({
     area: 633,
     display_address: "East 16th Street",
     street_address: "145 East 16th Street",
-    manager_id: 2,
+    manager_id: 1,
     postal_code: "150087"
 });
 
@@ -211,7 +223,7 @@ db.properties.insert({
     area: 1442,
     display_address: "E 19 Street",
     street_address: "346 E 19 Street",
-    manager_id: 1,
+    manager_id: 3,
     postal_code: "145351"
 });
 
@@ -225,7 +237,7 @@ db.properties.insert({
     area: 1452,
     display_address: "Hicks Street",
     street_address: "94 Hicks Street",
-    manager_id: 1,
+    manager_id: 5,
     postal_code: "152436"
 });
 
@@ -239,6 +251,7 @@ db.properties.insert({
     area: 1452,
     display_address: "Hicks Street",
     street_address: "94 Hicks Street",
-    manager_id: 1,
+    manager_id: 3,
     postal_code: "152436"
 });
+//#endregion

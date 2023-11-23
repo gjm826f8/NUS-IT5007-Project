@@ -161,7 +161,7 @@ function AgentLogin() {
             <div className="flex items-center justify-between">
               <MdArrowBack
                 className="float-left"
-                onClick={() => setMode("email")}
+                onClick={() => {setMode("email"); setAuth({...auth, email: '', isAuthenticated: false, asTenant: false, userData: {}})}}
               />
               <div className="loginHeader">Log In</div>
               <MdArrowBack className="invisible" />

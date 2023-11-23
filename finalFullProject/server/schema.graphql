@@ -5,6 +5,7 @@ type Tenant {
     email: String!
     password: String!
     favorites: [ID]
+    history: [ID]
 }
 
 type Agent {
@@ -38,7 +39,7 @@ type Query {
 
     # Property Service Related Queries
     getAllProperties: [Property]
-    getProperty(id: ID!): Property
+    getProperty(idList: [ID]): [Property]
 }
 
 type Mutation {

@@ -36,7 +36,7 @@ const resolvers = {
 
     // Property Service Resolvers
     getAllProperties: getAllPropertiesResolver,
-    // getProperty: getPropertyResolver,
+    getProperty: getPropertyResolver,
   },
   Mutation: {
     // User Service Resolvers
@@ -123,6 +123,21 @@ async function getAllPropertiesResolver(_, args)
     throw new Error(`Error get All Properties: ${error.message}`);
   }
 };
+
+async function getPropertyResolver(_, args)
+{
+  try {
+    const { idList } = args;
+    // for ids in idList, change type from string to int
+    for (let i = 0; i < idList.length; i++) {
+      idList[i] = parseInt(idList[i]);
+    }
+    const result = await db.collection('properties').find({id: {$in: idList}}).toArray();
+    return result;
+  } catch (error) {
+    throw new Error(`Error get Property: ${error.message}`);
+  }
+}
 //#endregion
 
 //#region Property Service Mutation Resolvers
