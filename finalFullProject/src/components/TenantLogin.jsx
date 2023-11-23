@@ -18,6 +18,7 @@ function TenantLogin() {
   const [checkEmail, setCheckEmail] = useState(false); // flag to check if user pressed continue button
   const [checkPassword, setCheckPassword] = useState(false);
   const [checkRegister, setCheckRegister] = useState(false); // flag to check if user pressed register button
+  const [passwordMatch, setPasswordMatch] = useState(false); // flag to check if password matches confirmPassword
 
   const { auth, setAuth } = AuthData();
 
@@ -103,19 +104,26 @@ function TenantLogin() {
 
   // if no error in password input form, proceed to match if password is correct
   useEffect(() => {
+    console.log(formValues)
     if (!errors.hasOwnProperty("password") && checkPassword) {
       // match formValues.password with auth.userData.password
       if (formValues.password === auth.userData.password) {
         setAuth({ ...auth, isAuthenticated: true });
         console.log("password correct");
+        setPasswordMatch(true);
       } else {
         setErrors({ password: "Incorrect password" });
       }
-      setCheckPassword(false);
+    }
+  }, [errors]);
+
+  useEffect(() => {
+    setCheckPassword(false);
+    if (passwordMatch) {
       setFormValues(initValues);
       navigate("/");
     }
-  }, [errors]);
+  }, [passwordMatch]);
 
   // if no error in registration input form, proceed to graphql query to add new tenant
   useEffect(() => {
