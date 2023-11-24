@@ -186,6 +186,7 @@ function TenantLogin() {
           email
           password
           favorites
+          history
         }
       }
       `;

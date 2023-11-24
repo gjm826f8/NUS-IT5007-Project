@@ -117,7 +117,6 @@ db.createCollection("properties");
 // Insert 10 sample property with an "id" field
 db.properties.insert({
     id: 1, // Unique ID for the property
-    listing_id: 7170325,
     price: 2400,
     type: "Condo",
     bathrooms: 1,
@@ -131,7 +130,6 @@ db.properties.insert({
 
 db.properties.insert({
     id: 2, // Unique ID for the property
-    listing_id: 7092344,
     price: 3800,
     type: "HDB",
     bathrooms: 1,
@@ -145,7 +143,6 @@ db.properties.insert({
 
 db.properties.insert({
     id: 3, // Unique ID for the property
-    listing_id: 7158677,
     price: 3495,
     type: "Condo",
     bathrooms: 1,
@@ -159,7 +156,6 @@ db.properties.insert({
 
 db.properties.insert({
     id: 4, // Unique ID for the property
-    listing_id: 7211212,
     price: 3000,
     type: "HDB",
     bathrooms: 1,
@@ -173,7 +169,6 @@ db.properties.insert({
 
 db.properties.insert({
     id: 5, // Unique ID for the property
-    listing_id: 7225292,
     price: 2795,
     type: "HDB",
     bathrooms: 1,
@@ -187,7 +182,6 @@ db.properties.insert({
 
 db.properties.insert({
     id: 6, // Unique ID for the property
-    listing_id: 7226687,
     price: 7200,
     type: "Condo",
     bathrooms: 1,
@@ -201,7 +195,6 @@ db.properties.insert({
 
 db.properties.insert({
     id: 7, // Unique ID for the property
-    listing_id: 7126989,
     price: 6000,
     type: "Condo",
     bathrooms: 2,
@@ -215,7 +208,6 @@ db.properties.insert({
 
 db.properties.insert({
     id: 8, // Unique ID for the property
-    listing_id: 7131094,
     price: 2435,
     type: "HDB",
     bathrooms: 0,
@@ -229,7 +221,6 @@ db.properties.insert({
 
 db.properties.insert({
     id: 9, // Unique ID for the property
-    listing_id: 7224815,
     price: 6850,
     type: "Condo",
     bathrooms: 3,
@@ -243,7 +234,6 @@ db.properties.insert({
 
 db.properties.insert({
     id: 10, // Unique ID for the property
-    listing_id: 7224815,
     price: 6850,
     type: "Condo",
     bathrooms: 3,

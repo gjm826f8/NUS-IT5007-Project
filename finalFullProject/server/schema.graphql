@@ -19,7 +19,6 @@ type Agent {
 ########## Property Service Related APIs ##########
 type Property {
     id: ID!
-    listing_id: Int!
     price: Int!
     type: String!
     bathrooms: Int!
@@ -51,7 +50,7 @@ type Mutation {
     deleteAgent(id: ID!): Agent
 
     # Property Service Related Mutations
-    addProperty(listing_id: Int!, price: Int!, type: String!, bathrooms: Int!, bedrooms: Int!, area: Int!, display_address: String!, street_address: String!, manager_id: ID!, postal_code: String!): Property
-    updateProperty(id: ID!, listing_id: Int, price: Int, type: String, bathrooms: Int, bedrooms: Int, area: Int, display_address: String, street_address: String, manager_id: ID, postal_code: String): Property
+    addProperty(price: Int!, type: String!, bathrooms: Int!, bedrooms: Int!, area: Int!, display_address: String!, street_address: String!, manager_id: ID!, postal_code: String!): Property
+    updateProperty(id: ID!, price: Int, type: String, bathrooms: Int, bedrooms: Int, area: Int, display_address: String, street_address: String, manager_id: ID, postal_code: String): Property
     deleteProperty(id: ID!): Property
 }

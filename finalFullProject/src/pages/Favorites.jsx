@@ -20,7 +20,6 @@ function Favorites() {
       query GetPropertyQuery ($idList: [ID]) {
         getProperty (idList: $idList) {
           id
-          listing_id
           price
           type
           bathrooms

@@ -47,7 +47,7 @@ const resolvers = {
     // deleteAgent: deleteAgentResolver,
 
     // Property Service Resolvers
-    // addProperty: addPropertyResolver,
+    addProperty: addPropertyResolver,
     // updateProperty: updatePropertyResolver,
     // deleteProperty: deletePropertyResolver,
   }
@@ -99,7 +99,7 @@ async function addTenantResolver(_, args)
     const id = await getNextSequence('tenants');
     // create a new tenant object
     const newTenant = {
-      id, name, email, password, favorites: [],
+      id, name, email, password, favorites: [], history: []
     };
     // insert the new tenant object into the database
     const result = await db.collection('tenants').insertOne(newTenant);
@@ -141,7 +141,45 @@ async function getPropertyResolver(_, args)
 //#endregion
 
 //#region Property Service Mutation Resolvers
-
+async function addPropertyResolver(_, args)
+{
+  try {
+    // Insert the property into the properties collection
+    const { 
+      price, 
+      type, 
+      bedrooms, 
+      bathrooms, 
+      area, 
+      display_address, 
+      street_address, 
+      manager_id,
+      postal_code
+    } = args;
+    console.log(price, type, bedrooms, bathrooms, area, display_address, street_address, manager_id, postal_code)
+    const id = await getNextSequence('properties');
+    // create a new property object
+    const newProperty = {
+      id, 
+      price, 
+      type, 
+      bedrooms, 
+      bathrooms, 
+      area, 
+      display_address, 
+      street_address, 
+      manager_id,
+      postal_code
+    };
+    // insert the new property object into the database
+    console.log(newProperty)
+    const result = await db.collection('properties').insertOne(newProperty);
+    console.log(result);
+    return result.ops[0];
+  } catch (error) {
+    throw new Error(`Error add Property: ${error.message}`);
+  }
+}
 //#endregion
 //#endregion
 
