@@ -5,7 +5,7 @@ import { AuthData } from '/src/components/';
 import graphQLFetch from '/src/graphql_cmd.js';
 
 function Favorites() {
-  const { auth } = AuthData()
+  const { auth, setAuth } = AuthData()
   const [userFavorites, setUserFavorites] = useState([])
 
   // fetch tenant data on load
@@ -34,7 +34,7 @@ function Favorites() {
       `;
     // define the variables required for the query
     const variables = {
-      email: formValues.email,
+      email: auth.email,
     };
     // send the request to the GraphQL API
     try {

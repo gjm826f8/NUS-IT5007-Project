@@ -41,7 +41,7 @@ const resolvers = {
   Mutation: {
     // User Service Resolvers
     addTenant: addTenantResolver,
-    // updateTenant: updateTenantResolver,
+    updateTenant: updateTenantResolver,
     // deleteTenant: deleteTenantResolver,
     updateAgent: updateAgentResolver,
     // deleteAgent: deleteAgentResolver,
@@ -110,6 +110,44 @@ async function addTenantResolver(_, args)
   }
 }
 
+async function updateTenantResolver(_, args)
+{
+  try {
+    // according to the features of args, update the tenant in the tenants collection
+    args.id = parseInt(args.id);
+    if (args.favorites) {
+      for (let i = 0; i < args.favorites.length; i++) {
+        args.favorites[i] = parseInt(args.favorites[i]);        
+      }
+      // get the value of key "properties" in counters collection
+      const newId = await db.collection('counters').findOne({_id: "properties"});
+      // append the new property id to the end of the array
+      args.favorites.push(newId.current);
+    }
+    if (args.history) {
+      for (let i = 0; i < args.history.length; i++) {
+        args.history[i] = parseInt(args.history[i]);        
+      }
+      // get the value of key "properties" in counters collection
+      const newId = await db.collection('counters').findOne({_id: "properties"});
+      // append the new property id to the end of the array
+      args.history.push(newId.current);
+    }
+    
+    // console.log(args);
+    const {id} = args;
+    console.log(args)
+    const result = await db.collection('tenants').updateOne(
+      {id},
+      {$set: args},
+      {returnOriginal: false}
+    );
+    // console.log(result);
+  } catch (error) {
+    throw new Error(`Error update Tenant: ${error.message}`);
+  }
+}
+
 async function updateAgentResolver(_, args) {
   try {
     // according to the features of args, update the agent in the agents collection
@@ -118,11 +156,12 @@ async function updateAgentResolver(_, args) {
       for (let i = 0; i < args.properties.length; i++) {
         args.properties[i] = parseInt(args.properties[i]);        
       }
+      // get the value of key "properties" in counters collection
+      const newId = await db.collection('counters').findOne({_id: "properties"});
+      // append the new property id to the end of the array
+      args.properties.push(newId.current);
     }
-    // get the value of key "properties" in counters collection
-    const newId = await db.collection('counters').findOne({_id: "properties"});
-    // append the new property id to the end of the array
-    args.properties.push(newId.current);
+    
     // console.log(args);
     const {id} = args;
     const result = await db.collection('agents').updateOne(

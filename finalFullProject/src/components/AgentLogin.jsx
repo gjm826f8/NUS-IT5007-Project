@@ -15,7 +15,8 @@ function AgentLogin() {
     const [errors, setErrors] = useState({});
     const [checkEmail, setCheckEmail] = useState(false); // flag to check if user pressed continue button
     const [checkPassword, setCheckPassword] = useState(false);
-  
+    const [passwordMatch, setPasswordMatch] = useState(false); // flag to check if password matches
+
     const { auth, setAuth } = AuthData();
   
     const navigate = useNavigate();
@@ -75,14 +76,20 @@ function AgentLogin() {
         if (formValues.password === auth.userData.password) {
           setAuth({ ...auth, isAuthenticated: true });
           console.log("password correct");
+          setPasswordMatch(true);
         } else {
           setErrors({ password: "Incorrect password" });
         }
-        setCheckPassword(false);
+      }
+    }, [errors]);
+
+    useEffect(() => {
+      setCheckPassword(false);
+      if (passwordMatch) {
         setFormValues(initValues);
         navigate("/");
       }
-    }, [errors]);
+    }, [passwordMatch]);
   
     const handleGetAgent = async () => {
       // define the GraphQL query to check if agent exists

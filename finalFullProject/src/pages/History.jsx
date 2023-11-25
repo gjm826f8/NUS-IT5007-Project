@@ -7,7 +7,7 @@ import { TenantPropertyComparison } from '/src/components';
 
 
 function History() {
-  const { auth } = AuthData()
+  const { auth, setAuth } = AuthData()
   const [userHistory, setUserHistory] = useState([])
 
   // fetch tenant data on load
@@ -36,7 +36,7 @@ function History() {
       `;
     // define the variables required for the query
     const variables = {
-      email: formValues.email,
+      email: auth.email,
     };
     // send the request to the GraphQL API
     try {

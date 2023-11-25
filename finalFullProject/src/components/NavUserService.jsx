@@ -78,6 +78,10 @@ const Dropdown = () => {
               </Menu.Item>
             </div>
           )}
+          <hr className="border-gray-400" />
+          <Menu.Item onClick={() => {navigate("/profile")}} as="li" className="dropdownItem">
+            My Profile
+          </Menu.Item>
           <Menu.Item onClick={handleLogout} as="li" className="dropdownItem">
             Logout
           </Menu.Item>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navigate, Route, Routes } from "react-router-dom";
 import { AuthData } from "./AuthWrapper.jsx";
-import { AddProperty, Favorites, History, LandingPage, Login, MyPosts } from "/src/pages/";
+import { AddProperty, Favorites, History, LandingPage, Login, MyPosts, ShowProfile } from "/src/pages/";
 
 function RenderRoutes() {
     const { auth } = AuthData();
@@ -12,6 +12,7 @@ function RenderRoutes() {
                 <Routes>
                     <Route exact path="/" element={<LandingPage />} />
                     <Route path="/login" element={<Login />} />
+                    {/* <Route path='/profile' element={<ShowProfile />} /> */}
                     <Route path='*' element={<Navigate to="/" replace />} />
                 </Routes>
             )
@@ -20,6 +21,7 @@ function RenderRoutes() {
             auth.isAuthenticated && auth.asTenant && (
                 <Routes>
                     <Route exact path="/" element={<LandingPage />} />
+                    <Route path='/profile' element={<ShowProfile />} />
                     <Route path="/favorites" element={<Favorites />} />
                     <Route path="/history" element={<History />} />
                     <Route path='*' element={<Navigate to="/" replace />} />
@@ -30,6 +32,7 @@ function RenderRoutes() {
             auth.isAuthenticated && !auth.asTenant && (
                 <Routes>
                     <Route exact path="/" element={<LandingPage />} />
+                    <Route path='/profile' element={<ShowProfile />} />
                     <Route path="/addproperty" element={<AddProperty />} />
                     <Route path="/myposts" element={<MyPosts />} />
                     <Route path='*' element={<Navigate to="/" replace />} />

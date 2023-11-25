@@ -6,6 +6,7 @@ import LandingPage from './LandingPage.jsx';
 
 // import user service pages
 import Login from './Login.jsx';
+import ShowProfile from './ShowProfile.jsx';
 
 // import tenant service pages
 import Favorites from './Favorites.jsx';
@@ -16,11 +17,8 @@ import AddProperty from './AddProperty.jsx';
 import MyPosts from './MyPosts.jsx';
 
 export {
-    LandingPage,
-    Login,
-    Favorites,
-    History,
-    AddProperty,
-    MyPosts,
-    };
+    AddProperty, Favorites,
+    History, LandingPage,
+    Login, MyPosts, ShowProfile
+};
     

@@ -146,6 +146,7 @@ function TenantLogin() {
     const getTenantQuery = `
         query GetTenantQuery($email: String!) {
           getTenant(email: $email) {
+            id
             name
             email
             password

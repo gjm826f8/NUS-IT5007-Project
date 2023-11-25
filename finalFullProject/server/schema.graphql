@@ -44,7 +44,7 @@ type Query {
 type Mutation {
     # User Service Related Mutations
     addTenant(name: String!, email: String!, password: String!): Tenant
-    updateTenant(id: ID!, name: String, email: String, password: String): Tenant
+    updateTenant(id: ID!, name: String, email: String, password: String, favorites: [ID], history: [ID]): Tenant
     updateAgent(id: ID!, name: String, email: String, password: String, properties: [ID]): Agent
     deleteTenant(id: ID!): Tenant
     deleteAgent(id: ID!): Agent
