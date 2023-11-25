@@ -89,6 +89,7 @@ function AgentLogin() {
       const getAgentQuery = `
         query GetAgentQuery($email: String!) {
           getAgent(email: $email) {
+            id
             name
             email
             password

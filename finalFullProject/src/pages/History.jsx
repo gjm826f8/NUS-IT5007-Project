@@ -8,13 +8,49 @@ import { TenantPropertyComparison } from '/src/components';
 
 function History() {
   const { auth } = AuthData()
-  const historyList = auth.userData.history
   const [userHistory, setUserHistory] = useState([])
 
-  // fetch property data on load
+  // fetch tenant data on load
   useEffect(() => {
-    handleGetProperty(historyList)
+    handleGetTenant()
   }, [])
+
+  // fetch property data on auth change
+  useEffect(() => {
+    const historyList = auth.userData.favorites
+    handleGetProperty(historyList)
+  }, [auth])
+
+  const handleGetTenant = async () => {
+    // define the GraphQL query to check if tenant exists
+    const getTenantQuery = `
+        query GetTenantQuery($email: String!) {
+          getTenant(email: $email) {
+            name
+            email
+            password
+            favorites
+            history
+          }
+        }
+      `;
+    // define the variables required for the query
+    const variables = {
+      email: formValues.email,
+    };
+    // send the request to the GraphQL API
+    try {
+      const result = await graphQLFetch(getTenantQuery, variables);
+      if (result.getTenant) {
+        setAuth({
+          ...auth,
+          userData: result.getTenant,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   // backend call to get property data
   const handleGetProperty = async (pList) => {

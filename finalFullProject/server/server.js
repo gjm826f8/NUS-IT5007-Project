@@ -43,7 +43,7 @@ const resolvers = {
     addTenant: addTenantResolver,
     // updateTenant: updateTenantResolver,
     // deleteTenant: deleteTenantResolver,
-    // updateAgent: updateAgentResolver,
+    updateAgent: updateAgentResolver,
     // deleteAgent: deleteAgentResolver,
 
     // Property Service Resolvers
@@ -109,6 +109,32 @@ async function addTenantResolver(_, args)
     throw new Error(`Error add Tenant: ${error.message}`);
   }
 }
+
+async function updateAgentResolver(_, args) {
+  try {
+    // according to the features of args, update the agent in the agents collection
+    args.id = parseInt(args.id);
+    if (args.properties) {
+      for (let i = 0; i < args.properties.length; i++) {
+        args.properties[i] = parseInt(args.properties[i]);        
+      }
+    }
+    // get the value of key "properties" in counters collection
+    const newId = await db.collection('counters').findOne({_id: "properties"});
+    // append the new property id to the end of the array
+    args.properties.push(newId.current);
+    // console.log(args);
+    const {id} = args;
+    const result = await db.collection('agents').updateOne(
+      {id},
+      {$set: args},
+      {returnOriginal: false}
+    );
+    // console.log(result);
+  } catch (error) {
+    throw new Error(`Error update Agent: ${error.message}`);
+  }
+}
 //#endregion
 
 //#region Property Service Query Resolvers
@@ -145,6 +171,7 @@ async function addPropertyResolver(_, args)
 {
   try {
     // Insert the property into the properties collection
+    args.manager_id = parseInt(args.manager_id);
     const { 
       price, 
       type, 

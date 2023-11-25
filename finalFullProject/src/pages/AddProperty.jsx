@@ -101,6 +101,9 @@ function AddProperty() {
     }
   }, [errors])
 
+  // test
+  useEffect(() => {console.log(auth.userData)}, [auth])
+
   const handleAddProperty = async () => {
     // define the GraphQL query to add property
     const addPropertyQuery = `
@@ -155,9 +158,48 @@ function AddProperty() {
       const result = await graphQLFetch(addPropertyQuery, variables);
       if (result.addProperty) {
         console.log("property added");
+        handleUpdateAgent();
         setFormValues(initValues);
         setCheckSubmit(false);
         navigate("/myposts");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  // update agent's property list
+  const handleUpdateAgent = async () => {
+    // define the GraphQL query to update agent
+    const updateAgentQuery = `
+      mutation UpdateAgentMutation(
+        $id: ID!
+        $name: String
+        $email: String
+        $password: String
+        $properties: [ID]
+      ) {
+        updateAgent(
+          id: $id
+          name: $name
+          email: $email
+          password: $password
+          properties: $properties
+        ) {
+          id
+        }
+      }
+    `
+    // define the variables required for the query
+    const variables = {
+      id: auth.userData.id,
+      properties: auth.userData.properties,
+    }
+    // send the request to the GraphQL API
+    try {
+      const result = await graphQLFetch(updateAgentQuery, variables);
+      if (result) {
+        console.log("agent updated");
       }
     } catch (error) {
       console.log(error);

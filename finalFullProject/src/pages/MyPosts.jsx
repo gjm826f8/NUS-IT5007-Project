@@ -6,14 +6,50 @@ import graphQLFetch from '/src/graphql_cmd.js'
 import { TenantPropertyComparison } from '/src/components/'
 
 function MyPosts() {
-  const { auth } = AuthData()
-  const postList = auth.userData.properties
+  const { auth, setAuth } = AuthData()
   const [userPosts, setUserPosts] = useState([])
   
-  // fetch property data on load
+  // fetch agent data on load
   useEffect(() => {
-    handleGetProperty(postList)
+    handleGetAgent()
   }, [])
+
+  // fetch property data on change in auth
+  useEffect(() => {
+    const postList = auth.userData.properties
+    handleGetProperty(postList)
+  }, [auth])
+
+  const handleGetAgent = async () => {
+    // define the GraphQL query to check if agent exists
+    const getAgentQuery = `
+      query GetAgentQuery($email: String!) {
+        getAgent(email: $email) {
+          id
+          name
+          email
+          password
+          properties
+        }
+      }
+    `;
+    // define the variables required for the query
+    const variables = {
+      email: auth.email,
+    };
+    // send the request to the GraphQL API
+    try {
+      const result = await graphQLFetch(getAgentQuery, variables);
+      if (result.getAgent) {
+        setAuth({
+          ...auth,
+          userData: result.getAgent,
+        });
+      } 
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   // backend call to get property data
   const handleGetProperty = async (pList) => {

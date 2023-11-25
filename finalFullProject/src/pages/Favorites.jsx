@@ -6,13 +6,49 @@ import graphQLFetch from '/src/graphql_cmd.js';
 
 function Favorites() {
   const { auth } = AuthData()
-  const favoritesList = auth.userData.favorites
   const [userFavorites, setUserFavorites] = useState([])
 
-  // fetch property data on load
+  // fetch tenant data on load
   useEffect(() => {
-    handleGetProperty(favoritesList)
+    handleGetTenant()
   }, [])
+
+  // fetch property data on auth change
+  useEffect(() => {
+    const favoritesList = auth.userData.favorites
+    handleGetProperty(favoritesList)
+  }, [auth])
+
+  const handleGetTenant = async () => {
+    // define the GraphQL query to check if tenant exists
+    const getTenantQuery = `
+        query GetTenantQuery($email: String!) {
+          getTenant(email: $email) {
+            name
+            email
+            password
+            favorites
+            history
+          }
+        }
+      `;
+    // define the variables required for the query
+    const variables = {
+      email: formValues.email,
+    };
+    // send the request to the GraphQL API
+    try {
+      const result = await graphQLFetch(getTenantQuery, variables);
+      if (result.getTenant) {
+        setAuth({
+          ...auth,
+          userData: result.getTenant,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   // backend call to get property data
   const handleGetProperty = async (pList) => {

@@ -182,6 +182,7 @@ function TenantLogin() {
     const addTenantMutation = `
       mutation AddTenantMutation ($name: String!, $email: String!, $password: String!) {
         addTenant (name: $name, email: $email, password: $password) {
+          id
           name
           email
           password
