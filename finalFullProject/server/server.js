@@ -48,8 +48,8 @@ const resolvers = {
 
     // Property Service Resolvers
     addProperty: addPropertyResolver,
-    // updateProperty: updatePropertyResolver,
-    // deleteProperty: deletePropertyResolver,
+    updateProperty: updatePropertyResolver,
+    deleteProperty: deletePropertyResolver,
   }
 };
 
@@ -198,6 +198,7 @@ async function getPropertyResolver(_, args)
       idList[i] = parseInt(idList[i]);
     }
     const result = await db.collection('properties').find({id: {$in: idList}}).toArray();
+    console.log(result);
     return result;
   } catch (error) {
     throw new Error(`Error get Property: ${error.message}`);
@@ -244,6 +245,52 @@ async function addPropertyResolver(_, args)
     return result.ops[0];
   } catch (error) {
     throw new Error(`Error add Property: ${error.message}`);
+  }
+}
+
+async function updatePropertyResolver(_, args)
+{
+  try {
+    // according to the features of args, update the tenant in the tenants collection
+    args.id = parseInt(args.id);
+    if (args.bathrooms) {
+      args.bathrooms = parseInt(args.bathrooms);
+    }
+    if (args.bedrooms) {
+      args.bedrooms = parseInt(args.bedrooms);
+    }
+    if (args.area) {
+      args.area = parseInt(args.area);
+    }
+    if (args.price) {
+      args.price = parseInt(args.price);
+    }
+    if (args.manager_id) {
+      args.manager_id = parseInt(args.manager_id);
+    }    
+    // console.log(args);
+    const {id} = args;
+    console.log(args)
+    const result = await db.collection('properties').updateOne(
+      {id},
+      {$set: args},
+      {returnOriginal: false}
+    );
+    // console.log(result);
+  } catch (error) {
+    throw new Error(`Error update Property: ${error.message}`);
+  }
+}
+
+async function deletePropertyResolver(_, args)
+{
+  try {
+    args.id = parseInt(args.id);
+    const {id} = args;
+    const result = await db.collection('properties').deleteOne({id});
+    console.log(result);
+  } catch (error) {
+    throw new Error(`Error delete Property: ${error.message}`);
   }
 }
 //#endregion

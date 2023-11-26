@@ -1,45 +1,40 @@
 import React, { useEffect, useState } from 'react'
 import { AuthData } from '/src/components/'
-import graphQLFetch from '/src/graphql_cmd.js'
 
 // to be replaced - listing components
-import { TenantPropertyComparison } from '/src/components/'
+import { AgentPostsTable, EditProperty, getAgentQuery, getPropertyQuery, DeleteProperty } from '/src/components/'
 
 function MyPosts() {
   const { auth, setAuth } = AuthData()
   const [userPosts, setUserPosts] = useState([])
+  const [editRow, setEditRow] = useState(null)
+  const [editId, setEditId] = useState(null)
+  const [deleteRow, setDeleteRow] = useState(null)
+  const [deleteId, setDeleteId] = useState(null)
+  const [modalVisible, setModalVisible] = useState(false)
+  const [deleteModalVisible, setDeleteModalVisible] = useState(false)
   
   // fetch agent data on load
   useEffect(() => {
     handleGetAgent()
   }, [])
 
-  // fetch property data on change in auth
+  // fetch property data on change in auth -- delete property
   useEffect(() => {
-    const postList = auth.userData.properties
-    handleGetProperty(postList)
+    handleGetProperty()
   }, [auth])
 
+  // fetch property data on change in editID -- edit property
+  useEffect(() => {
+    if (!editId || !deleteId) {
+      handleGetProperty()
+    }
+  }, [editId, deleteId])
+
   const handleGetAgent = async () => {
-    // define the GraphQL query to check if agent exists
-    const getAgentQuery = `
-      query GetAgentQuery($email: String!) {
-        getAgent(email: $email) {
-          id
-          name
-          email
-          password
-          properties
-        }
-      }
-    `;
-    // define the variables required for the query
-    const variables = {
-      email: auth.email,
-    };
     // send the request to the GraphQL API
     try {
-      const result = await graphQLFetch(getAgentQuery, variables);
+      const result = await getAgentQuery({email: auth.email})
       if (result.getAgent) {
         setAuth({
           ...auth,
@@ -51,43 +46,47 @@ function MyPosts() {
     }
   };
 
-  // backend call to get property data
-  const handleGetProperty = async (pList) => {
-    const getPropertyQuery = `
-      query GetPropertyQuery ($idList: [ID]) {
-        getProperty (idList: $idList) {
-          id
-          price
-          type
-          bathrooms
-          bedrooms
-          area
-          display_address
-          street_address
-          manager_id
-          postal_code
-        }
-      }
-    `;
-    // define the variables required for the query
+  const handleGetProperty = async () => {
     const variables = {
-      idList: pList
-    };
-    // send the request
+      idList: auth.userData.properties
+    }
     try {
-      const result = await graphQLFetch(getPropertyQuery, variables);
+      const result = await getPropertyQuery(variables);
       if (result) {
         setUserPosts(result.getProperty)
       }
     } catch (error) {
       console.log(error)
-    };
-  };
+    }
+  }
+
+  useEffect(() => {
+    if (editRow !== null && editRow !== undefined) {
+      setEditId(userPosts[editRow].id)
+      setModalVisible(true)
+    }
+  }, [editRow])
+
+  useEffect(() => {
+    if (deleteRow !== null && deleteRow !== undefined) {
+      setDeleteId(userPosts[deleteRow].id)
+      setDeleteModalVisible(true)
+    }
+  }, [deleteRow])
+  
+  // // test
+  // useEffect(() => {
+  //   console.log(editId)
+  // }, [editId])
 
   return (
     <div>
-      {/* --- to be replaced - listing components */}
-      <TenantPropertyComparison propertyData={userPosts} />
+      <AgentPostsTable propertyData={userPosts} setEditRow={setEditRow} setDeleteRow={setDeleteRow} />
+      {editId &&
+      <EditProperty propertyId={editId} setRow={setEditRow} setId={setEditId} modalVisible={modalVisible} setModalVisible={setModalVisible}/>}
+      {deleteId &&
+      <DeleteProperty propertyId={deleteId} setRow={setDeleteRow} setId={setDeleteId} modalVisible={deleteModalVisible} setModalVisible={setDeleteModalVisible}/>
+      }
     </div>
   )
 }
