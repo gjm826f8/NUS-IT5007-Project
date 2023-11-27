@@ -69,7 +69,7 @@ async function getTenantResolver(_, args)
     // Find the tenant in the tenants collection
     const { email } = args;
     const result = await db.collection('tenants').findOne({ email });
-    console.log(result);
+    // console.log(result);
     return result;
   } catch (error) {
     throw new Error(`Error get Tenant: ${error.message}`);
@@ -81,7 +81,7 @@ async function getAgentResolver(_, args)
   try {
     const { email } = args;
     const result = await db.collection('agents').findOne({ email });
-    console.log(result);
+    // console.log(result);
     return result;
   } catch (error) {
     throw new Error(`Error get Agent: ${error.message}`);
@@ -103,7 +103,7 @@ async function addTenantResolver(_, args)
     };
     // insert the new tenant object into the database
     const result = await db.collection('tenants').insertOne(newTenant);
-    console.log(result);
+    // console.log(result);
     return result.ops[0];
   } catch (error) {
     throw new Error(`Error add Tenant: ${error.message}`);
@@ -136,7 +136,7 @@ async function updateTenantResolver(_, args)
     
     // console.log(args);
     const {id} = args;
-    console.log(args)
+    // console.log(args)
     const result = await db.collection('tenants').updateOne(
       {id},
       {$set: args},
@@ -152,7 +152,19 @@ async function updateAgentResolver(_, args) {
   try {
     // according to the features of args, update the agent in the agents collection
     args.id = parseInt(args.id);
-    if (args.properties) {
+    if (args.propertyId) {
+      args.propertyId = parseInt(args.propertyId);
+      // find and delete propertyId from properties array
+      const result = await db.collection('agents').findOne({id: args.id});
+      const index = result.properties.indexOf(args.propertyId);
+      if (index > -1) {
+        result.properties.splice(index, 1);
+      }
+      args.properties = result.properties;
+      // delete key propertyId from args
+      delete args.propertyId;
+      console.log(args)
+    } else if (args.properties) {
       for (let i = 0; i < args.properties.length; i++) {
         args.properties[i] = parseInt(args.properties[i]);        
       }
@@ -182,7 +194,7 @@ async function getAllPropertiesResolver(_, args)
   try {
     // Find all properties in the properties collection
     const result = await db.collection('properties').find().toArray();
-    console.log(result);
+    // console.log(result);
     return result;
   } catch (error) {
     throw new Error(`Error get All Properties: ${error.message}`);
@@ -198,7 +210,7 @@ async function getPropertyResolver(_, args)
       idList[i] = parseInt(idList[i]);
     }
     const result = await db.collection('properties').find({id: {$in: idList}}).toArray();
-    console.log(result);
+    // console.log(result);
     return result;
   } catch (error) {
     throw new Error(`Error get Property: ${error.message}`);
@@ -223,7 +235,7 @@ async function addPropertyResolver(_, args)
       manager_id,
       postal_code
     } = args;
-    console.log(price, type, bedrooms, bathrooms, area, display_address, street_address, manager_id, postal_code)
+    // console.log(price, type, bedrooms, bathrooms, area, display_address, street_address, manager_id, postal_code)
     const id = await getNextSequence('properties');
     // create a new property object
     const newProperty = {
@@ -239,9 +251,9 @@ async function addPropertyResolver(_, args)
       postal_code
     };
     // insert the new property object into the database
-    console.log(newProperty)
+    // console.log(newProperty)
     const result = await db.collection('properties').insertOne(newProperty);
-    console.log(result);
+    // console.log(result);
     return result.ops[0];
   } catch (error) {
     throw new Error(`Error add Property: ${error.message}`);
@@ -270,7 +282,7 @@ async function updatePropertyResolver(_, args)
     }    
     // console.log(args);
     const {id} = args;
-    console.log(args)
+    // console.log(args)
     const result = await db.collection('properties').updateOne(
       {id},
       {$set: args},
@@ -288,7 +300,7 @@ async function deletePropertyResolver(_, args)
     args.id = parseInt(args.id);
     const {id} = args;
     const result = await db.collection('properties').deleteOne({id});
-    console.log(result);
+    // console.log(result);
   } catch (error) {
     throw new Error(`Error delete Property: ${error.message}`);
   }

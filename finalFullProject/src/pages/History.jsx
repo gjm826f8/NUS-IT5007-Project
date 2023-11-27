@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { AuthData } from '/src/components/';
-import graphQLFetch from '/src/graphql_cmd.js';
+import { AuthData, getPropertyQuery, getTenantQuery } from '/src/components/';
 
 // to be replaced - listing components
 import { TenantPropertyComparison } from '/src/components';
@@ -15,37 +14,22 @@ function History() {
     handleGetTenant()
   }, [])
 
-  // fetch property data on auth change
-  useEffect(() => {
-    const historyList = auth.userData.favorites
-    handleGetProperty(historyList)
-  }, [auth])
+  // // fetch property data on auth change
+  // useEffect(() => {
+  //   const historyList = auth.userData.favorites
+  //   handleGetProperty(historyList)
+  // }, [auth])
 
   const handleGetTenant = async () => {
-    // define the GraphQL query to check if tenant exists
-    const getTenantQuery = `
-        query GetTenantQuery($email: String!) {
-          getTenant(email: $email) {
-            name
-            email
-            password
-            favorites
-            history
-          }
-        }
-      `;
     // define the variables required for the query
     const variables = {
       email: auth.email,
     };
     // send the request to the GraphQL API
     try {
-      const result = await graphQLFetch(getTenantQuery, variables);
+      const result = await getTenantQuery(variables);
       if (result.getTenant) {
-        setAuth({
-          ...auth,
-          userData: result.getTenant,
-        });
+        handleGetProperty(result.getTenant.history)
       }
     } catch (error) {
       console.log(error);
@@ -54,29 +38,13 @@ function History() {
 
   // backend call to get property data
   const handleGetProperty = async (pList) => {
-    const getPropertyQuery = `
-      query GetPropertyQuery ($idList: [ID]) {
-        getProperty (idList: $idList) {
-          id
-          price
-          type
-          bathrooms
-          bedrooms
-          area
-          display_address
-          street_address
-          manager_id
-          postal_code
-        }
-      }
-    `;
     // define the variables required for the query
     const variables = {
       idList: pList
     };
     // send the request
     try {
-      const result = await graphQLFetch(getPropertyQuery, variables);
+      const result = await getPropertyQuery(variables);
       if (result) {
         setUserHistory(result.getProperty)
       }

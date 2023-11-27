@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { AuthData } from '/src/components/'
 
 // to be replaced - listing components
-import { AgentPostsTable, EditProperty, getAgentQuery, getPropertyQuery, DeleteProperty } from '/src/components/'
+import { AgentPostsTable, DeleteProperty, EditProperty, getAgentQuery, getPropertyQuery } from '/src/components/'
 
 function MyPosts() {
-  const { auth, setAuth } = AuthData()
+  const { auth } = AuthData()
+  const [propertyList, setPropertyList] = useState([])
   const [userPosts, setUserPosts] = useState([])
   const [editRow, setEditRow] = useState(null)
   const [editId, setEditId] = useState(null)
@@ -22,7 +23,7 @@ function MyPosts() {
   // fetch property data on change in auth -- delete property
   useEffect(() => {
     handleGetProperty()
-  }, [auth])
+  }, [propertyList])
 
   // fetch property data on change in editID -- edit property
   useEffect(() => {
@@ -36,10 +37,11 @@ function MyPosts() {
     try {
       const result = await getAgentQuery({email: auth.email})
       if (result.getAgent) {
-        setAuth({
-          ...auth,
-          userData: result.getAgent,
-        });
+        setPropertyList(result.getAgent.properties)
+        // setAuth({
+        //   ...auth,
+        //   userData: result.getAgent,
+        // });
       } 
     } catch (error) {
       console.log(error);
@@ -48,7 +50,7 @@ function MyPosts() {
 
   const handleGetProperty = async () => {
     const variables = {
-      idList: auth.userData.properties
+      idList: propertyList
     }
     try {
       const result = await getPropertyQuery(variables);
@@ -73,11 +75,6 @@ function MyPosts() {
       setDeleteModalVisible(true)
     }
   }, [deleteRow])
-  
-  // // test
-  // useEffect(() => {
-  //   console.log(editId)
-  // }, [editId])
 
   return (
     <div>

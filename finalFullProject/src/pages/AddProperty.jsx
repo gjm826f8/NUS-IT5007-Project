@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AuthData } from '/src/components/';
-import graphQLFetch from '/src/graphql_cmd.js';
+import { AuthData, addPropertyMutation, getAgentQuery, updateAgentMutation } from '/src/components/';
 
 function AddProperty() {
   const navigate = useNavigate();
@@ -101,46 +100,7 @@ function AddProperty() {
     }
   }, [errors])
 
-  // test
-  useEffect(() => {console.log(auth.userData)}, [auth])
-
   const handleAddProperty = async () => {
-    // define the GraphQL query to add property
-    const addPropertyQuery = `
-    mutation AddProperty(
-      $price: Int!
-      $type: String!
-      $bathrooms: Int!
-      $bedrooms: Int!
-      $area: Int!
-      $display_address: String!
-      $street_address: String!
-      $manager_id: ID!
-      $postal_code: String!
-    ) {
-      addProperty(
-        price: $price
-        type: $type
-        bathrooms: $bathrooms
-        bedrooms: $bedrooms
-        area: $area
-        display_address: $display_address
-        street_address: $street_address
-        manager_id: $manager_id
-        postal_code: $postal_code
-      ) {
-        price
-        type
-        bathrooms
-        bedrooms
-        area
-        display_address
-        street_address
-        manager_id
-        postal_code
-      }
-    }    
-    `;
     // define the variables required for the query
     const variables = {
       price: parseInt(formValues.price),
@@ -155,10 +115,41 @@ function AddProperty() {
     };
     // send the request to the GraphQL API
     try {
-      const result = await graphQLFetch(addPropertyQuery, variables);
+      const result = await addPropertyMutation(variables);
       if (result.addProperty) {
         console.log("property added");
-        handleUpdateAgent();
+        handleGetAgent();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const handleGetAgent = async () => {
+    // send the request to the GraphQL API
+    try {
+      const result = await getAgentQuery({email: auth.email})
+      if (result.getAgent) {
+        console.log('agent fetched')
+        handleUpdateAgent(result.getAgent.properties);
+      } 
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // update agent's property list
+  const handleUpdateAgent = async (propertyList) => {
+    // define the variables required for the query
+    const variables = {
+      id: auth.userData.id,
+      properties: propertyList,
+    }
+    // send the request to the GraphQL API
+    try {
+      const result = await updateAgentMutation(variables);
+      if (result) {
+        console.log("agent updated");
         setFormValues(initValues);
         setCheckSubmit(false);
         navigate("/myposts");
@@ -168,47 +159,8 @@ function AddProperty() {
     }
   }
 
-  // update agent's property list
-  const handleUpdateAgent = async () => {
-    // define the GraphQL query to update agent
-    const updateAgentQuery = `
-      mutation UpdateAgentMutation(
-        $id: ID!
-        $name: String
-        $email: String
-        $password: String
-        $properties: [ID]
-      ) {
-        updateAgent(
-          id: $id
-          name: $name
-          email: $email
-          password: $password
-          properties: $properties
-        ) {
-          id
-        }
-      }
-    `
-    // define the variables required for the query
-    const variables = {
-      id: auth.userData.id,
-      properties: auth.userData.properties,
-    }
-    // send the request to the GraphQL API
-    try {
-      const result = await graphQLFetch(updateAgentQuery, variables);
-      if (result) {
-        console.log("agent updated");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   return (
     <div>
-      <div>{JSON.stringify(formValues)}</div>
       <div className='min-h-screen flex items-center justify-center'>
         <div className='bg-gray-100 shadow-lg rounded-2xl w-2/3 max-w-3xl p-10 m-10 text-center'>
           <form onSubmit={handleSubmit} className='flex flex-col w-full px-10 gap-2 my-5'>

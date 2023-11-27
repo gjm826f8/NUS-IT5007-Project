@@ -1,6 +1,30 @@
 import graphQLFetch from "/src/graphql_cmd.js";
 
 //#region User Service Query
+const getTenantQuery = async (args) => {
+  // define the GraphQL query to check if tenant exists
+  const getTenantQuery = `
+  query GetTenantQuery($email: String!) {
+    getTenant(email: $email) {
+      name
+      email
+      password
+      favorites
+      history
+    }
+  }
+`;
+// define the variables required for the query
+const variables = args;
+// send the request to the GraphQL API
+try {
+  const result = await graphQLFetch(getTenantQuery, variables);
+  return result;
+} catch (error) {
+  console.log(error);
+}
+};
+
 const getAgentQuery = async (args) => {
   // define the GraphQL query to check if agent exists
   const getAgentQuery = `
@@ -27,7 +51,38 @@ const getAgentQuery = async (args) => {
 //#endregion
 
 //#region User Service Mutation
-
+const updateAgentMutation = async (args) => {
+  const updateAgentMutation = `
+  mutation UpdateAgentMutation(
+    $id: ID!
+    $name: String
+    $email: String
+    $password: String
+    $properties: [ID]
+  	$propertyId:ID
+  ) {
+    updateAgent(
+      id: $id
+      name: $name
+      email: $email
+      password: $password
+      properties: $properties
+      propertyId: $propertyId
+    ) {
+      id
+    }
+  }
+`
+  // define the variables required for the query
+  const variables = args;
+  // send the request to the GraphQL API
+  try {
+    const result = await graphQLFetch(updateAgentMutation, variables);
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+};
 //#endregion
 
 //#region Property Service Query
@@ -63,6 +118,52 @@ const getPropertyQuery = async (args) => {
 //#endregion
 
 //#region Property Service Mutation
+const addPropertyMutation = async (args) => {
+  const addPropertyMutation = `
+    mutation AddProperty(
+      $price: Int!
+      $type: String!
+      $bathrooms: Int!
+      $bedrooms: Int!
+      $area: Int!
+      $display_address: String!
+      $street_address: String!
+      $manager_id: ID!
+      $postal_code: String!
+    ) {
+      addProperty(
+        price: $price
+        type: $type
+        bathrooms: $bathrooms
+        bedrooms: $bedrooms
+        area: $area
+        display_address: $display_address
+        street_address: $street_address
+        manager_id: $manager_id
+        postal_code: $postal_code
+      ) {
+        price
+        type
+        bathrooms
+        bedrooms
+        area
+        display_address
+        street_address
+        manager_id
+        postal_code
+      }
+    }    
+    `;
+  // define the variables required for the query
+  const variables = args;
+  try {
+    const result = await graphQLFetch(addPropertyMutation, variables);
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const updatePropertyMutation = async (args) => {
   // define the GraphQL query to add property
   const updatePropertyMutation = `
@@ -102,7 +203,7 @@ const updatePropertyMutation = async (args) => {
   } catch (error) {
     console.log(error);
   }
-}
+};
 
 const deletePropertyMutation = async (args) => {
   // define the GraphQL query to add property
@@ -125,8 +226,16 @@ const deletePropertyMutation = async (args) => {
   } catch (error) {
     console.log(error);
   }
-}
+};
 //#endregion
 
-export { deletePropertyMutation, getAgentQuery, getPropertyQuery, updatePropertyMutation };
+export {
+  addPropertyMutation, 
+  deletePropertyMutation, 
+  getAgentQuery, 
+  getPropertyQuery, 
+  getTenantQuery, 
+  updateAgentMutation, 
+  updatePropertyMutation
+};
 
