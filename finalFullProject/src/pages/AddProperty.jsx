@@ -110,7 +110,7 @@ function AddProperty() {
       area: parseInt(formValues.area),
       display_address: formValues.display_address,
       street_address: formValues.street_address,
-      manager_id: auth.userData.id,
+      manager_id: auth.id,
       postal_code: formValues.postal_code,
     };
     // send the request to the GraphQL API
@@ -142,7 +142,7 @@ function AddProperty() {
   const handleUpdateAgent = async (propertyList) => {
     // define the variables required for the query
     const variables = {
-      id: auth.userData.id,
+      id: auth.id,
       properties: propertyList,
     }
     // send the request to the GraphQL API

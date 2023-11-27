@@ -1,6 +1,6 @@
 import React from "react";
 import { AuthData } from "./AuthWrapper.jsx";
-import { deletePropertyMutation, updateAgentMutation } from "./FetchCmd.js";
+import { deletePropertyMutation, getAgentQuery, updateAgentMutation } from "./FetchCmd.js";
 import Modal from "./Modal.jsx";
 
 const DeleteProperty = (args) => {
@@ -11,14 +11,13 @@ const DeleteProperty = (args) => {
 
   const handleDelete = async () => {
     await handleDeleteProperty();
-    await handleUpdateAgent();
+    await handleGetAgent();
     setModalVisible(false);
     setRow(null);
     setId(null);
   };
 
   const handleDeleteProperty = async () => {
-    console.log(propertyId);
     try {
       const variables = {
         id: propertyId,
@@ -32,12 +31,23 @@ const DeleteProperty = (args) => {
     }
   };
 
-  const handleUpdateAgent = async () => {
-    console.log(auth.userData);
+  const handleGetAgent = async () => {
+    // send the request to the GraphQL API
+    try {
+      const result = await getAgentQuery({email: auth.email})
+      if (result.getAgent) {
+        handleUpdateAgent(result.getAgent.properties)
+      } 
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleUpdateAgent = async (pList) => {
     try {
       const variables = {
-        id: auth.userData.id,
-        properties: auth.userData.properties,
+        id: auth.id,
+        properties: pList,
         propertyId: propertyId,
       };
       const result = await updateAgentMutation(variables);

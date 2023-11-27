@@ -38,10 +38,6 @@ function MyPosts() {
       const result = await getAgentQuery({email: auth.email})
       if (result.getAgent) {
         setPropertyList(result.getAgent.properties)
-        // setAuth({
-        //   ...auth,
-        //   userData: result.getAgent,
-        // });
       } 
     } catch (error) {
       console.log(error);

@@ -42,7 +42,7 @@ const resolvers = {
     // User Service Resolvers
     addTenant: addTenantResolver,
     updateTenant: updateTenantResolver,
-    // deleteTenant: deleteTenantResolver,
+    deleteTenant: deleteTenantResolver,
     updateAgent: updateAgentResolver,
     // deleteAgent: deleteAgentResolver,
 
@@ -115,23 +115,16 @@ async function updateTenantResolver(_, args)
   try {
     // according to the features of args, update the tenant in the tenants collection
     args.id = parseInt(args.id);
+    // **args.favorites or args.history is the renewed list of property id
     if (args.favorites) {
       for (let i = 0; i < args.favorites.length; i++) {
         args.favorites[i] = parseInt(args.favorites[i]);        
       }
-      // get the value of key "properties" in counters collection
-      const newId = await db.collection('counters').findOne({_id: "properties"});
-      // append the new property id to the end of the array
-      args.favorites.push(newId.current);
     }
     if (args.history) {
       for (let i = 0; i < args.history.length; i++) {
         args.history[i] = parseInt(args.history[i]);        
       }
-      // get the value of key "properties" in counters collection
-      const newId = await db.collection('counters').findOne({_id: "properties"});
-      // append the new property id to the end of the array
-      args.history.push(newId.current);
     }
     
     // console.log(args);
@@ -145,6 +138,17 @@ async function updateTenantResolver(_, args)
     // console.log(result);
   } catch (error) {
     throw new Error(`Error update Tenant: ${error.message}`);
+  }
+}
+
+async function deleteTenantResolver(_, args) {
+  try {
+    args.id = parseInt(args.id);
+    const {id} = args;
+    const result = await db.collection('tenants').deleteOne({id});
+    // console.log(result);
+  } catch (error) {
+    throw new Error(`Error delete Tenant: ${error.message}`);
   }
 }
 

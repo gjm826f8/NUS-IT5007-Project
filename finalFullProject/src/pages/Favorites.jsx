@@ -4,7 +4,7 @@ import { Slider, TenantPropertyComparison, getPropertyQuery, getTenantQuery } fr
 import { AuthData } from '/src/components/';
 
 function Favorites() {
-  const { auth, setAuth } = AuthData()
+  const { auth } = AuthData()
   const [userFavorites, setUserFavorites] = useState([])
 
   // fetch tenant data on load

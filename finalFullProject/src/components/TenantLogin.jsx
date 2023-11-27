@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { MdArrowBack } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { AuthData } from "./AuthWrapper.jsx";
-import graphQLFetch from "/src/graphql_cmd.js";
+import { addTenantMutation, getTenantQuery } from "./FetchCmd.js";
 
 function TenantLogin() {
   const [mode, setMode] = useState("email"); // email, password, signup
@@ -18,6 +18,7 @@ function TenantLogin() {
   const [checkEmail, setCheckEmail] = useState(false); // flag to check if user pressed continue button
   const [checkPassword, setCheckPassword] = useState(false);
   const [checkRegister, setCheckRegister] = useState(false); // flag to check if user pressed register button
+  const [password, setPassword] = useState(""); // password logged in the backend
   const [passwordMatch, setPasswordMatch] = useState(false); // flag to check if password matches confirmPassword
 
   const { auth, setAuth } = AuthData();
@@ -28,27 +29,6 @@ function TenantLogin() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
-  };
-
-  // handle submit of email input form
-  const handleSubmitEmail = async (e) => {
-    e.preventDefault();
-    setErrors(validate(formValues, mode));
-    setCheckEmail(true);
-  };
-
-  // handle submit of password input form
-  const handleSubmitPassword = async (e) => {
-    e.preventDefault();
-    setErrors(validate(formValues, mode));
-    setCheckPassword(true);
-  };
-
-  // handle submit of register input form
-  const handleSubmitRegister = async (e) => {
-    e.preventDefault();
-    setErrors(validate(formValues, mode));
-    setCheckRegister(true);
   };
 
   // validation of input fields
@@ -94,6 +74,13 @@ function TenantLogin() {
     return errors;
   };
 
+  // handle submit of email input form
+  const handleSubmitEmail = async (e) => {
+    e.preventDefault();
+    setErrors(validate(formValues, mode));
+    setCheckEmail(true);
+  };
+
   // if no error in email input form, proceed to graphql query to check if user exists
   useEffect(() => {
     if (!errors.hasOwnProperty("email") && checkEmail) {
@@ -102,12 +89,44 @@ function TenantLogin() {
     }
   }, [errors]);
 
+  const handleGetTenant = async () => {
+    // define the variables required for the query
+    const variables = {
+      email: formValues.email,
+    };
+    // send the request to the GraphQL API
+    try {
+      const result = await getTenantQuery(variables);
+      if (result.getTenant) {
+        setMode("password");
+        setAuth({
+          ...auth,
+          id: result.getTenant.id,
+          name: result.getTenant.name,
+          email: formValues.email,
+          asTenant: true,
+        });
+        setPassword(result.getTenant.password);
+      } else {
+        setMode("signup");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // handle submit of password input form
+  const handleSubmitPassword = async (e) => {
+    e.preventDefault();
+    setErrors(validate(formValues, mode));
+    setCheckPassword(true);
+  };
+
   // if no error in password input form, proceed to match if password is correct
   useEffect(() => {
-    console.log(formValues)
     if (!errors.hasOwnProperty("password") && checkPassword) {
-      // match formValues.password with auth.userData.password
-      if (formValues.password === auth.userData.password) {
+      // match formValues.password with password
+      if (formValues.password === password) {
         setAuth({ ...auth, isAuthenticated: true });
         console.log("password correct");
         setPasswordMatch(true);
@@ -117,13 +136,12 @@ function TenantLogin() {
     }
   }, [errors]);
 
-  useEffect(() => {
-    setCheckPassword(false);
-    if (passwordMatch) {
-      setFormValues(initValues);
-      navigate("/");
-    }
-  }, [passwordMatch]);
+  // handle submit of register input form
+  const handleSubmitRegister = async (e) => {
+    e.preventDefault();
+    setErrors(validate(formValues, mode));
+    setCheckRegister(true);
+  };
 
   // if no error in registration input form, proceed to graphql query to add new tenant
   useEffect(() => {
@@ -141,57 +159,7 @@ function TenantLogin() {
     }
   }, [errors]);
 
-  const handleGetTenant = async () => {
-    // define the GraphQL query to check if tenant exists
-    const getTenantQuery = `
-        query GetTenantQuery($email: String!) {
-          getTenant(email: $email) {
-            id
-            name
-            email
-            password
-            favorites
-            history
-          }
-        }
-      `;
-    // define the variables required for the query
-    const variables = {
-      email: formValues.email,
-    };
-    // send the request to the GraphQL API
-    try {
-      const result = await graphQLFetch(getTenantQuery, variables);
-      if (result.getTenant) {
-        setMode("password");
-        setAuth({
-          ...auth,
-          email: formValues.email,
-          asTenant: true,
-          userData: result.getTenant,
-        });
-      } else {
-        setMode("signup");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const handleAddTenant = async () => {
-    // define the GraphQL mutation to add new tenant
-    const addTenantMutation = `
-      mutation AddTenantMutation ($name: String!, $email: String!, $password: String!) {
-        addTenant (name: $name, email: $email, password: $password) {
-          id
-          name
-          email
-          password
-          favorites
-          history
-        }
-      }
-      `;
     // define the variables required for the query
     const variables = {
       name: formValues.username,
@@ -200,15 +168,15 @@ function TenantLogin() {
     };
     // send the request to the GraphQL API
     try {
-      const result = await graphQLFetch(addTenantMutation, variables);
+      const result = await addTenantMutation(variables);
       if (result) {
-        console.log(result);
         setAuth({
           ...auth,
+          id: result.addTenant.id,
+          name: result.addTenant.name,
           email: formValues.email,
           isAuthenticated: true,
           asTenant: true,
-          userData: result.addTenant,
         });
       }
     } catch (error) {
@@ -216,10 +184,13 @@ function TenantLogin() {
     }
   };
 
-  // Test
   useEffect(() => {
-    console.log(auth);
-  }, [auth]);
+    setCheckPassword(false);
+    if (passwordMatch) {
+      setFormValues(initValues);
+      navigate("/");
+    }
+  }, [passwordMatch]);
 
   return (
     <div>
@@ -255,7 +226,17 @@ function TenantLogin() {
           <div className="flex items-center justify-between">
             <MdArrowBack
               className="float-left"
-              onClick={() => {setMode("email"); setAuth({...auth, email: '', isAuthenticated: false, asTenant: false, userData: {}})}}
+              onClick={() => {
+                setMode("email");
+                setAuth({
+                  ...auth,
+                  id: "",
+                  name: "",
+                  email: "",
+                  isAuthenticated: false,
+                  asTenant: false,
+                });
+              }}
             />
             <div className="loginHeader">Log In</div>
             <MdArrowBack className="invisible" />

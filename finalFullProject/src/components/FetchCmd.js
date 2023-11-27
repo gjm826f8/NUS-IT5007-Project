@@ -6,6 +6,7 @@ const getTenantQuery = async (args) => {
   const getTenantQuery = `
   query GetTenantQuery($email: String!) {
     getTenant(email: $email) {
+      id
       name
       email
       password
@@ -51,6 +52,84 @@ const getAgentQuery = async (args) => {
 //#endregion
 
 //#region User Service Mutation
+const addTenantMutation = async (args) => {
+  // define the GraphQL mutation to add new tenant
+  const addTenantMutation = `
+  mutation AddTenantMutation ($name: String!, $email: String!, $password: String!) {
+    addTenant (name: $name, email: $email, password: $password) {
+      id
+      name
+      email
+      password
+      favorites
+      history
+    }
+  }
+  `;
+  // define the variables required for the query
+  const variables = args;
+  // send the request to the GraphQL API
+  try {
+    const result = await graphQLFetch(addTenantMutation, variables);
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const updateTenantMutation = async (args) => {
+  // define the GraphQL query to update tenant
+  const updateTenantMutation = `
+  mutation UpdateTenantMutation(
+      $id: ID!
+      $name: String
+      $email: String
+      $password: String
+      $favorites: [ID]
+      $history: [ID]
+  ) {
+      updateTenant(
+      id: $id
+      name: $name
+      email: $email
+      password: $password
+      favorites: $favorites
+      history: $history
+      ) {
+      id
+      }
+  }
+  `;
+  // define the variables required for the query
+  const variables = args;
+  // send the request to the GraphQL API
+  try {
+    const result = await graphQLFetch(updateTenantMutation, variables);
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const deleteTenantMutation = async (args) => {
+  // define the GraphQL query to add property
+  const deleteTenantMutation = `
+      mutation DeleteTenantMutation ($id: ID!) {
+        deleteTenant (id:$id) {
+          id
+        }
+      }
+        `
+  // define the variables required for the query
+  const variables = args;
+  try {
+    const result = await graphQLFetch(deleteTenantMutation, variables);
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const updateAgentMutation = async (args) => {
   const updateAgentMutation = `
   mutation UpdateAgentMutation(
@@ -230,12 +309,15 @@ const deletePropertyMutation = async (args) => {
 //#endregion
 
 export {
-  addPropertyMutation, 
+  addPropertyMutation,
+  addTenantMutation,
   deletePropertyMutation, 
-  getAgentQuery, 
-  getPropertyQuery, 
-  getTenantQuery, 
-  updateAgentMutation, 
-  updatePropertyMutation
+  deleteTenantMutation, 
+  getAgentQuery,
+  getPropertyQuery,
+  getTenantQuery,
+  updateAgentMutation,
+  updatePropertyMutation,
+  updateTenantMutation
 };
 

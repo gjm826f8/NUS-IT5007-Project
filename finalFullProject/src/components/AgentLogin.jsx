@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { MdArrowBack } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { AuthData } from './AuthWrapper.jsx';
-import graphQLFetch from '/src/graphql_cmd.js';
+import { getAgentQuery } from './FetchCmd.js';
 
 function AgentLogin() {
     const [mode, setMode] = useState("email"); // email, password
@@ -15,6 +15,7 @@ function AgentLogin() {
     const [errors, setErrors] = useState({});
     const [checkEmail, setCheckEmail] = useState(false); // flag to check if user pressed continue button
     const [checkPassword, setCheckPassword] = useState(false);
+    const [password, setPassword] = useState(""); // password logged in the backend
     const [passwordMatch, setPasswordMatch] = useState(false); // flag to check if password matches
 
     const { auth, setAuth } = AuthData();
@@ -26,21 +27,7 @@ function AgentLogin() {
       const { name, value } = e.target;
       setFormValues({ ...formValues, [name]: value });
     };
-  
-    // handle submit of email input form
-    const handleSubmitEmail = async (e) => {
-      e.preventDefault();
-      setErrors(validate(formValues, mode));
-      setCheckEmail(true);
-    };
-  
-    // handle submit of password input form
-    const handleSubmitPassword = async (e) => {
-      e.preventDefault();
-      setErrors(validate(formValues, mode));
-      setCheckPassword(true);
-    };
-  
+
     // validation of input fields
     const validate = (values, loginMode) => {
       const errors = {};
@@ -61,6 +48,13 @@ function AgentLogin() {
       return errors;
     };
   
+    // handle submit of email input form
+    const handleSubmitEmail = async (e) => {
+      e.preventDefault();
+      setErrors(validate(formValues, mode));
+      setCheckEmail(true);
+    };
+  
     // if no error in email input form, proceed to graphql query to check if user exists
     useEffect(() => {
       if (!errors.hasOwnProperty("email") && checkEmail) {
@@ -69,11 +63,47 @@ function AgentLogin() {
       }
     }, [errors]);
   
+    const handleGetAgent = async () => {
+      // define the variables required for the query
+      const variables = {
+        email: formValues.email,
+      };
+      // send the request to the GraphQL API
+      try {
+        const result = await getAgentQuery(variables);
+        if (result.getAgent) {
+          setMode("password");
+          setAuth({
+            ...auth,
+            id: result.getAgent.id,
+            name: result.getAgent.name,
+            email: formValues.email,
+            asTenant: false,
+          });
+          setPassword(result.getAgent.password);
+        } else {
+          setErrors({
+            email:
+              "Agent does not exist. If you want to register as new agent, please contact our staff for help.",
+          });
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  
+    // handle submit of password input form
+    const handleSubmitPassword = async (e) => {
+      e.preventDefault();
+      setErrors(validate(formValues, mode));
+      setCheckPassword(true);
+    };
+    
     // if no error in password input form, proceed to match if password is correct
     useEffect(() => {
       if (!errors.hasOwnProperty("password") && checkPassword) {
-        // match formValues.password with auth.userData.password
-        if (formValues.password === auth.userData.password) {
+        // match formValues.password with password
+        if (formValues.password === password) {
           setAuth({ ...auth, isAuthenticated: true });
           console.log("password correct");
           setPasswordMatch(true);
@@ -90,50 +120,6 @@ function AgentLogin() {
         navigate("/");
       }
     }, [passwordMatch]);
-  
-    const handleGetAgent = async () => {
-      // define the GraphQL query to check if agent exists
-      const getAgentQuery = `
-        query GetAgentQuery($email: String!) {
-          getAgent(email: $email) {
-            id
-            name
-            email
-            password
-            properties
-          }
-        }
-      `;
-      // define the variables required for the query
-      const variables = {
-        email: formValues.email,
-      };
-      // send the request to the GraphQL API
-      try {
-        const result = await graphQLFetch(getAgentQuery, variables);
-        if (result.getAgent) {
-          setMode("password");
-          setAuth({
-            ...auth,
-            email: formValues.email,
-            asTenant: false,
-            userData: result.getAgent,
-          });
-        } else {
-          setErrors({
-            email:
-              "Agent does not exist. If you want to register as new agent, please contact our staff for help.",
-          });
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-  
-    // test
-    useEffect(() => {
-      console.log(auth);
-    }, [auth]);
   
     return (
       <div>
@@ -169,7 +155,7 @@ function AgentLogin() {
             <div className="flex items-center justify-between">
               <MdArrowBack
                 className="float-left"
-                onClick={() => {setMode("email"); setAuth({...auth, email: '', isAuthenticated: false, asTenant: false, userData: {}})}}
+                onClick={() => {setMode("email"); setAuth({...auth, name: '', id: '', email: '', isAuthenticated: false, asTenant: false, })}}
               />
               <div className="loginHeader">Log In</div>
               <MdArrowBack className="invisible" />

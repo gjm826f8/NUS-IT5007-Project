@@ -6,19 +6,13 @@ import { TenantPropertyComparison } from '/src/components';
 
 
 function History() {
-  const { auth, setAuth } = AuthData()
+  const { auth } = AuthData()
   const [userHistory, setUserHistory] = useState([])
 
   // fetch tenant data on load
   useEffect(() => {
     handleGetTenant()
   }, [])
-
-  // // fetch property data on auth change
-  // useEffect(() => {
-  //   const historyList = auth.userData.favorites
-  //   handleGetProperty(historyList)
-  // }, [auth])
 
   const handleGetTenant = async () => {
     // define the variables required for the query

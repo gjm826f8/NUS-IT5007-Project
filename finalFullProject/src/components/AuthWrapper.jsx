@@ -8,10 +8,11 @@ export const AuthWrapper = ({ children }) => {
 
     const [auth, setAuth] = useState(
         {
+            id: "",
+            name: "",
             email: "",
             isAuthenticated: false,
             asTenant: false,
-            userData: {},
         }
     );
 

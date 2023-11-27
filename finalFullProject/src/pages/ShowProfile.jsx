@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { AuthData } from "/src/components/";
-import graphQLFetch from "/src/graphql_cmd.js";
+import { AuthData, DeleteTenant, getAgentQuery, getTenantQuery, updateAgentMutation, updateTenantMutation } from "/src/components/";
 
 function ShowProfile() {
   const initData = {
@@ -18,12 +17,12 @@ function ShowProfile() {
   const [formValues, setFormValues] = useState(initData);
   const [errors, setErrors] = useState({});
   const [checkUpdate, setCheckUpdate] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [checkDelete, setCheckDelete] = useState(false);
 
   // fetch user data on load
   useEffect(() => {
-    console.log(auth)
     handleGetUser();
-    // setFormValues({ ...initData, ...fakeData });
   }, []);
 
   const handleGetUser = async () => {
@@ -35,25 +34,14 @@ function ShowProfile() {
   }
 
   const handleGetTenant = async () => {
-    // define the GraphQL query to check if tenant exists
-    const getTenantQuery = `
-        query GetTenantQuery($email: String!) {
-          getTenant(email: $email) {
-            name
-            email
-            password
-          }
-        }
-      `;
     // define the variables required for the query
     const variables = {
       email: auth.email,
     };
     // send the request to the GraphQL API
     try {
-      const result = await graphQLFetch(getTenantQuery, variables);
+      const result = await getTenantQuery(variables);
       if (result.getTenant) {
-        console.log(result.getTenant);
         setFormValues({...formValues, name: result.getTenant.name, email: result.getTenant.email, password: result.getTenant.password, passwordConfirm: ''})
       }
     } catch (error) {
@@ -102,36 +90,20 @@ function ShowProfile() {
   };
 
   const handleGetAgent = async () => {
-    // define the GraphQL query to check if agent exists
-    const getAgentQuery = `
-      query GetAgentQuery($email: String!) {
-        getAgent(email: $email) {
-          name
-          email
-          password
-        }
-      }
-    `;
     // define the variables required for the query
     const variables = {
       email: auth.email,
     };
     // send the request to the GraphQL API
     try {
-      const result = await graphQLFetch(getAgentQuery, variables);
+      const result = await getAgentQuery(variables);
       if (result.getAgent) {
-        console.log('getagent result', result.getAgent);
         setFormValues( {...formValues, name: result.getAgent.name, email: result.getAgent.email, password: result.getAgent.password, passwordConfirm: ''});
       }
     } catch (error) {
       console.log(error);
     }
   };
-
-//   // test
-//   useEffect(() => {
-//     console.log(formValues);
-//   }, [formValues]);
 
   // if no error and checkUpdate is true, then update the user
     useEffect(() => {
@@ -145,42 +117,20 @@ function ShowProfile() {
     }, [errors]);
 
     const handleUpdateTenant = async () => {
-        // define the GraphQL query to update tenant
-        const updateTenantMutation = `
-            mutation UpdateTenantMutation(
-                $id: ID!
-                $name: String
-                $email: String
-                $password: String
-                $favorites: [ID]
-                $history: [ID]
-            ) {
-                updateTenant(
-                id: $id
-                name: $name
-                email: $email
-                password: $password
-                favorites: $favorites
-                history: $history
-                ) {
-                id
-                }
-            }
-        `
         // define the variables required for the query
         const variables = {
-            id: auth.userData.id,
+            id: auth.id,
             name: formValues.name,
             email: formValues.email,
             password: formValues.password,
         }
         // send the request to the GraphQL API
         try {
-            const result = await graphQLFetch(updateTenantMutation, variables);
+            const result = await updateTenantMutation(variables);
             if (result) {
                 console.log("tenant updated");
                 setReadOnly(true);
-                setAuth({...auth, email: formValues.email, userData: {...auth.userData, name: formValues.name, password: formValues.password, email: formValues.email}})
+                setAuth({...auth, email: formValues.email, name: formValues.name})
             }
         } catch (error) {
             console.log(error);
@@ -188,40 +138,20 @@ function ShowProfile() {
     }
 
     const handleUpdateAgent = async () => {
-        // define the GraphQL query to update agent
-        const updateAgentQuery = `
-          mutation UpdateAgentMutation(
-            $id: ID!
-            $name: String
-            $email: String
-            $password: String
-            $properties: [ID]
-          ) {
-            updateAgent(
-              id: $id
-              name: $name
-              email: $email
-              password: $password
-              properties: $properties
-            ) {
-              id
-            }
-          }
-        `
         // define the variables required for the query
         const variables = {
-          id: auth.userData.id,
+          id: auth.id,
           name: formValues.name,
           email: formValues.email,
           password: formValues.password,
         }
         // send the request to the GraphQL API
         try {
-          const result = await graphQLFetch(updateAgentQuery, variables);
+          const result = await updateAgentMutation(variables);
           if (result) {
             console.log("agent updated");
             setReadOnly(true);
-            setAuth({...auth, email: formValues.email, userData: {...auth.userData, name: formValues.name, password: formValues.password, email: formValues.email}})
+            setAuth({...auth, email: formValues.email, name: formValues.name})
           }
         } catch (error) {
           console.log(error);
@@ -229,6 +159,7 @@ function ShowProfile() {
       }
 
   return (
+    <div>
     <div className="bg-gray-50 min-h-screen flex flex-col items-center justify-center gap-2">
       <div className="loginContainer">
         <div className="loginHeader">Profile</div>
@@ -318,11 +249,19 @@ function ShowProfile() {
             </div>
           )}
           {readOnly ? (
-            <div
-              className="bg-slate-500 hover:bg-slate-600 text-white font-semibold p-2 rounded-lg w-full"
-              onClick={() => setReadOnly(false)}
-            >
-              Edit
+            <div className="flex justify-between gap-4">
+              <div
+                className="bg-slate-500 hover:bg-slate-600 text-white font-semibold p-2 rounded-lg w-full"
+                onClick={() => setReadOnly(false)}
+              >
+                Edit
+              </div>
+              <div 
+                className="bg-slate-500 hover:bg-slate-600 text-white font-semibold p-2 rounded-lg w-full"
+                onClick={() => {setCheckDelete(true); setModalVisible(true)}}
+              >
+                Delete Account
+              </div>
             </div>
           ) : (
             <div className="flex justify-between gap-4">
@@ -342,6 +281,9 @@ function ShowProfile() {
           )}
         </form>
       </div>
+    </div>
+    {checkDelete && 
+    <DeleteTenant modalVisible={modalVisible} setModalVisible={setModalVisible}/>}
     </div>
   );
 }

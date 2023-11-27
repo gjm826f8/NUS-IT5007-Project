@@ -17,10 +17,11 @@ const Dropdown = () => {
 
   const handleLogout = () => {
     setAuth({
+      id: "",
+      name: "",
       email: "",
       isAuthenticated: false,
       asTenant: false,
-      userData: {},
     });
     navigate("/");
   };
@@ -31,7 +32,7 @@ const Dropdown = () => {
         as="div"
         className="bg-gray-600 text-white font-bold hover:bg-gray-800 px-4 py-3 rounded-lg text-center"
       >
-        {auth.userData.name}
+        {auth.name}
       </Menu.Button>
       <Menu.Items className="px-2 py-2 text-[15px] space-y-2 shadow-md bg-white absolute w-full z-10 list-none rounded-b-lg">
         <div className="py-1 flex flex-col gap-2">

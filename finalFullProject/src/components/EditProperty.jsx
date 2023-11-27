@@ -4,7 +4,6 @@ import { getPropertyQuery, updatePropertyMutation } from "./FetchCmd.js";
 import Modal from "./Modal.jsx";
 
 function EditProperty(args) {
-  //   console.log(args);
   args.propertyId = parseInt(args.propertyId);
   const { propertyId, setRow, setId, modalVisible, setModalVisible } = args;
 
@@ -135,7 +134,7 @@ function EditProperty(args) {
     // create args for updatePropertyMutation. copy formValues, add manager_id and property_id
     const args = {
       ...formValues,
-      manager_id: auth.userData.id,
+      manager_id: auth.id,
       id: propertyId,
     };
     try {
