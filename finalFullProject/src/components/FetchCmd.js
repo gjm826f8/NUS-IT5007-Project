@@ -115,6 +115,7 @@ const deletePropertyMutation = async (args) => {
         ) {
           id
         }
+      }
         `
   // define the variables required for the query
   const variables = args;

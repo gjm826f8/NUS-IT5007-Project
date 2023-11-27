@@ -1,7 +1,7 @@
 import React from "react";
 import { AuthData } from "./AuthWrapper.jsx";
-import Modal from "./Modal.jsx";
 import { deletePropertyMutation } from "./FetchCmd.js";
+import Modal from "./Modal.jsx";
 
 const DeleteProperty = (args) => {
   args.propertyId = parseInt(args.propertyId);
@@ -16,6 +16,7 @@ const DeleteProperty = (args) => {
   const { auth, setAuth } = AuthData();
 
   const handleDeleteProperty = async () => {
+    console.log(propertyId)
     try {
         const variables = {
             id: propertyId
@@ -23,6 +24,9 @@ const DeleteProperty = (args) => {
         const result = await deletePropertyMutation(variables);
         if (result) {
             handleUpdateAgent();
+            setModalVisible(false);
+            setRow(null);
+            setId(null);
             console.log("deleted property")
         }
     } catch (error) {

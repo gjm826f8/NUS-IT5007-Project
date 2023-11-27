@@ -144,6 +144,9 @@ function EditProperty(args) {
         console.log("property updateded");
         setReadOnly(true);
         setCheckSubmit(false);
+        setModalVisible(false);
+        setRow(null);
+        setId(null);
       }
     } catch (error) {
       console.log(error);
