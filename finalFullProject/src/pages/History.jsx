@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { AuthData, getPropertyQuery, getTenantQuery } from '/src/components/';
 
 // to be replaced - listing components
-import { TenantPropertyComparison } from '/src/components';
+import { PropertyTable } from '/src/components';
 
 
 function History() {
@@ -50,7 +50,7 @@ function History() {
   return (
     <div>
       {/* --- to be replaced - listing components */}
-      <TenantPropertyComparison propertyData={userHistory} />
+      <PropertyTable propertyData={userHistory} />
     </div>
   )
 }

@@ -7,6 +7,7 @@ import EditProperty from './EditProperty.jsx';
 import {
     addPropertyMutation,
     getAgentQuery,
+    getAllPropertiesQuery,
     getPropertyQuery,
     getTenantQuery,
     updateAgentMutation,
@@ -14,10 +15,10 @@ import {
 } from './FetchCmd.js';
 import Modal from './Modal.jsx';
 import NavUserService from './NavUserService.jsx';
+import PropertyTable from './PropertyTable.jsx';
 import RenderRoutes from './RenderRoutes.jsx';
 import Slider from './Slider.jsx';
 import TenantLogin from './TenantLogin.jsx';
-import TenantPropertyComparison from './TenantPropertyComparison.jsx';
 
 export {
     AgentLogin,
@@ -26,14 +27,10 @@ export {
     AuthWrapper,
     DeleteProperty, DeleteTenant, EditProperty,
     Modal,
-    NavUserService,
-    RenderRoutes,
+    NavUserService, PropertyTable, RenderRoutes,
     Slider,
-    TenantLogin,
-    TenantPropertyComparison,
-    addPropertyMutation,
-    getAgentQuery,
-    getPropertyQuery,
+    TenantLogin, addPropertyMutation,
+    getAgentQuery, getAllPropertiesQuery, getPropertyQuery,
     getTenantQuery,
     updateAgentMutation,
     updateTenantMutation

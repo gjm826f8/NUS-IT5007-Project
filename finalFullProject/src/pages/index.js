@@ -3,6 +3,7 @@
 // ##############################################################################
 
 import LandingPage from './LandingPage.jsx';
+import Properties from './Properties.jsx';
 
 // import user service pages
 import Login from './Login.jsx';
@@ -19,6 +20,6 @@ import MyPosts from './MyPosts.jsx';
 export {
     AddProperty, Favorites,
     History, LandingPage,
-    Login, MyPosts, ShowProfile
+    Login, MyPosts, Properties, ShowProfile
 };
     

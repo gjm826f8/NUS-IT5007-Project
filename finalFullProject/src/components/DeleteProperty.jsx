@@ -1,17 +1,18 @@
 import React from "react";
-import { AuthData } from "./AuthWrapper.jsx";
-import { deletePropertyMutation, getAgentQuery, updateAgentMutation } from "./FetchCmd.js";
+// import { AuthData } from "./AuthWrapper.jsx";
+// import { deletePropertyMutation, getAgentQuery, updateAgentMutation } from "./FetchCmd.js";
+import { deletePropertyMutation } from "./FetchCmd.js";
 import Modal from "./Modal.jsx";
 
 const DeleteProperty = (args) => {
   args.propertyId = parseInt(args.propertyId);
   const { modalVisible, setModalVisible, setRow, setId, propertyId } = args;
 
-  const { auth } = AuthData();
+  // const { auth } = AuthData();
 
   const handleDelete = async () => {
     await handleDeleteProperty();
-    await handleGetAgent();
+    // await handleGetAgent();
     setModalVisible(false);
     setRow(null);
     setId(null);
@@ -31,33 +32,33 @@ const DeleteProperty = (args) => {
     }
   };
 
-  const handleGetAgent = async () => {
-    // send the request to the GraphQL API
-    try {
-      const result = await getAgentQuery({email: auth.email})
-      if (result.getAgent) {
-        handleUpdateAgent(result.getAgent.properties)
-      } 
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const handleGetAgent = async () => {
+  //   // send the request to the GraphQL API
+  //   try {
+  //     const result = await getAgentQuery({email: auth.email})
+  //     if (result.getAgent) {
+  //       handleUpdateAgent(result.getAgent.properties)
+  //     } 
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
-  const handleUpdateAgent = async (pList) => {
-    try {
-      const variables = {
-        id: auth.id,
-        properties: pList,
-        propertyId: propertyId,
-      };
-      const result = await updateAgentMutation(variables);
-      if (result) {
-        console.log("Success! update agent's property list");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const handleUpdateAgent = async (pList) => {
+  //   try {
+  //     const variables = {
+  //       id: auth.id,
+  //       properties: pList,
+  //       propertyId: propertyId,
+  //     };
+  //     const result = await updateAgentMutation(variables);
+  //     if (result) {
+  //       console.log("Success! update agent's property list");
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <Modal

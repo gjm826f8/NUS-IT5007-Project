@@ -256,12 +256,12 @@ function ShowProfile() {
               >
                 Edit
               </div>
-              <div 
+              {auth.asTenant && <div 
                 className="bg-slate-500 hover:bg-slate-600 text-white font-semibold p-2 rounded-lg w-full"
                 onClick={() => {setCheckDelete(true); setModalVisible(true)}}
               >
                 Delete Account
-              </div>
+              </div>}
             </div>
           ) : (
             <div className="flex justify-between gap-4">

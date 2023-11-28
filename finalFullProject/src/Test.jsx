@@ -18,6 +18,8 @@ function Test() {
       <br />
       <Link to="/" className="underline">Home</Link>
       <label> | </label>
+      <Link to="/properties">Properties</Link>
+      <label> | </label>
       <Link to="/login">Login</Link>
       <label> | </label>
       <Link to="/myposts">My Posts</Link>
@@ -27,6 +29,8 @@ function Test() {
       <Link to="/favorites">Favorites</Link>
       <label> | </label>
       <Link to="/history">History</Link>
+      <label> | </label>
+      <Link to="/profile">Profile</Link>
       <div className="text-center">----------End Test Field----------</div>
     </div>
   );

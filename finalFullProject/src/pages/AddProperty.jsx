@@ -169,7 +169,7 @@ function AddProperty() {
               className="inputBox"
               type="text"
               name="price"
-              placeholder="Price: $"
+              placeholder="Price (in SGD)"
               value={formValues.price}
               onChange={handleChange} 
             />
@@ -179,7 +179,7 @@ function AddProperty() {
               className="inputBox"
               type="text"
               name="type"
-              placeholder="Type: HDB/ Condo"
+              placeholder="Type (HDB/ Condo)"
               value={formValues.type}
               onChange={handleChange}
               list='typeList'
@@ -194,7 +194,7 @@ function AddProperty() {
               className="inputBox"
               type="number"
               name="bedrooms"
-              placeholder="Bedrooms: "
+              placeholder="# of Bedrooms"
               value={formValues.bedrooms}
               onChange={handleChange}
             />
@@ -204,7 +204,7 @@ function AddProperty() {
               className="inputBox"
               type="number"
               name="bathrooms"
-              placeholder="Bathrooms: "
+              placeholder="# of Bathrooms"
               value={formValues.bathrooms}
               onChange={handleChange}
             />
@@ -214,7 +214,7 @@ function AddProperty() {
               className="inputBox"
               type="text"
               name="area"
-              placeholder="Area: "
+              placeholder="Area (in sqft)"
               value={formValues.area}
               onChange={handleChange}
             />
@@ -224,7 +224,7 @@ function AddProperty() {
               className="inputBox"
               type="text"
               name="display_address"
-              placeholder="Display Address: "
+              placeholder="Address that you want to display"
               value={formValues.display_address}
               onChange={handleChange}
             />
@@ -234,7 +234,7 @@ function AddProperty() {
               className="inputBox"
               type="text"
               name="street_address"
-              placeholder="Street Address: "
+              placeholder="Actual Street Address"
               value={formValues.street_address}
               onChange={handleChange}
             />
@@ -244,7 +244,7 @@ function AddProperty() {
               className="inputBox"
               type="text"
               name="postal_code"
-              placeholder="Postal Code: "
+              placeholder="Postal Code"
               value={formValues.postal_code}
               onChange={handleChange}
             />

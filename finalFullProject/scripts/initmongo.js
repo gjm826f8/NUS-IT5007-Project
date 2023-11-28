@@ -35,7 +35,7 @@ db.tenants.insert({
     email: "janedoe@example.com",
     password: "jane",
     favorites: [1],
-    history: [1, 2, 3],
+    history: [1, 5, 7, 8],
 });
 
 db.tenants.insert({
@@ -44,7 +44,7 @@ db.tenants.insert({
     email: "bobsmith@example.com",
     password: "bob",
     favorites: [2, 3],
-    history: [1, 2, 3, 4],
+    history: [2, 3, 9, 10],
 });
 
 db.tenants.insert({
@@ -53,7 +53,7 @@ db.tenants.insert({
     email: "alicesmith@example.com",
     password: "alice",
     favorites: [1, 2, 4],
-    history: [1, 2, 3, 4, 5],
+    history: [1, 2, 4, 7, 9],
 });
 
 db.tenants.insert({

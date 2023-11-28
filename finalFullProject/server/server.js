@@ -33,6 +33,7 @@ const resolvers = {
     // User Service Resolvers
     getTenant: getTenantResolver,
     getAgent: getAgentResolver,
+    getAgentById: getAgentByIdResolver,
 
     // Property Service Resolvers
     getAllProperties: getAllPropertiesResolver,
@@ -88,6 +89,19 @@ async function getAgentResolver(_, args)
   }
 }
 
+async function getAgentByIdResolver(_, args)
+{
+  args.id = parseInt(args.id);
+  try {
+    const { id } = args;
+    const result = await db.collection('agents').findOne({ id });
+    // console.log(result);
+    return result;
+  } catch (error) {
+    throw new Error(`Error get Agent: ${error.message}`);
+  }
+
+}
 //#endregion
 
 //#region User Service Mutation Resolvers
@@ -120,11 +134,15 @@ async function updateTenantResolver(_, args)
       for (let i = 0; i < args.favorites.length; i++) {
         args.favorites[i] = parseInt(args.favorites[i]);        
       }
+      // remove duplicates
+      args.favorites = [...new Set(args.favorites)];
     }
     if (args.history) {
       for (let i = 0; i < args.history.length; i++) {
         args.history[i] = parseInt(args.history[i]);        
       }
+      // remove duplicates
+      args.history = [...new Set(args.history)];
     }
     
     // console.log(args);

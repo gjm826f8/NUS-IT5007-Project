@@ -35,6 +35,7 @@ type Query {
     # User Service Related Queries
     getTenant(email: String!): Tenant
     getAgent(email: String!): Agent
+    getAgentById(id: ID!): Agent
 
     # Property Service Related Queries
     getAllProperties: [Property]

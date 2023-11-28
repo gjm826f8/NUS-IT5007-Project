@@ -49,6 +49,28 @@ const getAgentQuery = async (args) => {
     console.log(error);
   }
 };
+
+const getAgentByIdQuery = async (args) => {
+  // define the GraphQL query to check if agent exists
+  const getAgentByIdQuery = `
+      query GetAgentByIdQuery($id: ID!) {
+        getAgentById(id: $id) {
+          id
+          name
+          email
+        }
+      }
+    `;
+  // define the variables required for the query
+  const variables = args;
+  // send the request to the GraphQL API
+  try {
+    const result = await graphQLFetch(getAgentByIdQuery, variables);
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+}
 //#endregion
 
 //#region User Service Mutation
@@ -165,6 +187,33 @@ const updateAgentMutation = async (args) => {
 //#endregion
 
 //#region Property Service Query
+const getAllPropertiesQuery = async () => {
+  const getAllPropertiesQuery = `
+    query GetAllPropertiesQuery {
+      getAllProperties {
+        id
+        price
+        type
+        bedrooms
+        bathrooms
+        area
+        display_address
+        street_address
+        manager_id
+        postal_code
+      }
+    }
+  `;
+  try {
+    const result = await graphQLFetch(getAllPropertiesQuery);
+    if (result) {
+      return result;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const getPropertyQuery = async (args) => {
   const getPropertyQuery = `
       query GetPropertyQuery ($idList: [ID]) {
@@ -311,10 +360,8 @@ const deletePropertyMutation = async (args) => {
 export {
   addPropertyMutation,
   addTenantMutation,
-  deletePropertyMutation, 
-  deleteTenantMutation, 
-  getAgentQuery,
-  getPropertyQuery,
+  deletePropertyMutation,
+  deleteTenantMutation, getAgentByIdQuery, getAgentQuery, getAllPropertiesQuery, getPropertyQuery,
   getTenantQuery,
   updateAgentMutation,
   updatePropertyMutation,

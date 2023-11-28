@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 // import React, { useState } from "react";
-import { Slider, TenantPropertyComparison, getPropertyQuery, getTenantQuery } from "/src/components";
+import { PropertyTable, Slider, getPropertyQuery, getTenantQuery } from "/src/components";
 import { AuthData } from '/src/components/';
 
 function Favorites() {
@@ -46,11 +46,16 @@ function Favorites() {
   }
 
   const [enabled, setEnabled] = useState(false);
+
+  useEffect(() => {
+    handleGetTenant();
+  }, [enabled]);
+
   return (
     <div>
       <Slider enabled={enabled} setEnabled={setEnabled} />
       {enabled ? (
-        <TenantPropertyComparison propertyData={userFavorites} />
+        <PropertyTable propertyData={userFavorites} />
       ) : (
         <div></div>
       )}
