@@ -1,8 +1,6 @@
 import React from "react";
-// import { AuthData } from "./AuthWrapper.jsx";
-// import { deletePropertyMutation, getAgentQuery, updateAgentMutation } from "./FetchCmd.js";
-import { deletePropertyMutation } from "./FetchCmd.js";
-import Modal from "./Modal.jsx";
+import { deletePropertyMutation } from "../FetchCmd.js";
+import Modal from "../Modal.jsx";
 
 const DeleteProperty = (args) => {
   args.propertyId = parseInt(args.propertyId);

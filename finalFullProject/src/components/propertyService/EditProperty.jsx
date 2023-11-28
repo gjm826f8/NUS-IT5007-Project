@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { AuthData } from "./AuthWrapper.jsx";
-import { getPropertyQuery, updatePropertyMutation } from "./FetchCmd.js";
-import Modal from "./Modal.jsx";
+import { AuthData } from "../AuthWrapper.jsx";
+import { getPropertyQuery, updatePropertyMutation } from "../FetchCmd.js";
+import Modal from "../Modal.jsx";
 
 function EditProperty(args) {
   args.propertyId = parseInt(args.propertyId);

@@ -5,7 +5,6 @@ import { AuthData, DeleteTenant, getAgentQuery, getTenantQuery, updateAgentMutat
 function ShowProfile() {
   const initData = {
     name: "",
-    email: "",
     password: "",
     passwordConfirm: "",
   };
@@ -42,7 +41,7 @@ function ShowProfile() {
     try {
       const result = await getTenantQuery(variables);
       if (result.getTenant) {
-        setFormValues({...formValues, name: result.getTenant.name, email: result.getTenant.email, password: result.getTenant.password, passwordConfirm: ''})
+        setFormValues({...formValues, name: result.getTenant.name, password: result.getTenant.password, passwordConfirm: ''})
       }
     } catch (error) {
       console.log(error);
@@ -63,11 +62,6 @@ function ShowProfile() {
         errors.name = "Name needs to be 4 characters or more";
     } else if (values.name.length > 20) {
         errors.name = "Name needs to be 20 characters or less";
-    }
-    if (!values.email) {
-      errors.email = "Email required";
-    } else if (!/\S+@\S+\.\S+/.test(values.email)) {
-      errors.email = "Email address is invalid";
     }
     if (!values.password) {
       errors.password = "Password is required";
@@ -98,7 +92,7 @@ function ShowProfile() {
     try {
       const result = await getAgentQuery(variables);
       if (result.getAgent) {
-        setFormValues( {...formValues, name: result.getAgent.name, email: result.getAgent.email, password: result.getAgent.password, passwordConfirm: ''});
+        setFormValues( {...formValues, name: result.getAgent.name, password: result.getAgent.password, passwordConfirm: ''});
       }
     } catch (error) {
       console.log(error);
@@ -121,7 +115,6 @@ function ShowProfile() {
         const variables = {
             id: auth.id,
             name: formValues.name,
-            email: formValues.email,
             password: formValues.password,
         }
         // send the request to the GraphQL API
@@ -130,7 +123,7 @@ function ShowProfile() {
             if (result) {
                 console.log("tenant updated");
                 setReadOnly(true);
-                setAuth({...auth, email: formValues.email, name: formValues.name})
+                setAuth({...auth, name: formValues.name})
             }
         } catch (error) {
             console.log(error);
@@ -142,7 +135,6 @@ function ShowProfile() {
         const variables = {
           id: auth.id,
           name: formValues.name,
-          email: formValues.email,
           password: formValues.password,
         }
         // send the request to the GraphQL API
@@ -151,7 +143,7 @@ function ShowProfile() {
           if (result) {
             console.log("agent updated");
             setReadOnly(true);
-            setAuth({...auth, email: formValues.email, name: formValues.name})
+            setAuth({...auth, name: formValues.name})
           }
         } catch (error) {
           console.log(error);
@@ -174,16 +166,6 @@ function ShowProfile() {
             readOnly={readOnly}
           />
           {errors.name && <div className="errorMessage">{errors.name}</div>}
-          <label className="text-left">Email</label>
-          <input
-            className="inputBox"
-            type="text"
-            name="email"
-            value={formValues.email}
-            onChange={handleChange}
-            readOnly={readOnly}
-          />
-            {errors.email && <div className="errorMessage">{errors.email}</div>}
           <label className="text-left">Password</label>
           {/* add show password configure */}
           <div className="flex justify-between items-center">
@@ -251,13 +233,13 @@ function ShowProfile() {
           {readOnly ? (
             <div className="flex justify-between gap-4">
               <div
-                className="bg-slate-500 hover:bg-slate-600 text-white font-semibold p-2 rounded-lg w-full"
+                className="bg-slate-500 hover:bg-slate-600 text-white font-semibold p-2 rounded-lg w-full cursor-pointer"
                 onClick={() => setReadOnly(false)}
               >
                 Edit
               </div>
               {auth.asTenant && <div 
-                className="bg-slate-500 hover:bg-slate-600 text-white font-semibold p-2 rounded-lg w-full"
+                className="bg-slate-500 hover:bg-slate-600 text-white font-semibold p-2 rounded-lg w-full cursor-pointer"
                 onClick={() => {setCheckDelete(true); setModalVisible(true)}}
               >
                 Delete Account
@@ -266,13 +248,13 @@ function ShowProfile() {
           ) : (
             <div className="flex justify-between gap-4">
               <div
-                className="bg-slate-500 hover:bg-slate-600 text-white font-semibold p-2 rounded-lg w-full"
+                className="bg-slate-500 hover:bg-slate-600 text-white font-semibold p-2 rounded-lg w-full cursor-pointer"
                 onClick={() => {setReadOnly(true); auth.asTenant ? handleGetTenant() : handleGetAgent()}}
               >
                 Cancel
               </div>
               <button
-                className="bg-slate-500 hover:bg-slate-600 text-white font-semibold p-2 rounded-lg w-full"
+                className="bg-slate-500 hover:bg-slate-600 text-white font-semibold p-2 rounded-lg w-full cursor-pointer"
                 type="submit"
               >
                 Update Profile

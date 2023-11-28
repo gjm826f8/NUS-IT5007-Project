@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { MdArrowBack } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import { AuthData } from './AuthWrapper.jsx';
-import { getAgentQuery } from './FetchCmd.js';
+import { AuthData } from '../AuthWrapper.jsx';
+import { getAgentQuery } from '../FetchCmd.js';
 
 function AgentLogin() {
     const [mode, setMode] = useState("email"); // email, password
@@ -154,7 +154,7 @@ function AgentLogin() {
           <div className="loginContainer">
             <div className="flex items-center justify-between">
               <MdArrowBack
-                className="float-left"
+                className="float-left cursor-pointer"
                 onClick={() => {setMode("email"); setAuth({...auth, name: '', id: '', email: '', isAuthenticated: false, asTenant: false, })}}
               />
               <div className="loginHeader">Log In</div>

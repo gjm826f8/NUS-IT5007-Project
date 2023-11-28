@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { MdArrowBack } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import { AuthData } from "./AuthWrapper.jsx";
-import { addTenantMutation, getTenantQuery } from "./FetchCmd.js";
+import { AuthData } from "../AuthWrapper.jsx";
+import { addTenantMutation, getTenantQuery } from "../FetchCmd.js";
 
 function TenantLogin() {
   const [mode, setMode] = useState("email"); // email, password, signup
@@ -225,7 +225,7 @@ function TenantLogin() {
         <div className="loginContainer">
           <div className="flex items-center justify-between">
             <MdArrowBack
-              className="float-left"
+              className="float-left cursor-pointer"
               onClick={() => {
                 setMode("email");
                 setAuth({

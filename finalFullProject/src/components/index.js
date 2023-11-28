@@ -1,9 +1,4 @@
-import AgentLogin from './AgentLogin.jsx';
-import AgentPostsTable from './AgentPostsTable.jsx';
 import { AuthData, AuthWrapper } from './AuthWrapper.jsx';
-import DeleteProperty from './DeleteProperty.jsx';
-import DeleteTenant from './DeleteTenant.jsx';
-import EditProperty from './EditProperty.jsx';
 import {
     addPropertyMutation,
     getAgentQuery,
@@ -14,11 +9,16 @@ import {
     updateTenantMutation
 } from './FetchCmd.js';
 import Modal from './Modal.jsx';
-import NavUserService from './NavUserService.jsx';
-import PropertyTable from './PropertyTable.jsx';
 import RenderRoutes from './RenderRoutes.jsx';
 import Slider from './Slider.jsx';
-import TenantLogin from './TenantLogin.jsx';
+import DeleteProperty from './propertyService/DeleteProperty.jsx';
+import EditProperty from './propertyService/EditProperty.jsx';
+import PropertyTable from './propertyService/PropertyTable.jsx';
+import AgentLogin from './userService/AgentLogin.jsx';
+import AgentPostsTable from './userService/AgentPostsTable.jsx';
+import DeleteTenant from './userService/DeleteTenant.jsx';
+import NavUserService from './userService/NavUserService.jsx';
+import TenantLogin from './userService/TenantLogin.jsx';
 
 export {
     AgentLogin,

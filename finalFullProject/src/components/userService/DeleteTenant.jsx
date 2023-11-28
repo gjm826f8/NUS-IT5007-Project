@@ -1,7 +1,7 @@
 import React from "react";
-import { AuthData } from "./AuthWrapper.jsx";
-import { deleteTenantMutation } from "./FetchCmd.js";
-import Modal from "./Modal.jsx";
+import { AuthData } from "../AuthWrapper.jsx";
+import { deleteTenantMutation } from "../FetchCmd.js";
+import Modal from "../Modal.jsx";
 
 const DeleteTenant = (args) => {
   const { modalVisible, setModalVisible } = args;

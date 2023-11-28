@@ -62,12 +62,12 @@ function AgentPostsTable(args) {
 
   return (
     <div className="p-2 max-w-5xl mx-auto text-black fill-gray-400">
-      <table className="border border-gray-700 w-full text-left">
+      <table className="border border-gray-700 w-full">
         <thead className="bg-slate-600 text-white">
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
-                <th key={header.id} className="capitalize px-3.5 py-2">
+                <th key={header.id} className="capitalize px-3.5 py-2 text-center">
                   {flexRender(
                     header.column.columnDef.header,
                     header.getContext()
@@ -86,7 +86,7 @@ function AgentPostsTable(args) {
                   key={row.id}
                   className={`
                             ${i % 2 === 0 ? "bg-slate-50" : "bg-white"}
-                        `}
+                         text-center`}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <td key={cell.id} className="px-3.5 py-2">
@@ -96,17 +96,15 @@ function AgentPostsTable(args) {
                       )}
                     </td>
                   ))}
-                  <td className="px-3.5 py-2">
+                  <td>
                     <button 
                       onClick={() => {setEditRow(row.id)}}
-                      className="text-center"
                     >
                       <BiMessageSquareDetail className="text-gray-400 hover:text-slate-600"/>
                     </button>
                   </td>
-                  <td className="px-3.5 py-2">
+                  <td>
                     <button
-                      className="text-center"
                       onClick={() => {setDeleteRow(row.id)}}
                     >
                       <MdDeleteOutline className="text-gray-400 hover:text-slate-600"/>

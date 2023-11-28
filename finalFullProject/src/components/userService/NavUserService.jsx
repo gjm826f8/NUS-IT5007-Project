@@ -2,13 +2,10 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 // import auth
-import { AuthData } from "./AuthWrapper.jsx";
+import { AuthData } from "../AuthWrapper.jsx";
 
 // import menu ui
 import { Menu } from "@headlessui/react";
-
-// import custom css
-import "./styles/style.css";
 
 const Dropdown = () => {
   const { auth, setAuth } = AuthData();
@@ -43,7 +40,7 @@ const Dropdown = () => {
                   navigate("/favorites");
                 }}
                 as="li"
-                className="dropdownItem"
+                className="cursor-pointer hover:bg-gray-400 hover:font-semibold flex w-full items-center rounded-md px-2 py-2"
               >
                 My Favorites
               </Menu.Item>
@@ -52,7 +49,7 @@ const Dropdown = () => {
                   navigate("/history");
                 }}
                 as="li"
-                className="dropdownItem"
+                className="cursor-pointer hover:bg-gray-400 hover:font-semibold flex w-full items-center rounded-md px-2 py-2"
               >
                 History
               </Menu.Item>
@@ -64,7 +61,7 @@ const Dropdown = () => {
                   navigate("/addproperty");
                 }}
                 as="li"
-                className="dropdownItem"
+                className="cursor-pointer hover:bg-gray-400 hover:font-semibold flex w-full items-center rounded-md px-2 py-2"
               >
                 Add Property
               </Menu.Item>
@@ -73,19 +70,21 @@ const Dropdown = () => {
                   navigate("/myposts");
                 }}
                 as="li"
-                className="dropdownItem"
+                className="cursor-pointer hover:bg-gray-400 hover:font-semibold flex w-full items-center rounded-md px-2 py-2"
               >
                 My Posts
               </Menu.Item>
             </div>
           )}
           <hr className="border-gray-400" />
-          <Menu.Item onClick={() => {navigate("/profile")}} as="li" className="dropdownItem">
-            My Profile
-          </Menu.Item>
-          <Menu.Item onClick={handleLogout} as="li" className="dropdownItem">
-            Logout
-          </Menu.Item>
+          <div>
+            <Menu.Item onClick={() => {navigate("/profile")}} as="li" className="cursor-pointer hover:bg-gray-400 hover:font-semibold flex w-full items-center rounded-md px-2 py-2">
+              My Profile
+            </Menu.Item>
+            <Menu.Item onClick={handleLogout} as="li" className="cursor-pointer hover:bg-gray-400 hover:font-semibold flex w-full items-center rounded-md px-2 py-2">
+              Logout
+            </Menu.Item>
+          </div>
         </div>
       </Menu.Items>
     </Menu>

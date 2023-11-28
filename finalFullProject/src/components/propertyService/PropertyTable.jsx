@@ -8,13 +8,13 @@ import {
 import React, { useEffect, useState } from "react";
 import { FcLike, FcLikePlaceholder } from "react-icons/fc";
 import { HiOutlineMailOpen } from "react-icons/hi";
-import AgentContactInfo from "./AgentContactInfo.jsx";
-import { AuthData } from "./AuthWrapper.jsx";
+import { AuthData } from "../AuthWrapper.jsx";
 import {
   getAgentByIdQuery,
   getTenantQuery,
   updateTenantMutation
-} from "./FetchCmd.js";
+} from "../FetchCmd.js";
+import AgentContactInfo from "./AgentContactInfo.jsx";
 
 function PropertyTable({ propertyData }) {
   const { auth } = AuthData();
