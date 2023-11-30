@@ -1,5 +1,9 @@
+// Purpose: Provide a page for the user to view and edit their profile.
+
 import React, { useEffect, useState } from "react";
+// import icons
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+// import auth, graphql queries and components
 import { AuthData, DeleteTenant, getAgentQuery, getTenantQuery, updateAgentMutation, updateTenantMutation } from "/src/components/";
 
 function ShowProfile() {
@@ -7,23 +11,24 @@ function ShowProfile() {
     name: "",
     password: "",
     passwordConfirm: "",
-  };
+  }; // initial values for the input fields
 
   const { auth, setAuth } = AuthData();
-  const [readOnly, setReadOnly] = useState(true);
-  const [showPassword, setShowPassword] = useState(false);
-  const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
-  const [formValues, setFormValues] = useState(initData);
-  const [errors, setErrors] = useState({});
-  const [checkUpdate, setCheckUpdate] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
-  const [checkDelete, setCheckDelete] = useState(false);
+  const [readOnly, setReadOnly] = useState(true); // if input fields are read only
+  const [showPassword, setShowPassword] = useState(false); // if password input field is shown
+  const [showPasswordConfirm, setShowPasswordConfirm] = useState(false); // if password confirm input field is shown
+  const [formValues, setFormValues] = useState(initData); // formValues initialization
+  const [errors, setErrors] = useState({}); // errors initialization, for input value validation
+  const [checkUpdate, setCheckUpdate] = useState(false); // check if update button is clicked
+  const [modalVisible, setModalVisible] = useState(false); // modal visibility control - delete function
+  const [checkDelete, setCheckDelete] = useState(false); // check if delete button is clicked
 
   // fetch user data on load
   useEffect(() => {
     handleGetUser();
   }, []);
 
+  // get user data according to the user type
   const handleGetUser = async () => {
     if (auth.asTenant) {
         handleGetTenant();
@@ -32,6 +37,7 @@ function ShowProfile() {
     }
   }
 
+  // fetch tenant data
   const handleGetTenant = async () => {
     // define the variables required for the query
     const variables = {
@@ -54,6 +60,7 @@ function ShowProfile() {
     setCheckUpdate(true);
   };
 
+  // input value validation
   const validate = (values) => {
     let errors = {};
     if (!values.name) {
@@ -83,6 +90,7 @@ function ShowProfile() {
     setFormValues({ ...formValues, [name]: value });
   };
 
+  // fetch agent data
   const handleGetAgent = async () => {
     // define the variables required for the query
     const variables = {
@@ -110,6 +118,7 @@ function ShowProfile() {
         }
     }, [errors]);
 
+    // update tenant data
     const handleUpdateTenant = async () => {
         // define the variables required for the query
         const variables = {
@@ -130,6 +139,7 @@ function ShowProfile() {
         }
     }
 
+    // update agent data
     const handleUpdateAgent = async () => {
         // define the variables required for the query
         const variables = {

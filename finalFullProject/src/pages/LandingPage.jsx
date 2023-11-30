@@ -1,11 +1,11 @@
+// Purpose: Landing page for the application
+
 import React from 'react'
-import { NavUserService } from '/src/components'
 
 function LandingPage() {
   return (
     <div>
-      <h1>Landing Page</h1>
-      <NavUserService />
+      <h1>Temporary Landing Page</h1>
     </div>
   )
 }

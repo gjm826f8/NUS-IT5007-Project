@@ -1,4 +1,7 @@
+// Purpose: Displays all properties in a table
+
 import React, { useEffect, useState } from 'react'
+// import graphql queries and components
 import { PropertyTable, getAllPropertiesQuery } from '/src/components/'
 
 const Properties = () => {

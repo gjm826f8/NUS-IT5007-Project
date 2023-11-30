@@ -1,11 +1,14 @@
+// Purpose: AddProperty page allows the agent to add a new property to the database
+
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+// import auth and necessary graphql queries/ mutations
 import { AuthData, addPropertyMutation, getAgentQuery, updateAgentMutation } from '/src/components/';
 
 function AddProperty() {
   const navigate = useNavigate();
-  const { auth } = AuthData()
-  const initValues = {
+  const { auth } = AuthData();
+  const initValues = { // initial values for the input fields
     price: "",
     type: "",
     bathrooms: "",
@@ -15,9 +18,9 @@ function AddProperty() {
     street_address: "",
     postal_code: "",
   };
-  const [formValues, setFormValues] = useState(initValues);
-  const [errors, setErrors] = useState({});
-  const [checkSubmit, setCheckSubmit] = useState(false);
+  const [formValues, setFormValues] = useState(initValues); // formValues initialization
+  const [errors, setErrors] = useState({}); // errors initialization, for input value validation
+  const [checkSubmit, setCheckSubmit] = useState(false); // check if submit button is clicked
 
   // handle change in input fields
   const handleChange = (e) => {
@@ -28,8 +31,8 @@ function AddProperty() {
   // handle submit of input form
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrors(validate(formValues));
-    setCheckSubmit(true);
+    setErrors(validate(formValues)); // validate the input fields
+    setCheckSubmit(true); // set checkSubmit to true, to trigger useEffect
   };
 
   // validation of input fields
@@ -118,6 +121,8 @@ function AddProperty() {
       const result = await addPropertyMutation(variables);
       if (result.addProperty) {
         console.log("property added");
+        // after adding the property, update the agent's property list
+        // to prepare the old property list, get agent first
         handleGetAgent();
       }
     } catch (error) {
@@ -131,6 +136,7 @@ function AddProperty() {
       const result = await getAgentQuery({email: auth.email})
       if (result.getAgent) {
         console.log('agent fetched')
+        // after getting the agent, update the agent's property list
         handleUpdateAgent(result.getAgent.properties);
       } 
     } catch (error) {
@@ -141,6 +147,7 @@ function AddProperty() {
   // update agent's property list
   const handleUpdateAgent = async (propertyList) => {
     // define the variables required for the query
+    // send the old property list and the backend will automatically add the new property id to it
     const variables = {
       id: auth.id,
       properties: propertyList,
@@ -150,6 +157,7 @@ function AddProperty() {
       const result = await updateAgentMutation(variables);
       if (result) {
         console.log("agent updated");
+        // after updating the agent, reset the all values and navigate to myposts page
         setFormValues(initValues);
         setCheckSubmit(false);
         navigate("/myposts");

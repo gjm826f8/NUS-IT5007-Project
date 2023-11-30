@@ -1,31 +1,35 @@
+// Purpose: MyPosts page component. 
+// Displays the agent's property list and allows the agent to edit or delete their properties.
+
 import React, { useEffect, useState } from 'react'
+// import auth
 import { AuthData } from '/src/components/'
 
-// to be replaced - listing components
+// import components and necessary graphql queries
 import { AgentPostsTable, DeleteProperty, EditProperty, getAgentQuery, getPropertyQuery } from '/src/components/'
 
 function MyPosts() {
   const { auth } = AuthData()
-  const [propertyList, setPropertyList] = useState([])
-  const [userPosts, setUserPosts] = useState([])
-  const [editRow, setEditRow] = useState(null)
-  const [editId, setEditId] = useState(null)
-  const [deleteRow, setDeleteRow] = useState(null)
-  const [deleteId, setDeleteId] = useState(null)
-  const [modalVisible, setModalVisible] = useState(false)
-  const [deleteModalVisible, setDeleteModalVisible] = useState(false)
+  const [propertyList, setPropertyList] = useState([]) // agent's property list initialization
+  const [userPosts, setUserPosts] = useState([]) // property data initialization
+  const [editRow, setEditRow] = useState(null) // row that is being edited
+  const [editId, setEditId] = useState(null) //  id of property being edited
+  const [deleteRow, setDeleteRow] = useState(null) // row that is being deleted
+  const [deleteId, setDeleteId] = useState(null) // id of property being deleted
+  const [modalVisible, setModalVisible] = useState(false) // modal visibility control - edit function
+  const [deleteModalVisible, setDeleteModalVisible] = useState(false) // modal visibility control - delete function
   
   // fetch agent data on load
   useEffect(() => {
     handleGetAgent()
   }, [])
 
-  // fetch property data on change in auth -- delete property
+  // fetch property data on change in propertyList -- delete property
   useEffect(() => {
     handleGetProperty()
   }, [propertyList])
 
-  // fetch property data on change in editID -- edit property
+  // fetch property data on change in editID/ deleteID
   useEffect(() => {
     if (!editId || !deleteId) {
       handleGetProperty()
@@ -37,6 +41,7 @@ function MyPosts() {
     try {
       const result = await getAgentQuery({email: auth.email})
       if (result.getAgent) {
+        // set property list to agent's property list
         setPropertyList(result.getAgent.properties)
       } 
     } catch (error) {
@@ -44,6 +49,7 @@ function MyPosts() {
     }
   };
 
+  // fetch property data
   const handleGetProperty = async () => {
     const variables = {
       idList: propertyList
@@ -51,6 +57,7 @@ function MyPosts() {
     try {
       const result = await getPropertyQuery(variables);
       if (result) {
+        // set property data to the result of the query
         setUserPosts(result.getProperty)
       }
     } catch (error) {
@@ -58,6 +65,7 @@ function MyPosts() {
     }
   }
 
+  // set editId to the id of the property being edited on change in editRow
   useEffect(() => {
     if (editRow !== null && editRow !== undefined) {
       setEditId(userPosts[editRow].id)
@@ -65,6 +73,7 @@ function MyPosts() {
     }
   }, [editRow])
 
+  // set deleteId to the id of the property being deleted on change in deleteRow
   useEffect(() => {
     if (deleteRow !== null && deleteRow !== undefined) {
       setDeleteId(userPosts[deleteRow].id)

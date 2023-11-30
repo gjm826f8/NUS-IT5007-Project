@@ -1,8 +1,7 @@
 import React from "react";
-// import { Navigate, Route, Routes } from "react-router-dom";
 
-import Test from "./Test.jsx";
-// import auth
+// import auth and routes components
+import NavigationBar from "./NavigationBar.jsx";
 import { AuthWrapper, RenderRoutes } from "/src/components/";
 
 // import pages
@@ -10,8 +9,8 @@ import { AuthWrapper, RenderRoutes } from "/src/components/";
 function App() {
   return (
     <div>
-      <Test />
       <AuthWrapper>
+        <NavigationBar />
         <RenderRoutes />
       </AuthWrapper>
     </div>

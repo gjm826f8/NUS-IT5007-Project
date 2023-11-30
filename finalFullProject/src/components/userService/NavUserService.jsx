@@ -94,7 +94,7 @@ const Dropdown = () => {
 function NavUserService() {
   const { auth } = AuthData();
   return (
-    <div>
+    <div className="w-[220px]">
       {auth.isAuthenticated ? (
         <Dropdown />
       ) : (
