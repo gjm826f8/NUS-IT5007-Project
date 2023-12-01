@@ -1,3 +1,6 @@
+// Purpose: Renders the routes based on the user's authentication status and role. 
+// To protect routes from unauthenticated users.
+
 import React from 'react';
 import { Navigate, Route, Routes } from "react-router-dom";
 import { AuthData } from "./AuthWrapper.jsx";
@@ -13,7 +16,6 @@ function RenderRoutes() {
                     <Route exact path="/" element={<LandingPage />} />
                     <Route path="/properties" element={<Properties />} />
                     <Route path="/login" element={<Login />} />
-                    {/* <Route path='/profile' element={<ShowProfile />} /> */}
                     <Route path='*' element={<Navigate to="/" replace />} />
                 </Routes>
             )

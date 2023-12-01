@@ -1,10 +1,19 @@
+// Purpose: Displays a modal to edit property data.
+
 import React, { useEffect, useState } from "react";
+// import auth
 import { AuthData } from "../AuthWrapper.jsx";
+// import graphql mutation and query
 import { getPropertyQuery, updatePropertyMutation } from "../FetchCmd.js";
 import Modal from "../Modal.jsx";
 
 function EditProperty(args) {
-  args.propertyId = parseInt(args.propertyId);
+  args.propertyId = parseInt(args.propertyId); // convert id from string to int
+  // propertyId: id of the property to be edited
+  // setRow: function to set the row to be edited
+  // setId: function to set the id of the row to be edited
+  // modalVisible: boolean to determine if modal is visible
+  // setModalVisible: function to set modalVisible
   const { propertyId, setRow, setId, modalVisible, setModalVisible } = args;
 
   const { auth } = AuthData();
@@ -17,11 +26,11 @@ function EditProperty(args) {
     display_address: "",
     street_address: "",
     postal_code: "",
-  };
-  const [formValues, setFormValues] = useState(initValues);
-  const [errors, setErrors] = useState({});
-  const [checkSubmit, setCheckSubmit] = useState(false);
-  const [readOnly, setReadOnly] = useState(true);
+  }; // initial values for input fields
+  const [formValues, setFormValues] = useState(initValues); // input fields initialization
+  const [errors, setErrors] = useState({}); // errors initialization, used for validation
+  const [checkSubmit, setCheckSubmit] = useState(false); // check if submit button is clicked
+  const [readOnly, setReadOnly] = useState(true); // if input fields are read only
 
   // fetch property data on load
   useEffect(() => {
@@ -141,6 +150,7 @@ function EditProperty(args) {
       const result = await updatePropertyMutation(args);
       if (result) {
         console.log("property updateded");
+        // after update, reset all status and values to default
         setReadOnly(true);
         setCheckSubmit(false);
         setModalVisible(false);

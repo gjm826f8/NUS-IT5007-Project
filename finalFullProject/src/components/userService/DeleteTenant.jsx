@@ -1,6 +1,11 @@
+// Purpose: Provide a way for a tenant to delete their account.
+
 import React from "react";
+// import auth
 import { AuthData } from "../AuthWrapper.jsx";
+// import graphql mutation
 import { deleteTenantMutation } from "../FetchCmd.js";
+// import modal to confirm delete
 import Modal from "../Modal.jsx";
 
 const DeleteTenant = (args) => {
@@ -9,8 +14,8 @@ const DeleteTenant = (args) => {
   const { auth, setAuth } = AuthData();
 
   const handleDelete = async () => {
-    handleDeleteTenant();
-    setModalVisible(false);
+    handleDeleteTenant(); // delete the tenant from the database
+    setModalVisible(false); // close the modal
     setAuth({ 
       ...auth, 
       id: "",
@@ -21,6 +26,7 @@ const DeleteTenant = (args) => {
     });
   };
 
+  // delete the tenant from the database
   const handleDeleteTenant = async () => {
     try {
       const variables = {

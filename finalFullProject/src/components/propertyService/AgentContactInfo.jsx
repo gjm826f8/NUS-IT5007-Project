@@ -1,7 +1,13 @@
+// Purpose: Displays the agent's contact information in a modal.
+
 import React from "react";
 import Modal from "../Modal.jsx";
 
 const AgentContactInfo = (args) => {
+  // modalVisible: boolean to determine if modal is visible
+  // setModalVisible: function to set modalVisible
+  // name: agent's name
+  // email: agent's email
   const { modalVisible, setModalVisible, name, email } = args;
 
   return (
