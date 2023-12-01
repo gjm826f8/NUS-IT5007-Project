@@ -38,6 +38,7 @@ const resolvers = {
     // Property Service Resolvers
     getAllProperties: getAllPropertiesResolver,
     getProperty: getPropertyResolver,
+    getPropertiesByAddress: getPropertiesByAddressResolver,
   },
   Mutation: {
     // User Service Resolvers
@@ -242,6 +243,26 @@ async function getPropertyResolver(_, args)
     throw new Error(`Error get Property: ${error.message}`);
   }
 }
+
+async function getPropertiesByAddressResolver(_, args) {
+  // Description: get properties by address with a keyword
+  try {
+    const keyword = args.street_address; // Assuming the keyword is passed as an argument
+
+    // Build a MongoDB query to find properties with the keyword in the street_address
+    const query = {
+      street_address: { $regex: new RegExp(keyword, 'i') }, // Case-insensitive search
+      // You can add more conditions here if needed
+    };
+
+    const result = await db.collection('properties').find(query).toArray();
+    return result;
+  } catch (error) {
+    throw new Error(`Error getting properties by address: ${error.message}`);
+  }
+}
+
+
 //#endregion
 
 //#region Property Service Mutation Resolvers

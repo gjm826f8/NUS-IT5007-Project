@@ -214,6 +214,36 @@ const getAllPropertiesQuery = async () => {
   }
 };
 
+const getPropertiesByAddressQuery = async (street_address) => {
+  const getPropertiesByAddressQuery = `
+    query GetPropertiesByAddress($street_address: String) {
+      getPropertiesByAddress(street_address:$street_address) {
+        id
+        price
+        type
+        bedrooms
+        bathrooms
+        area
+        display_address
+        street_address
+        manager_id
+        postal_code
+      }
+    }
+  `;
+
+  try {
+    const result = await graphQLFetch(getPropertiesByAddressQuery, {street_address});
+    if (result) {
+      return result;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
+
 const getPropertyQuery = async (args) => {
   const getPropertyQuery = `
       query GetPropertyQuery ($idList: [ID]) {
@@ -362,6 +392,7 @@ export {
   addTenantMutation,
   deletePropertyMutation,
   deleteTenantMutation, getAgentByIdQuery, getAgentQuery, getAllPropertiesQuery, getPropertyQuery,
+  getPropertiesByAddressQuery,
   getTenantQuery,
   updateAgentMutation,
   updatePropertyMutation,

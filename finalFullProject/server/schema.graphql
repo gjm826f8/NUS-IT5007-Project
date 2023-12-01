@@ -40,6 +40,7 @@ type Query {
     # Property Service Related Queries
     getAllProperties: [Property]
     getProperty(idList: [ID]): [Property]
+    getPropertiesByAddress(street_address:String):[Property]
 }
 
 type Mutation {
