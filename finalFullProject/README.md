@@ -46,7 +46,10 @@
   * Delete property (DELETE)
 * Agent Service
   * Get agent (READ)
+<<<<<<< HEAD
   * Get agent by ID (READ)
+=======
+>>>>>>> 7f0d9b80b9ef91d412aa1d73b04008607a4aa1f9
   * Update agent (UPDATE)
 * Tenant Service
   * Get tenant (READ)
