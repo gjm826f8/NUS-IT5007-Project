@@ -1,3 +1,6 @@
+// Purpose: Provide a table to display all the properties posted by the agent.
+// Agent can edit or delete the property.
+
 import {
   createColumnHelper,
   flexRender,
@@ -6,12 +9,16 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import React from "react";
+// import icons
 import { BiMessageSquareDetail } from "react-icons/bi";
 import { MdDeleteOutline } from "react-icons/md";
 
 
 
 function AgentPostsTable(args) {
+  // propertyData: data of all the properties posted by the agent
+  // setEditRow: function to set the id of the property to be edited
+  // setDeleteRow: function to set the id of the property to be deleted
   const { propertyData, setEditRow, setDeleteRow } = args;
 
   // construct the table columns

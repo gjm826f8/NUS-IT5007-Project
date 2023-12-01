@@ -1,16 +1,21 @@
+// Purpose: Displays a modal to confirm if the user really wants to delete a property.
+
 import React from "react";
+// import graphql mutation
 import { deletePropertyMutation } from "../FetchCmd.js";
 import Modal from "../Modal.jsx";
 
 const DeleteProperty = (args) => {
-  args.propertyId = parseInt(args.propertyId);
+  args.propertyId = parseInt(args.propertyId); // convert id from string to int
+  // modalVisible: boolean to determine if modal is visible
+  // setModalVisible: function to set modalVisible
+  // setRow: function to set the row to be deleted
+  // setId: function to set the id of the row to be deleted
+  // propertyId: id of the property to be deleted
   const { modalVisible, setModalVisible, setRow, setId, propertyId } = args;
-
-  // const { auth } = AuthData();
 
   const handleDelete = async () => {
     await handleDeleteProperty();
-    // await handleGetAgent();
     setModalVisible(false);
     setRow(null);
     setId(null);
@@ -29,34 +34,6 @@ const DeleteProperty = (args) => {
       console.log(error);
     }
   };
-
-  // const handleGetAgent = async () => {
-  //   // send the request to the GraphQL API
-  //   try {
-  //     const result = await getAgentQuery({email: auth.email})
-  //     if (result.getAgent) {
-  //       handleUpdateAgent(result.getAgent.properties)
-  //     } 
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // const handleUpdateAgent = async (pList) => {
-  //   try {
-  //     const variables = {
-  //       id: auth.id,
-  //       properties: pList,
-  //       propertyId: propertyId,
-  //     };
-  //     const result = await updateAgentMutation(variables);
-  //     if (result) {
-  //       console.log("Success! update agent's property list");
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   return (
     <Modal
