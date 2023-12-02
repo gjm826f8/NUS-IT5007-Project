@@ -201,6 +201,8 @@ const getAllPropertiesQuery = async () => {
         street_address
         manager_id
         postal_code
+        lat
+        lng
       }
     }
   `;

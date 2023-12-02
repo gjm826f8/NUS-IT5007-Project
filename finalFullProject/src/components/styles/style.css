@@ -7,3 +7,49 @@
         @apply cursor-pointer hover:bg-gray-400 hover:font-semibold flex w-full items-center rounded-md px-2 py-2
     }
 }
+
+.map {
+    height: 100vh;
+    width: 100vw;
+}
+
+.map-container {
+    height: 80%;
+    width: 55%;
+    margin-left: auto; 
+    margin-right: 0;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+}
+
+.houseBriefInfo {
+    width: 45%;
+}
+.houseBriefInfoItem {
+
+}
+.houseDetailInfo {
+    width: 45%;
+}
+.houseDetailInfoItem {
+
+}
+.houseInfoTitle {
+
+}
+.houseInfoDetail {
+
+}
+
+.houseBriefImg {
+    width: 35%;
+ }
+
+ .houseDetailImgBig {
+    width: 50%;
+ }
+
+ .houseDetailImgSmall {
+    width: 25%;
+ }

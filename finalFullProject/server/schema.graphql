@@ -28,6 +28,8 @@ type Property {
     street_address: String!
     manager_id: ID!
     postal_code: String!
+    lat: Float
+    lng: Float
 }
 
 ########## Query ##########

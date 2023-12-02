@@ -125,7 +125,9 @@ db.properties.insert({
     display_address: "145 Borinquen Place",
     street_address: "145 Borinquen Place",
     manager_id: 1,
-    postal_code: "111211"
+    postal_code: "111211",
+    lat: 1.3125027012585204,
+    lng: 103.79535446001437
 });
 
 db.properties.insert({
@@ -138,7 +140,9 @@ db.properties.insert({
     display_address: "East 44th",
     street_address: "230 East 44th",
     manager_id: 2,
-    postal_code: "123456"
+    postal_code: "123456",
+    lat: 1.312084383000261,
+    lng: 103.79430837402873
 });
 
 db.properties.insert({
@@ -151,7 +155,9 @@ db.properties.insert({
     display_address: "East 56th Street",
     street_address: "405 East 56th Street",
     manager_id: 3,
-    postal_code: "635212"
+    postal_code: "635212",
+    lat: 1.3005358077027382,
+    lng: 103.79901234507363
 });
 
 db.properties.insert({
@@ -164,7 +170,9 @@ db.properties.insert({
     display_address: "Metropolitan Avenue",
     street_address: "792 Metropolitan Avenue",
     manager_id: 4,
-    postal_code: "110941"
+    postal_code: "110941",
+    lat: 1.305688243262237,
+    lng: 103.78223607455757
 });
 
 db.properties.insert({
@@ -177,7 +185,9 @@ db.properties.insert({
     display_address: "East 34th Street",
     street_address: "340 East 34th Street",
     manager_id: 2,
-    postal_code: "364513"
+    postal_code: "364513",
+    lat: 1.3007761602570163,
+    lng: 103.84616037641358
 });
 
 db.properties.insert({
@@ -190,7 +200,9 @@ db.properties.insert({
     display_address: "East 16th Street",
     street_address: "145 East 16th Street",
     manager_id: 1,
-    postal_code: "150087"
+    postal_code: "150087",
+    lat: 1.3133028172440704,
+    lng: 103.90741425942242
 });
 
 db.properties.insert({
@@ -203,7 +215,9 @@ db.properties.insert({
     display_address: "East 13th Street",
     street_address: "410 East 13th Street",
     manager_id: 3,
-    postal_code: "646121"
+    postal_code: "646121",
+    lat: 1.306942326651174,
+    lng: 103.91616343080902
 });
 
 db.properties.insert({
@@ -216,7 +230,9 @@ db.properties.insert({
     display_address: "E 19 Street",
     street_address: "346 E 19 Street",
     manager_id: 3,
-    postal_code: "145351"
+    postal_code: "145351",
+    lat: 1.3306325395787089, 
+    lng: 103.91709418770824
 });
 
 db.properties.insert({
@@ -229,7 +245,9 @@ db.properties.insert({
     display_address: "Hicks Street",
     street_address: "94 Hicks Street",
     manager_id: 5,
-    postal_code: "152436"
+    postal_code: "152436",
+    lat: 1.325578657757717, 
+    lng: 103.88861661876479
 });
 
 db.properties.insert({
@@ -242,6 +260,8 @@ db.properties.insert({
     display_address: "Hicks Street",
     street_address: "94 Hicks Street",
     manager_id: 3,
-    postal_code: "152436"
+    postal_code: "152436",
+    lat: 1.3342077154018848,
+    lng: 103.85691393426998
 });
 //#endregion
