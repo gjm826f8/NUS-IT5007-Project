@@ -9,6 +9,8 @@ function NavigationBar() {
         <Link to="/" className="underline">Home</Link>
         <label> | </label>
         <Link to="/properties">Properties</Link>
+        <label> | </label>
+        <Link to="/map">Map Based Search</Link>
       </div>
       <NavUserService />
     </div>
