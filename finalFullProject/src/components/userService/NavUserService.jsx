@@ -1,3 +1,5 @@
+// Purpose: Provide a navigation bar for the user service.
+
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -19,7 +21,7 @@ const Dropdown = () => {
       email: "",
       isAuthenticated: false,
       asTenant: false,
-    });
+    }); // reset auth
     navigate("/");
   };
 
@@ -94,7 +96,7 @@ const Dropdown = () => {
 function NavUserService() {
   const { auth } = AuthData();
   return (
-    <div>
+    <div className="w-[220px]">
       {auth.isAuthenticated ? (
         <Dropdown />
       ) : (

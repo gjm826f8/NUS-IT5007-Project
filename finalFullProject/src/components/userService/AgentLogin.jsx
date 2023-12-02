@@ -1,9 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { MdArrowBack } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
-import { AuthData } from '../AuthWrapper.jsx';
-import { getAgentQuery } from '../FetchCmd.js';
+// Purpose: Provide a login page for agent users.
 
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom";
+// import auth
+import { AuthData } from '../AuthWrapper.jsx';
+// import graphql query
+import { getAgentQuery } from '../FetchCmd.js';
+// import icons
+import { MdArrowBack } from "react-icons/md";
 function AgentLogin() {
     const [mode, setMode] = useState("email"); // email, password
 

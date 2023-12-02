@@ -1,11 +1,13 @@
+// Purpose: Landing page for the application
+
 import React from 'react'
-import { NavUserService } from '/src/components'
+//import PropertySearch from '/Users/doudou/IT5007_proj/course-project-team-20/finalFullProject/src/components/propertyService/PropertySearch.jsx';
+import PropertySearch from '../components/propertyService/PropertySearch.jsx'
 
 function LandingPage() {
   return (
     <div>
-      <h1>Landing Page</h1>
-      <NavUserService />
+      <PropertySearch/>
     </div>
   )
 }

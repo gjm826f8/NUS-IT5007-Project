@@ -1,4 +1,7 @@
+// Purpose: History page for the tenant user, shows the tenant's viewing history
+
 import React, { useEffect, useState } from 'react';
+// impor auth and necessary graphql queries
 import { AuthData, getPropertyQuery, getTenantQuery } from '/src/components/';
 
 // to be replaced - listing components
@@ -7,9 +10,9 @@ import { PropertyTable } from '/src/components';
 
 function History() {
   const { auth } = AuthData()
-  const [userHistory, setUserHistory] = useState([])
+  const [userHistory, setUserHistory] = useState([]) // property data of the user's history initialization
 
-  // fetch tenant data on load
+  // fetch tenant's history list on load, and then fetch the property data
   useEffect(() => {
     handleGetTenant()
   }, [])
@@ -23,6 +26,7 @@ function History() {
     try {
       const result = await getTenantQuery(variables);
       if (result.getTenant) {
+        // after getting the tenant's history list, get the property data
         handleGetProperty(result.getTenant.history)
       }
     } catch (error) {
@@ -40,6 +44,7 @@ function History() {
     try {
       const result = await getPropertyQuery(variables);
       if (result) {
+        // set the property data
         setUserHistory(result.getProperty)
       }
     } catch (error) {

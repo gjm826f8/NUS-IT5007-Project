@@ -6,7 +6,8 @@ import {
     getPropertyQuery,
     getTenantQuery,
     updateAgentMutation,
-    updateTenantMutation
+    updateTenantMutation,
+    getPropertiesByAddressQuery
 } from './FetchCmd.js';
 import Modal from './Modal.jsx';
 import RenderRoutes from './RenderRoutes.jsx';
@@ -20,6 +21,7 @@ import DeleteTenant from './userService/DeleteTenant.jsx';
 import NavUserService from './userService/NavUserService.jsx';
 import TenantLogin from './userService/TenantLogin.jsx';
 
+
 export {
     AgentLogin,
     AgentPostsTable,
@@ -31,6 +33,7 @@ export {
     Slider,
     TenantLogin, addPropertyMutation,
     getAgentQuery, getAllPropertiesQuery, getPropertyQuery,
+    getPropertiesByAddressQuery,
     getTenantQuery,
     updateAgentMutation,
     updateTenantMutation

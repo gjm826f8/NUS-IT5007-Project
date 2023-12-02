@@ -1,13 +1,14 @@
+// Purpose: Favorites page for the tenant user, shows the tenant's favorites properties
+
 import React, { useEffect, useState } from 'react';
-// import React, { useState } from "react";
 import { PropertyTable, Slider, getPropertyQuery, getTenantQuery } from "/src/components";
 import { AuthData } from '/src/components/';
 
 function Favorites() {
   const { auth } = AuthData()
-  const [userFavorites, setUserFavorites] = useState([])
+  const [userFavorites, setUserFavorites] = useState([]) // property data of the user's favorites initialization
 
-  // fetch tenant data on load
+  // fetch tenant favorites list on load, and then fetch the property data
   useEffect(() => {
     handleGetTenant()
   }, [])
@@ -21,6 +22,7 @@ function Favorites() {
     try {
       const result = await getTenantQuery(variables);
       if (result.getTenant) {
+        // after getting the tenant's favorites list, get the property data
         handleGetProperty(result.getTenant.favorites)
       }
     } catch (error) {
@@ -38,6 +40,7 @@ function Favorites() {
     try {
       const result = await getPropertyQuery(variables);
       if (result) {
+        // set the property data
         setUserFavorites(result.getProperty)
       }
     } catch (error) {
@@ -45,8 +48,9 @@ function Favorites() {
     };
   }
 
-  const [enabled, setEnabled] = useState(false);
+  const [enabled, setEnabled] = useState(false); // slider control
 
+  // on slider change, fetch the tenant favorites list and new property data again
   useEffect(() => {
     handleGetTenant();
   }, [enabled]);

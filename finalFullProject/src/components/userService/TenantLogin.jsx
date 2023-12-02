@@ -1,8 +1,13 @@
+// Purpose: Provide a login page for tenants to log in or sign up.
+
 import React, { useEffect, useState } from "react";
-import { MdArrowBack } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+// import auth
 import { AuthData } from "../AuthWrapper.jsx";
+// import graphql mutation and query
 import { addTenantMutation, getTenantQuery } from "../FetchCmd.js";
+// import icons
+import { MdArrowBack } from "react-icons/md";
 
 function TenantLogin() {
   const [mode, setMode] = useState("email"); // email, password, signup
@@ -271,7 +276,7 @@ function TenantLogin() {
         <div className="loginContainer">
           <div className="flex items-center justify-between">
             <MdArrowBack
-              className="float-left"
+              className="float-left cursor-pointer"
               onClick={() => setMode("email")}
             />
             <div className="loginHeader">Sign Up</div>

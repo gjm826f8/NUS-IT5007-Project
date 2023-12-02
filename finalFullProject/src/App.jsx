@@ -1,17 +1,16 @@
 import React from "react";
-// import { Navigate, Route, Routes } from "react-router-dom";
 
-import Test from "./Test.jsx";
-// import auth
+// import auth and routes components
+import NavigationBar from "./NavigationBar.jsx";
 import { AuthWrapper, RenderRoutes } from "/src/components/";
 
 // import pages
 
 function App() {
   return (
-    <div>
-      <Test />
+    <div className="bg-gray-50 min-h-screen">
       <AuthWrapper>
+        <NavigationBar />
         <RenderRoutes />
       </AuthWrapper>
     </div>

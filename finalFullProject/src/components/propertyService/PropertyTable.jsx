@@ -1,3 +1,5 @@
+// Purpose: Provide a table to display the property data, and allow the user to like/dislike properties and contact agents.
+
 import {
   createColumnHelper,
   flexRender,
@@ -6,23 +8,28 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import React, { useEffect, useState } from "react";
+// import icons
 import { FcLike, FcLikePlaceholder } from "react-icons/fc";
 import { HiOutlineMailOpen } from "react-icons/hi";
+// import auth
 import { AuthData } from "../AuthWrapper.jsx";
+// import graphql queries and mutations
 import {
   getAgentByIdQuery,
   getTenantQuery,
   updateTenantMutation
 } from "../FetchCmd.js";
+// import modal to show agent contact info
 import AgentContactInfo from "./AgentContactInfo.jsx";
 
 function PropertyTable({ propertyData }) {
   const { auth } = AuthData();
-  const [favoritesList, setFavoritesList] = useState([]);
-  const [historyList, setHistoryList] = useState([]);
-  const [modalVisible, setModalVisible] = useState(false);
-  const [agentInfo, setAgentInfo] = useState({ name: "", email: "" });
+  const [favoritesList, setFavoritesList] = useState([]); // store the ids of the properties that the tenant likes
+  const [historyList, setHistoryList] = useState([]); // store the ids of the properties that the tenant has viewed
+  const [modalVisible, setModalVisible] = useState(false); // control the visibility of the modal
+  const [agentInfo, setAgentInfo] = useState({ name: "", email: "" }); // store the agent contact info
 
+  // get the tenant's favorites and history lists
   useEffect(() => {
     if (auth.isAuthenticated && auth.asTenant) {
       handleGetTenant();
@@ -170,7 +177,7 @@ function PropertyTable({ propertyData }) {
   };
 
   return (
-    <div className="p-2 max-w-5xl mx-auto text-black fill-gray-400">
+    <div className="px-2 max-w-5xl mx-auto text-black fill-gray-400 py-10">
       <table className="border border-gray-700 w-full">
         <thead className="bg-slate-600 text-white">
           {table.getHeaderGroups().map((headerGroup) => (
