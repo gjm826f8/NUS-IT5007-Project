@@ -18,13 +18,26 @@ const Map = ({houseList, setShowInfoWindowId, showOnMapId}) => {
   // Google Map Marker: selected house state
   const [selectedId, setSelectedId] = useState(0);
   // Google Map Marker: when click on a marker change color
+  // Google Map Center: Singapore or selected house
+  const [center, setCenter] = useState({ lat: 1.3648480445323086, lng: 103.81261318608769 });
+  // Google Map Zoom: default 12 or selected 15
+  const [zoom, setZoom] = useState(12);
 
   // Google Map API Key
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: "AIzaSyBrHnN-mtF_XkCy80h7MI2c25mQ6W9qBo8", // GOOGLE_MAP_API_KEY,
   });
   // Google Map Center
-  const center = useMemo(() => ({ lat: 1.3648480445323086, lng: 103.81261318608769 }), []);
+  // const center = useMemo(() => ({ lat: 1.3648480445323086, lng: 103.81261318608769 }), []);
+  useEffect(() => {
+    if (showOnMapId != 0) {
+      setSelectedId(showOnMapId);
+      console.log("houseList: ", houseList);
+      console.log(houseList[showOnMapId]);
+      // setCenter({ lat: houseList[showOnMapId].lat, lng: houseList[showOnMapId].lng });
+      setZoom(15);
+    }
+  }, [showOnMapId]);
 
   return (
     <div className="map">
@@ -34,7 +47,7 @@ const Map = ({houseList, setShowInfoWindowId, showOnMapId}) => {
         <GoogleMap
           mapContainerClassName="map-container"
           center={center}
-          zoom={12}
+          zoom={zoom}
         >
           {
             houseList.map((house) => (
@@ -44,10 +57,12 @@ const Map = ({houseList, setShowInfoWindowId, showOnMapId}) => {
                 onClick={() => {
                   setSelectedId(house.id);
                   setShowInfoWindowId(house.id);
+                  setCenter({ lat: house.lat, lng: house.lng });
+                  setZoom(15);
                 }}
                 onMouseOver={() => setShowInfoPropId(house.id)} 
                 onMouseOut={() => setShowInfoPropId(0)}
-                icon={normal_icon_url}
+                icon={house.id == selectedId ? click_icon_url : normal_icon_url}
               >
                 {showInfoPropId == house.id && (
                     <InfoWindow>

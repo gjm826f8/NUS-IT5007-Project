@@ -9,12 +9,12 @@
 }
 
 .map {
-    height: 100vh;
-    width: 100vw;
+    /* height: 85vh;
+    width: 55vw; */
 }
 
 .map-container {
-    height: 80%;
+    height: 85%;
     width: 55%;
     margin-left: auto; 
     margin-right: 0;
@@ -24,22 +24,48 @@
 }
 
 .houseBriefInfo {
+    height: 600px;
     width: 45%;
+    overflow: auto;
+    left: 60px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 .houseBriefInfoItem {
-
+    background-color: #ffffffed;
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow:0px 0px 3px 2px rgb(214, 214, 214);
+    border-style: outset;
+    padding: 10px;
+    margin: 5px;
 }
 .houseDetailInfo {
+    height: 600px;
     width: 45%;
+    overflow: auto;
+    left: 60px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 .houseDetailInfoItem {
-
+    margin: 10px; 
+    background-color: #ffffffed;
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow:0px 0px 3px 2px rgb(214, 214, 214);
+    border-style: outset;
+    padding: 10px;
 }
 .houseInfoTitle {
-
+    font-size: 18px;
+    text-align: left;
 }
 .houseInfoDetail {
+    font-size: 14px;
 
+}
+
+.houseInfoDParagraph {
+    text-align: left;
 }
 
 .houseBriefImg {
@@ -52,4 +78,8 @@
 
  .houseDetailImgSmall {
     width: 25%;
+ }
+
+ .houseDetailButton {
+    
  }

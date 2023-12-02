@@ -12,6 +12,7 @@ import { getAllPropertiesQuery } from "../components/FetchCmd.js";
 export default function MapBaseSearch() {
   const [showOnMapId, setShowOnMapId] = useState(0);
   const [showInfoWindowId, setShowInfoWindowId] = useState(0);
+  const [houseListFiltered, setHouseListFiltered] = useState([]);
   // House List State
   const [houseList, setHouseList] = useState([]);
   // get house list from database
@@ -35,9 +36,9 @@ export default function MapBaseSearch() {
     <div>
       {/* <navBar /> */}
       {/* <searchBar /> */}
-      {/* <functionBtn /> */}
-      <DisplayWindow houseList={houseList} showInfoWindowId={showInfoWindowId} setShowInfoWindowId={setShowInfoWindowId} setShowOnMapId={setShowOnMapId}/>
-      <Map houseList={houseList} setShowInfoWindowId={setShowInfoWindowId} showOnMapId={showOnMapId}/>
+      <DisplayWindow houseList={houseList} showInfoWindowId={showInfoWindowId} setShowInfoWindowId={setShowInfoWindowId} 
+        setShowOnMapId={setShowOnMapId} houseListFiltered={houseListFiltered} setHouseListFiltered={setHouseListFiltered}/>
+      <Map houseList={houseListFiltered} setShowInfoWindowId={setShowInfoWindowId} showOnMapId={showOnMapId}/>
     </div>
   );
 }
