@@ -17,6 +17,7 @@
   * Search and filter by MRT, price, property type and # of bedrooms
 * Map View (all users)
 * Properties (all users)
+  * Display all properties
   * Like/ Dislike a property for tenant users
 * Log in/ Sign up (users not logged in yet)
   * Tenant login and signup
@@ -67,9 +68,9 @@ TBD
 *You can test this section with userEmail: `johndoe@example.com` and password: `john`*
 * Access landing page and map view.
 * Once logged in, tenants can click on the button with their username in the upper right corner to access all tenant-permitted features in a drop-down list.
-* **Properties:** The page lists all the properties. Unlike this page in the above mode (namely 2.1.1), the user can also click the "heart" icon to change the status ("Like"/ "Dislike") of the property. 
-* **Favorites:** The page lists all the properties for which the tenant user have clicked on the "heart" icon. There is a slider to toggle between a detailed listing mode with images and a comparison mode that shows only the necessary information in a table. User can also click the "heart" icon to change the status ("Like"/ "Dislike") of the property. 
-* **History:** The page lists all the properties for which the tenant user has viewed. User can also click the "heart" icon to change the status ("Like"/ "Dislike") of the property. 
+* **Properties:** The page lists all the properties. Unlike this page in the above mode (namely 2.1.1), the user can also click the "heart" icon to change the status ("Like"/ "Dislike") of the property. On change of the status, `favorites` and `history` list of `tenants` collection will be updated at the back-end. System will fetch latest data.
+* **Favorites:** The page lists all the properties for which the tenant user have clicked on the "heart" icon. There is a slider to toggle between a detailed listing mode with images and a comparison mode that shows only the necessary information in a table. User can also click the "heart" icon to change the status ("Like"/ "Dislike") of the property. On change of the status, `favorites` and `history` list of `tenants` collection will be updated at the back-end. System will fetch latest data.
+* **History:** The page lists all the properties for which the tenant user has viewed. User can also click the "heart" icon to change the status ("Like"/ "Dislike") of the property. On change of the status, `favorites` list of `tenants` collection will be updated at the back-end. System will fetch latest data.
 * **My Profile:** In this page, users can update their profile and de-register their account. Validation is performed on all input fields.
 * **Log Out:** Users can log out of their accounts.
 #### 2.2.3 Logged in Agents
@@ -77,7 +78,7 @@ TBD
 * Access landing page and map view.
 * **Properties:** The page lists all the properties. 
 * **Add Property:** The agent user can post new property from this page. Validation is performed on all input fields.
-* **My Posts**: This page lists all the properties posted by the agent user as the responsible agent. The user can also edit or delete attributes on this page.
+* **My Posts**: This page lists all the properties posted by the agent user as the responsible agent. The user can also edit or delete properties on this page. On edition and deletion, the data will be fetched again.
 * **My Profile:** In this page, users can update their profile. Validation is performed on all input fields.
 *  **Log Out:** Users can log out of their accounts.
 
@@ -145,3 +146,34 @@ The default status (first time you come in this page) is to show all properties 
    right bottom corner: user can zoom in with "+" button, zoom out with "-" button, or drag the yellow human icon on the map to look what the place looks like in reality
    other operations: click and hold the left mouse button can drag to different part the map
                      scroll the mouse wheel up can zoom in to the place, scroll the mouse wheel down can zoom out from the place
+
+## 4. Details of the Project Modules Assigned to Each Team Member
+
+<div class='center'>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Tasks</th>
+    </tr>
+    <tr>
+      <td>LI YUELING</td>
+      <td>
+        - Tenant service UI&API (CRUD) 
+        <br /> 
+        - Agent Service UI&API (RU) 
+        <br /> 
+        - Basic property service UI&API (CRUD)
+        <br />
+        - Project env setting
+      </td>
+    </tr>
+    <tr>
+      <td>JIANG XINDOU</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>LIAO YUEH FAN</td>
+      <td></td>
+    </tr>
+  </table>
+</div>
