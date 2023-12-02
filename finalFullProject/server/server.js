@@ -1,3 +1,7 @@
+// Li Yueling, Jiang Xindou
+// First Create: 2023-11-19
+// Function Complete: 2023-12-02
+
 const fs = require('fs');
 const express = require('express');
 const { ApolloServer, UserInputError } = require('apollo-server-express');
@@ -272,6 +276,9 @@ async function addPropertyResolver(_, args)
   try {
     // Convert all values that should be numbers from strings to numbers.
     args.manager_id = parseInt(args.manager_id);
+    // 2023-12-01: add lng, lat according to Liao's new request
+    args.lng = parseFloat(args.lng);
+    args.lat = parseFloat(args.lat);
     const { 
       price, 
       type, 
@@ -281,7 +288,9 @@ async function addPropertyResolver(_, args)
       display_address, 
       street_address, 
       manager_id,
-      postal_code
+      postal_code,
+      lng,
+      lat
     } = args;
     // Get the value of key "properties" in counters collection
     const id = await getNextSequence('properties');
@@ -296,7 +305,8 @@ async function addPropertyResolver(_, args)
       display_address, 
       street_address, 
       manager_id,
-      postal_code
+      postal_code,
+      lng, lat
     };
     const result = await db.collection('properties').insertOne(newProperty);
     return result.ops[0];

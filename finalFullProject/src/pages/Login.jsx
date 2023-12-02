@@ -1,5 +1,8 @@
 // Purpose: Login page component. 
 // Allows the user to login as a tenant or agent, as well as sign up for an tenant account.
+// Li Yueling
+// First Create: 2023-11-20
+// Function Complete: 2023-11-27
 
 import React, { useState } from "react";
 // import icons

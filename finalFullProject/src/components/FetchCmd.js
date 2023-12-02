@@ -1,3 +1,7 @@
+// Li Yueling
+// First Create: 2023-11-26
+// Function Complete: 2023-11-28
+
 import graphQLFetch from "/src/graphql_cmd.js";
 
 //#region User Service Query
@@ -260,6 +264,8 @@ const getPropertyQuery = async (args) => {
           street_address
           manager_id
           postal_code
+          lng
+          lat
         }
       }
     `;
@@ -290,6 +296,8 @@ const addPropertyMutation = async (args) => {
       $street_address: String!
       $manager_id: ID!
       $postal_code: String!
+      $lat: Float
+      $lng: Float
     ) {
       addProperty(
         price: $price
@@ -301,6 +309,8 @@ const addPropertyMutation = async (args) => {
         street_address: $street_address
         manager_id: $manager_id
         postal_code: $postal_code
+        lat: $lat
+        lng: $lng
       ) {
         price
         type
@@ -393,9 +403,7 @@ export {
   addPropertyMutation,
   addTenantMutation,
   deletePropertyMutation,
-  deleteTenantMutation, getAgentByIdQuery, getAgentQuery, getAllPropertiesQuery, getPropertyQuery,
-  getPropertiesByAddressQuery,
-  getTenantQuery,
+  deleteTenantMutation, getAgentByIdQuery, getAgentQuery, getAllPropertiesQuery, getPropertiesByAddressQuery, getPropertyQuery, getTenantQuery,
   updateAgentMutation,
   updatePropertyMutation,
   updateTenantMutation

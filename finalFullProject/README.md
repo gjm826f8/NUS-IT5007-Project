@@ -34,6 +34,7 @@
 * Properties (all users)
   * Display all properties
   * Like/ Dislike a property for tenant users
+  * Get contact information for the agent in charge for tenant users
 * Log in/ Sign up (users not logged in yet)
   * Tenant login and signup
   * Agent login
@@ -44,9 +45,11 @@
 * History (tenants)
   * List of properties that tenant user have viewed
   * Tenant users can change the like status by clicking heart icon
+  * Tenant users can get contact information for the agent in charge
 * Favorites (tenants)
   * List of properties that tenant user likes
   * Tenant users can change the like status by clicking heart icon
+  * Tenant users can get contact information for the agent in charge
 * Add Property (agent)
   * Form for agents to post new property
 * My Posts (agent)
@@ -83,9 +86,9 @@ TBD
 *You can test this section with userEmail: `johndoe@example.com` and password: `john`*
 * Access landing page and map view.
 * Once logged in, tenants can click on the button with their username in the upper right corner to access all tenant-permitted features in a drop-down list.
-* **Properties:** The page lists all the properties. Unlike this page in the above mode (namely 2.1.1), the user can also click the "heart" icon to change the status ("Like"/ "Dislike") of the property. On change of the status, `favorites` and `history` list of `tenants` collection will be updated at the back-end. System will fetch latest data.
-* **Favorites:** The page lists all the properties for which the tenant user have clicked on the "heart" icon. There is a slider to toggle between a detailed listing mode with images and a comparison mode that shows only the necessary information in a table. User can also click the "heart" icon to change the status ("Like"/ "Dislike") of the property. On change of the status, `favorites` and `history` list of `tenants` collection will be updated at the back-end. System will fetch latest data.
-* **History:** The page lists all the properties for which the tenant user has viewed. User can also click the "heart" icon to change the status ("Like"/ "Dislike") of the property. On change of the status, `favorites` list of `tenants` collection will be updated at the back-end. System will fetch latest data.
+* **Properties:** The page lists all the properties. Unlike this page in the above mode (namely 2.1.1), the user can also click the "heart" icon to change the status ("Like"/ "Dislike") of the property. On change of the status, `favorites` and `history` list of `tenants` collection will be updated at the back-end. System will fetch latest data. Besides, users can get the contact information of agent in charge in a pop-up modal.
+* **Favorites:** The page lists all the properties for which the tenant user have clicked on the "heart" icon. There is a slider to toggle between a detailed listing mode with images and a comparison mode that shows only the necessary information in a table. User can also click the "heart" icon to change the status ("Like"/ "Dislike") of the property. On change of the status, `favorites` and `history` list of `tenants` collection will be updated at the back-end. System will fetch latest data. Besides, users can get the contact information of agent in charge in a pop-up modal.
+* **History:** The page lists all the properties for which the tenant user has viewed. User can also click the "heart" icon to change the status ("Like"/ "Dislike") of the property. On change of the status, `favorites` list of `tenants` collection will be updated at the back-end. System will fetch latest data. Besides, users can get the contact information of agent in charge in a pop-up modal.
 * **My Profile:** In this page, users can update their profile and de-register their account. Validation is performed on all input fields.
 * **Log Out:** Users can log out of their accounts.
 #### 2.2.3 Logged in Agents <a id='section2.2.3'></a>

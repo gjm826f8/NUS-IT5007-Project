@@ -1,4 +1,7 @@
 // Purpose: Provide a page for the user to view and edit their profile.
+// Li Yueling
+// First Create: 2023-11-25
+// Function Complete: 2023-11-27
 
 import React, { useEffect, useState } from "react";
 // import icons
@@ -132,6 +135,8 @@ function ShowProfile() {
             if (result) {
                 console.log("tenant updated");
                 setReadOnly(true);
+                setShowPassword(false);
+                setShowPasswordConfirm(false);
                 setAuth({...auth, name: formValues.name})
             }
         } catch (error) {
@@ -153,6 +158,8 @@ function ShowProfile() {
           if (result) {
             console.log("agent updated");
             setReadOnly(true);
+            setShowPassword(false);
+            setShowPasswordConfirm(false);
             setAuth({...auth, name: formValues.name})
           }
         } catch (error) {
@@ -259,7 +266,7 @@ function ShowProfile() {
             <div className="flex justify-between gap-4">
               <div
                 className="bg-slate-500 hover:bg-slate-600 text-white font-semibold p-2 rounded-lg w-full cursor-pointer"
-                onClick={() => {setReadOnly(true); auth.asTenant ? handleGetTenant() : handleGetAgent()}}
+                onClick={() => {setReadOnly(true); setShowPassword(false); setShowPasswordConfirm(false); auth.asTenant ? handleGetTenant() : handleGetAgent()}}
               >
                 Cancel
               </div>

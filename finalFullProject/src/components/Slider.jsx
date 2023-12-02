@@ -1,8 +1,11 @@
+// Li Yueling
+// First Create: 2023-11-23
+// Function Complete: 2023-11-23
 import React from "react";
 
 function Slider({ enabled, setEnabled }) {
   return (
-    <div className="flex relative items-center justify-between mx-10 my-5">
+    <div className="flex relative items-center justify-between mx-10 my-2">
       <div className="relative"></div>
       <div className="flex flex-row gap-5 items-center">
         <label className="text-sm text-gray-500">Compare Properties</label>

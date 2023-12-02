@@ -1,3 +1,7 @@
+## Li Yueling
+## First Create: 2023-11-19
+## Function Complete: 2023-12-02
+
 ########## User Service Related APIs ##########
 type Tenant {
     id: ID!
@@ -54,7 +58,7 @@ type Mutation {
     deleteAgent(id: ID!): Agent
 
     # Property Service Related Mutations
-    addProperty(price: Int!, type: String!, bathrooms: Int!, bedrooms: Int!, area: Int!, display_address: String!, street_address: String!, manager_id: ID!, postal_code: String!): Property
+    addProperty(price: Int!, type: String!, bathrooms: Int!, bedrooms: Int!, area: Int!, display_address: String!, street_address: String!, manager_id: ID!, postal_code: String!, lat: Float, lng:Float): Property
     updateProperty(id: ID!, price: Int, type: String, bathrooms: Int, bedrooms: Int, area: Int, display_address: String, street_address: String, manager_id: ID, postal_code: String): Property
     deleteProperty(id: ID!): Property
 }

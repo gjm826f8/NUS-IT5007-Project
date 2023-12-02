@@ -1,4 +1,7 @@
 // Purpose: Provide a way for a tenant to delete their account.
+// Li Yueling
+// First Create: 2023-11-27
+// Function Complete: 2023-11-27
 
 import React from "react";
 // import auth
