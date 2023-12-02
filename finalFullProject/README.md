@@ -1,7 +1,22 @@
 # IT5007 - Team 20 - Course Project
-[TOC]
 
-## 1. Project Init
+**Contents:**
+1. [Project Init](#section1)
+2. [Implemented Features](#section2)
+   1. [List of Implemented Features Overview](#section2.1)
+      1. [UI Implementation](#section2.1.1)
+      2. [Back-end Implementation](#section2.1.2)
+   2. [Pages and Access Rights by User Type](#section2.2)
+      1. [Guest/ Unauthenticated/ Unregistered Users](#section2.2.1)
+      2. [Logged in Tenants](#section2.2.2)
+      3. [Logged in Agents](#section2.2.3)
+3. [Page Details - Landing Page and Map View](#section3)
+   1. [Landing Page](#section3.1)
+   2. [Map-Based Search](#section3.2)
+4. [Details of the Project Modules Assigned to Each Team Member](#section4)
+
+
+## 1. Project Init <a id='section1'></a>
 1. Make sure you are in the correct project folder, if not, switch the working path to `cd /course-project-team-20/finalFullProject/`
 3. `npm install` to install all the dependencies.
 3. Start MongoDB server using the command: `systemctl start mongod`
@@ -9,9 +24,9 @@
 5. Run `npm run compile` to compile `index.bundle.js` file to public folder.
 6. Run `npm start` to start App on port 3000.
 
-## 2. Implemented Features
-### 2.1 List of Implemented Features Overview
-#### 2.1.1 UI Implementation
+## 2. Implemented Features <a id='section2'></a>
+### 2.1 List of Implemented Features Overview <a id='section2.1'></a>
+#### 2.1.1 UI Implementation <a id='section2.1.1'></a>
 * Landing Page (all users)
   * Property listing with details and images
   * Search and filter by MRT, price, property type and # of bedrooms
@@ -37,7 +52,7 @@
 * My Posts (agent)
   * List of properties that agent user have posted
   * Agent users can edit the details and delete property
-#### 2.1.2 Back-end Implementation
+#### 2.1.2 Back-end Implementation <a id='section2.1.2'></a>
 ##### 1. GraphQL and MongoDB
 * Property Service
   * Get all properties (READ)
@@ -56,15 +71,15 @@
   * Delete tenant (DELETE)
 ##### 2. 3rd Party APIs
 TBD
-### 2.2 Pages and Access Rights by User Type
-#### 2.2.1 Guest/ Unauthenticated/ Unregistered Users
+### 2.2 Pages and Access Rights by User Type <a id='section2.2'></a>
+#### 2.2.1 Guest/ Unauthenticated/ Unregistered Users <a id='section2.2.1'></a>
 * Access landing page and map view.
 * View all of the properties by clicking `Properties` placed on the top navigation bar.
 * Access `Login` page by clicking the `Log in/ Sign up` button placed on the top-right corner of the page.
    * Switch `tenant`/`agent` login mode by clicking the 2 buttons placed on the top of the input field container. Validation is performed on all input fields.
    * **Agent mode:** Registration as a new agent user is not allowed, as licenses and other checks are required in the real world. The same also goes for agent deregistrations.
    * **Tenant mode:** The first step is to check for an e-mail address and continue checking for a password if the e-mail exists in the database; if not, continue with the registration.
-#### 2.2.2 Logged in Tenants
+#### 2.2.2 Logged in Tenants <a id='section2.2.2'></a>
 *You can test this section with userEmail: `johndoe@example.com` and password: `john`*
 * Access landing page and map view.
 * Once logged in, tenants can click on the button with their username in the upper right corner to access all tenant-permitted features in a drop-down list.
@@ -73,7 +88,7 @@ TBD
 * **History:** The page lists all the properties for which the tenant user has viewed. User can also click the "heart" icon to change the status ("Like"/ "Dislike") of the property. On change of the status, `favorites` list of `tenants` collection will be updated at the back-end. System will fetch latest data.
 * **My Profile:** In this page, users can update their profile and de-register their account. Validation is performed on all input fields.
 * **Log Out:** Users can log out of their accounts.
-#### 2.2.3 Logged in Agents
+#### 2.2.3 Logged in Agents <a id='section2.2.3'></a>
 *You can test this section with userEmail: `andrewjordan@example.org` and password: `andrew`*
 * Access landing page and map view.
 * **Properties:** The page lists all the properties. 
@@ -82,8 +97,8 @@ TBD
 * **My Profile:** In this page, users can update their profile. Validation is performed on all input fields.
 *  **Log Out:** Users can log out of their accounts.
 
-## 3. Page Details - Landing Page and Map View
-### 3.1 Landing Page
+## 3. Page Details - Landing Page and Map View <a id='section3'></a>
+### 3.1 Landing Page <a id='section3.1'></a>
 **Navigation**: 
 
  - Whole Unit: click to see listing of whole unit for rent
@@ -102,7 +117,7 @@ TBD
 **Listing**: 
 Listing of new posts
 
-### 3.2 Map-Based Search
+### 3.2 Map-Based Search <a id='section3.2'></a>
 In this projet, this is the most important function which allows user to search for rental house in a map view. We use Google Map API to show the map and mark all the properties in Singapore. In this page, there also should have a same navigation bar and search box as the landing page on the top of the website, however we can't intergrate it since the page isn's built by React. And we will fix that later!
 #### 3.2.1 Filter buttom
 There are three type of filter buttoms, including "All Properties", "My Favorite", "View History". And the buttons will be replaced by other designed icons afterword.
@@ -147,7 +162,7 @@ The default status (first time you come in this page) is to show all properties 
    other operations: click and hold the left mouse button can drag to different part the map
                      scroll the mouse wheel up can zoom in to the place, scroll the mouse wheel down can zoom out from the place
 
-## 4. Details of the Project Modules Assigned to Each Team Member
+## 4. Details of the Project Modules Assigned to Each Team Member <a id='section4'></a>
 
 <div class='center'>
   <table>
@@ -158,13 +173,16 @@ The default status (first time you come in this page) is to show all properties 
     <tr>
       <td>LI YUELING</td>
       <td>
-        - Tenant service UI&API (CRUD) 
-        <br /> 
-        - Agent Service UI&API (RU) 
-        <br /> 
-        - Basic property service UI&API (CRUD)
+        - Project environment setting
         <br />
-        - Project env setting
+        - Tenant service UI&API&back-end 
+        <br/>&emsp;&emsp; (CRUD - Login, Deregister, Show profile, Update profile) 
+        <br /> 
+        - Agent Service UI&API&back-end 
+        <br/>&emsp;&emsp; (RU - Show profile, Update profile) 
+        <br /> 
+        - Property service UI&API&back-end 
+        <br/>&emsp;&emsp;  (CRUD - Show all properties, Show all properties posted by the agent, Agent post new property, Agent edit/ delete property, Show properties in tenant's favorites/ history list, Update tenant's favorites/ history list)        
       </td>
     </tr>
     <tr>
