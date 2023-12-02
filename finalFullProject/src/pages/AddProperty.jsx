@@ -1,4 +1,7 @@
 // Purpose: AddProperty page allows the agent to add a new property to the database
+// Li Yueling
+// First Create: 2023-11-20
+// Function Complete: 2023-11-27
 
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -104,6 +107,13 @@ function AddProperty() {
   }, [errors])
 
   const handleAddProperty = async () => {
+    // 2023-12-01
+    // According to Liao's new request, the longitute and latitude will be generated randomly
+    // get 2 random numbers to generate a random longitute and latitude
+    // longitute range: 103.38 to 104.6
+    // latitude range: 1.09 to 1.29
+    const longitute = (Math.random() * (104.6 - 103.38) + 103.38).toFixed(6);
+    const latitude = (Math.random() * (1.29 - 1.09) + 1.09).toFixed(6);
     // define the variables required for the query
     const variables = {
       price: parseInt(formValues.price),
@@ -115,6 +125,8 @@ function AddProperty() {
       street_address: formValues.street_address,
       manager_id: auth.id,
       postal_code: formValues.postal_code,
+      lng: longitute,
+      lat: latitude,
     };
     // send the request to the GraphQL API
     try {

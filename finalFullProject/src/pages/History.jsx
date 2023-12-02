@@ -1,4 +1,7 @@
 // Purpose: History page for the tenant user, shows the tenant's viewing history
+// Li Yueling
+// First Create: 2023-11-20
+// Function Complete: 2023-11-27
 
 import React, { useEffect, useState } from 'react';
 // impor auth and necessary graphql queries

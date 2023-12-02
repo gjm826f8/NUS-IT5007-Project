@@ -1,12 +1,20 @@
 // Purpose: Favorites page for the tenant user, shows the tenant's favorites properties
+// Li Yueling
+// First Create: 2023-11-20
+// Function Complete: 2023-11-27
 
 import React, { useEffect, useState } from 'react';
 import { PropertyTable, Slider, getPropertyQuery, getTenantQuery } from "/src/components";
 import { AuthData } from '/src/components/';
+import DisplayWindow from "/src/components/mapService/displayWindow.jsx";
+import Map from "/src/components/mapService/map.jsx";
 
 function Favorites() {
   const { auth } = AuthData()
   const [userFavorites, setUserFavorites] = useState([]) // property data of the user's favorites initialization
+
+  const [showOnMapId, setShowOnMapId] = useState(0);
+  const [showInfoWindowId, setShowInfoWindowId] = useState(0);
 
   // fetch tenant favorites list on load, and then fetch the property data
   useEffect(() => {
@@ -61,7 +69,10 @@ function Favorites() {
       {enabled ? (
         <PropertyTable propertyData={userFavorites} />
       ) : (
-        <div></div>
+        <div>
+          <DisplayWindow houseList={userFavorites} showInfoWindowId={showInfoWindowId} setShowInfoWindowId={setShowInfoWindowId} setShowOnMapId={setShowOnMapId}/>
+          <Map houseList={userFavorites} setShowInfoWindowId={setShowInfoWindowId} showOnMapId={showOnMapId}/>
+        </div>
       )}
     </div>
   );

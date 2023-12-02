@@ -1,4 +1,7 @@
 // Purpose: Displays the agent's contact information in a modal.
+// Li Yueling
+// First Create: 2023-11-28
+// Function Complete: 2023-11-28
 
 import React from "react";
 import Modal from "../Modal.jsx";

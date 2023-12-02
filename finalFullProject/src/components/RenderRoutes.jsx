@@ -1,5 +1,8 @@
 // Purpose: Renders the routes based on the user's authentication status and role. 
 // To protect routes from unauthenticated users.
+// Li Yueling
+// First Create: 2023-11-24
+// Function Complete: 2023-12-02
 
 import React from 'react';
 import { Navigate, Route, Routes } from "react-router-dom";

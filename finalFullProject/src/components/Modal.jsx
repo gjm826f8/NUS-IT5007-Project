@@ -1,3 +1,7 @@
+// Li Yueling
+// First Create: 2023-11-26
+// Function Complete: 2023-11-26
+
 import React from "react";
 
 const Modal = ({ isVisible, onClose, children }) => {

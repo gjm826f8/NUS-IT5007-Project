@@ -1,4 +1,7 @@
 // Purpose: Displays a modal to confirm if the user really wants to delete a property.
+// Li Yueling
+// First Create: 2023-11-26
+// Function Complete: 2023-11-26
 
 import React from "react";
 // import graphql mutation

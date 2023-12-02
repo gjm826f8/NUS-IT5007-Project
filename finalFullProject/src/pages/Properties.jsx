@@ -1,4 +1,7 @@
 // Purpose: Displays all properties in a table
+// Li Yueling
+// First Create: 2023-11-20
+// Function Complete: 2023-11-27
 
 import React, { useEffect, useState } from 'react'
 // import graphql queries and components
