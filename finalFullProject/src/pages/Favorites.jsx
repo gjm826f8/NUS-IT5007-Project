@@ -1,7 +1,7 @@
 // Purpose: Favorites page for the tenant user, shows the tenant's favorites properties
 // Li Yueling
 // First Create: 2023-11-20
-// Function Complete: 2023-11-27
+// Function Complete: 2023-12-02
 
 import React, { useEffect, useState } from 'react';
 import { PropertyTable, Slider, getPropertyQuery, getTenantQuery } from "/src/components";
@@ -70,6 +70,7 @@ function Favorites() {
         <PropertyTable propertyData={userFavorites} />
       ) : (
         <div>
+          {/* Liao's function */}
           <DisplayWindow houseList={userFavorites} showInfoWindowId={showInfoWindowId} setShowInfoWindowId={setShowInfoWindowId} setShowOnMapId={setShowOnMapId}/>
           <Map houseList={userFavorites} setShowInfoWindowId={setShowInfoWindowId} showOnMapId={showOnMapId}/>
         </div>
