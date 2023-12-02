@@ -13,7 +13,7 @@ import "./styles/loginSignup.css";
 function Login() {
   const [mode, setMode] = useState("tenant"); // mode state to determine which login component to render, agent/tenant
   return (
-    <div className="bg-gray-50 min-h-screen flex flex-col items-center justify-center gap-2">
+    <div className="flex flex-col items-center justify-center gap-2 py-10">
       {/* switch to change the login mode */}
       <div className="flex gap-2 justify-center">
         <button

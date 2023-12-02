@@ -162,7 +162,7 @@ function ShowProfile() {
 
   return (
     <div>
-    <div className="bg-gray-50 min-h-screen flex flex-col items-center justify-center gap-2">
+    <div className="flex flex-col items-center justify-center gap-2 py-10">
       <div className="loginContainer">
         <div className="loginHeader">Profile</div>
         <form onSubmit={handleSubmit} className="loginForm">

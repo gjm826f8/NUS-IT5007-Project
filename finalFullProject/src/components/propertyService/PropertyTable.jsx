@@ -177,7 +177,7 @@ function PropertyTable({ propertyData }) {
   };
 
   return (
-    <div className="p-2 max-w-5xl mx-auto text-black fill-gray-400">
+    <div className="px-2 max-w-5xl mx-auto text-black fill-gray-400 py-10">
       <table className="border border-gray-700 w-full">
         <thead className="bg-slate-600 text-white">
           {table.getHeaderGroups().map((headerGroup) => (
