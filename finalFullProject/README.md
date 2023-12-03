@@ -196,7 +196,20 @@ The default status (first time you come in this page) is to show all properties 
     </tr>
     <tr>
       <td>JIANG XINDOU</td>
-      <td></td>
+      <td>
+        <br />
+        <b>UI Pages</b><br />
+        - Landing Page<br />
+        <br />   
+        <b>MongoDB and GraphQL</b><br />
+        - get properties by address<br />
+        <b>APIs Implementation</b><br />
+              - Search Property by Address<br />
+              - Search Property by Property Type<br />
+              - Search Property by Bedroom Number<br />
+              - Search Property by Maximum Price<br />
+      </td>
+    </tr>
     </tr>
     <tr>
       <td>LI YUELING</td>
