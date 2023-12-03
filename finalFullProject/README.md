@@ -28,8 +28,9 @@
 ### 2.1 List of Implemented Features Overview <a id='section2.1'></a>
 #### 2.1.1 UI Implementation <a id='section2.1.1'></a>
 * Landing Page (all users)
-  * Property listing with details and images
-  * Search and filter by MRT, price, property type and # of bedrooms
+  * Header: As a warm welcome for users and state the intention of the website
+  * Sample Property Display: Display sample properties. 
+  * Property Display and Search: Display the listing of properties for rent and allow users to search properties of their interest by address, property type, bedroom number and maximum price. 
 * Map Based Search (all users)
   * House Information on the left hand side
   * Google Map with Marker to show all properties in Singapore
@@ -65,6 +66,8 @@
   * Add property (CREATE)
   * Update property (UPDATE)
   * Delete property (DELETE)
+  * Get all properties by address (READ)
+
 * Agent Service
   * Get agent (READ)
   * Get agent by ID (READ)
@@ -118,21 +121,20 @@
 ### 3.1 Landing Page <a id='section3.1'></a>
 **Navigation**: 
 
- - Whole Unit: click to see listing of whole unit for rent
- - Rooms: click to see rooms for rent
- - Map-Based Search: click to view properties based on map
- - Post: click to post a property
- - Login: click to login
+ - Home: Direct to landing page
+ - Properties: A display of all available properties
+ - Map-Based Search: Visit Map-Based Search Service
+ - Login: click to login as agent or tenant
  
 **Search**: 
 	
- - by MRT
- - by Price
- - by how many Bedrooms
+ - by Address
  - by Property Type
+ - by Bedroom Number
+ - by Maximum Price
 
 **Listing**: 
-Listing of new posts
+Listing of related Properties
 
 ### 3.2 Map-Based Search <a id='section3.2'></a>
 In this projet, this is the most important function which allows user to view for rental house in a map. We use Google Map API to show the map and mark all the properties in Singapore. In this page, there is the same navigation bar as the landing page on the top of the website. On the left hand side we have house information, and on the other side of the web page we have google map.
