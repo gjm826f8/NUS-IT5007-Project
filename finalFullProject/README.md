@@ -67,7 +67,7 @@
   * Add property (CREATE)
   * Update property (UPDATE)
   * Delete property (DELETE)
-  * Get all properties by address (READ)
+  * Get properties by address (READ)
 
 * Agent Service
   * Get agent (READ)
@@ -127,6 +127,9 @@
  - Map-Based Search: Visit Map-Based Search Service
  - Login: click to login as agent or tenant
  
+**Header**:
+ - a warm welcome and state intention of the website which is a property rental platform
+
 **Search**: 
 	
  - by Address
@@ -134,8 +137,8 @@
  - by Bedroom Number
  - by Maximum Price
 
-**Listing**: 
-Listing of related Properties
+**Display**: 
+ - Listing of related Properties
 
 ### 3.2 Map-Based Search <a id='section3.2'></a>
 In this projet, this is the most important function which allows user to view for rental house in a map. We use Google Map API to show the map and mark all the properties in Singapore. In this page, there is the same navigation bar as the landing page on the top of the website. On the left hand side we have house information, and on the other side of the web page we have google map.
@@ -198,12 +201,12 @@ The default status (first time you come in this page) is to show all properties 
     <tr>
       <td>JIANG XINDOU</td>
       <td>
-        <br />
         <b>UI Pages</b><br />
         - Landing Page<br />
         <br />   
         <b>MongoDB and GraphQL</b><br />
         - get properties by address<br />
+        <br />   
         <b>APIs Implementation</b><br />
               - Search Property by Address<br />
               - Search Property by Property Type<br />
