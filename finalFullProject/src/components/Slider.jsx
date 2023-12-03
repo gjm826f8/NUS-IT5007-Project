@@ -5,7 +5,7 @@ import React from "react";
 
 function Slider({ enabled, setEnabled }) {
   return (
-    <div className="flex relative items-center justify-between mx-10 my-2">
+    <div className="flex items-center justify-between mx-10 absolute z-10 bg-gray-50 rounded-lg right-10">
       <div className="relative"></div>
       <div className="flex flex-row gap-5 items-center">
         <label className="text-sm text-gray-500">Compare Properties</label>
