@@ -14,6 +14,7 @@
    1. [Landing Page](#section3.1)
    2. [Map-Based Search](#section3.2)
 4. [Details of the Project Modules Assigned to Each Team Member](#section4)
+5. [Demo Video Link](#section5)
 
 
 ## 1. Project Init <a id='section1'></a>
@@ -252,3 +253,8 @@ The default status (first time you come in this page) is to show all properties 
     </tr>
   </table>
 </div>
+
+## 5. Demo Video Link
+- Part 1:
+- Part 2:
+- Part 3: https://drive.google.com/file/d/1_YvyJoOJi2pnttdn726H7YzFW62wrXng/view?usp=sharing
