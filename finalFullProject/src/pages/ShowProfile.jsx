@@ -137,7 +137,8 @@ function ShowProfile() {
                 setReadOnly(true);
                 setShowPassword(false);
                 setShowPasswordConfirm(false);
-                setAuth({...auth, name: formValues.name})
+                setAuth({...auth, name: formValues.name});
+                setFormValues({...formValues, passwordConfirm: ''});
             }
         } catch (error) {
             console.log(error);
@@ -160,7 +161,8 @@ function ShowProfile() {
             setReadOnly(true);
             setShowPassword(false);
             setShowPasswordConfirm(false);
-            setAuth({...auth, name: formValues.name})
+            setAuth({...auth, name: formValues.name});
+            setFormValues({...formValues, passwordConfirm: ''});
           }
         } catch (error) {
           console.log(error);
