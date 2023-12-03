@@ -10,8 +10,12 @@ import DisplayWindow from "../components/mapService/displayWindow.jsx";
 import { getAllPropertiesQuery } from "../components/FetchCmd.js";
 
 export default function MapBaseSearch() {
-  const [showOnMapId, setShowOnMapId] = useState(0);
+  // const [showOnMapId, setShowOnMapId] = useState(0);
+  // Google Map Marker: selected house state
+  const [selectedId, setSelectedId] = useState(0);
+  // House Info Window State
   const [showInfoWindowId, setShowInfoWindowId] = useState(0);
+  // House List Filtered State
   const [houseListFiltered, setHouseListFiltered] = useState([]);
   // House List State
   const [houseList, setHouseList] = useState([]);
@@ -37,8 +41,8 @@ export default function MapBaseSearch() {
       {/* <navBar /> */}
       {/* <searchBar /> */}
       <DisplayWindow houseList={houseList} showInfoWindowId={showInfoWindowId} setShowInfoWindowId={setShowInfoWindowId} 
-        setShowOnMapId={setShowOnMapId} houseListFiltered={houseListFiltered} setHouseListFiltered={setHouseListFiltered}/>
-      <Map houseList={houseListFiltered} setShowInfoWindowId={setShowInfoWindowId} showOnMapId={showOnMapId}/>
+         setSelectedId={setSelectedId} houseListFiltered={houseListFiltered} setHouseListFiltered={setHouseListFiltered}/>
+      <Map houseList={houseListFiltered} setShowInfoWindowId={setShowInfoWindowId} selectedId={selectedId} setSelectedId={setSelectedId}/>
     </div>
   );
 }

@@ -23,7 +23,7 @@ const sample_text = "This is a sample text. The house have 3 bedrooms and 2 bath
                     Please call me on the weekday from 9am to 10 pm! \
                     If you have any questions, please feel free to contact me.";
 
-const DisplayWindow = ({ houseList, showInfoWindowId, setShowInfoWindowId, setShowOnMapId, houseListFiltered, setHouseListFiltered }) => {
+const DisplayWindow = ({ houseList, showInfoWindowId, setShowInfoWindowId, setSelectedId, houseListFiltered, setHouseListFiltered }) => {
   const { auth } = AuthData();
   const [favoritesList, setFavoritesList] = useState([]);
   const [historyList, setHistoryList] = useState([]);
@@ -181,14 +181,18 @@ const DisplayWindow = ({ houseList, showInfoWindowId, setShowInfoWindowId, setSh
     <div className="displayWindow">
       <div className='functionBtn'>
         <FilterBtn filterType={filterType} setFilterType={setFilterType} isTenant={isTenant} setShowInfoWindowId={setShowInfoWindowId} />
-        <SortBtn setSortType={setSortType}/>
+        <SortBtn setSortType={setSortType} />
+      </div>
+      <hr></hr>
+      <div className='resultNumber'>
+        {showInfoWindowId == 0 && <p> {houseListFiltered.length} results found </p>}
       </div>
       {showInfoWindowId == 0 && <HouseBriefInfo houseList={houseListFiltered} setShowInfoWindowId={setShowInfoWindowId}
-        setShowOnMapId={setShowOnMapId} favoritesList={favoritesList} historyList={historyList}
+        setSelectedId={setSelectedId} favoritesList={favoritesList} historyList={historyList}
         handleView={handleView} handleLike={handleLike} handleDislike={handleDislike} />}
       {showInfoWindowId != 0 && <HouseDetailInfo houseList={houseListFiltered} showInfoWindowId={showInfoWindowId}
         setShowInfoWindowId={setShowInfoWindowId} favoritesList={favoritesList} handleLike={handleLike} handleDislike={handleDislike}
-        setShowOnMapId={setShowOnMapId} />}
+        setSelectedId={setSelectedId} />}
     </div>
   );
 }
@@ -240,27 +244,22 @@ const SortBtn = ({ setSortType }) => {
   ];
   return (
     <Dropdown
-    menu={{
-      items,
-      onClick,
-    }}
-  >
-    <a onClick={(e) => e.preventDefault()}>
-      <Space>
-        Sorting By
-        <DownOutlined />
-      </Space>
-    </a>
-  </Dropdown>
-    );
+      menu={{
+        items,
+        onClick,
+      }}
+    >
+      <a onClick={(e) => e.preventDefault()}>
+        <Space>
+          Sorting By
+          <DownOutlined />
+        </Space>
+      </a>
+    </Dropdown>
+  );
 }
 
-const HouseBriefInfo = ({ houseList, setShowInfoWindowId, setShowOnMapId, favoritesList, historyList, handleView, handleLike, handleDislike }) => {
-  const handleClick = (id) => {
-    setShowInfoWindowId(id);
-    // handleView(id);
-    console.log("handleClick id: ", id);
-  }
+const HouseBriefInfo = ({ houseList, setShowInfoWindowId, setSelectedId, favoritesList, historyList, handleView, handleLike, handleDislike }) => {
   return (
     <div className="houseBriefInfo">
       {houseList.map((house, index) => (
@@ -288,7 +287,7 @@ const HouseBriefInfo = ({ houseList, setShowInfoWindowId, setShowOnMapId, favori
               <td className="houseBriefButton">
                 <LiaMapMarkerAltSolid className="w-6 h-6 cursor-pointer"
                   title="click to show on map"
-                  onClick={setShowOnMapId(house.id)}></LiaMapMarkerAltSolid>
+                  onClick={() => {setSelectedId(house.id); console.log("onClick show on map: ", house.id);}}></LiaMapMarkerAltSolid>
               </td>
             </tr>
             <tr className="houseInfoDetail">
@@ -333,14 +332,7 @@ const HouseBriefInfo = ({ houseList, setShowInfoWindowId, setShowOnMapId, favori
   );
 }
 
-const HouseDetailInfo = ({ houseList, showInfoWindowId, setShowInfoWindowId, favoritesList, handleLike, handleDislike, setShowOnMapId }) => {
-  const handleBack = () => {
-    return () => {
-      setShowInfoWindowId(0);
-      setShowOnMapId(0);
-    };
-  }
-
+const HouseDetailInfo = ({ houseList, showInfoWindowId, setShowInfoWindowId, favoritesList, handleLike, handleDislike, setSelectedId }) => {
   return (
     <div className="houseDetailInfo">
       {houseList.map((house, index) => (house.id == showInfoWindowId && (
@@ -401,7 +393,7 @@ const HouseDetailInfo = ({ houseList, showInfoWindowId, setShowInfoWindowId, fav
               <td className="houseDetailButton" align="right">
                 <TbArrowBackUp className="w-6 h-6 cursor-pointer"
                   title="click to go back"
-                  onClick={handleBack()}></TbArrowBackUp>
+                  onClick={ () => {setShowInfoWindowId(0); setSelectedId(0); console.log("onClick go back: ", 0);}}></TbArrowBackUp>
               </td>
             </tr>
             <tr className="houseInfoDetail">

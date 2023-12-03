@@ -85,8 +85,17 @@
     width: 100%;
     display: flex;
     flex-direction: row;
+    padding: 10px;
+    font-family: Arial, Helvetica, sans-serif;
  }
 
  .filterBtn {
-    width: 35%;
+    width: 36%;
+ }
+
+ .resultNumber {
+    margin-left: 36%;
+    padding: 3px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
  }
