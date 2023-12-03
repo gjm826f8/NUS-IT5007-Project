@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { NavUserService } from '/src/components';
+const logo_url = "https://t3.ftcdn.net/jpg/02/94/06/76/360_F_294067687_NRdOU2O0LXLltL29fj7vqLaz00PM5dTJ.jpg";
 
 function NavigationBar() {
   return (

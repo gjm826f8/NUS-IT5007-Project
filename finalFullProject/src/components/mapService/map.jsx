@@ -27,14 +27,16 @@ const Map = ({houseList, setShowInfoWindowId, showOnMapId}) => {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: "AIzaSyBrHnN-mtF_XkCy80h7MI2c25mQ6W9qBo8", // GOOGLE_MAP_API_KEY,
   });
-  // Google Map Center
-  // const center = useMemo(() => ({ lat: 1.3648480445323086, lng: 103.81261318608769 }), []);
+  // Google Map Center and Zoom decide by showOnMapId state
   useEffect(() => {
     if (showOnMapId != 0) {
       setSelectedId(showOnMapId);
-      console.log("houseList: ", houseList);
-      console.log(houseList[showOnMapId]);
-      // setCenter({ lat: houseList[showOnMapId].lat, lng: houseList[showOnMapId].lng });
+      for (var i = 0; i < houseList.length; i++) {
+        if (houseList[i].id == showOnMapId) {
+          setCenter({ lat: houseList[i].lat, lng: houseList[i].lng });
+          break;
+        }
+      }
       setZoom(15);
     }
   }, [showOnMapId]);
