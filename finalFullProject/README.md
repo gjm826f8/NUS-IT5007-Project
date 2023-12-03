@@ -255,6 +255,6 @@ The default status (first time you come in this page) is to show all properties 
 </div>
 
 ## 5. Demo Video Link
-- Part 1:
+- Part 1(Landing_Page_Xindou): https://youtu.be/RPvKX9r4KMY
 - Part 2:
 - Part 3: https://drive.google.com/file/d/1_YvyJoOJi2pnttdn726H7YzFW62wrXng/view?usp=sharing
