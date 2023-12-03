@@ -11,6 +11,7 @@ module.exports = {
 	devServer: {
 		directory: path.resolve(__dirname, 'public'),
 		watch: true,
+		hot: true
 	  },
 	module: {
 		rules: [
@@ -32,6 +33,7 @@ module.exports = {
 	},
 	devServer: {
         historyApiFallback: true,
+		hot: true
     },
 	plugins: [
 		new MiniCssExtractPlugin({
