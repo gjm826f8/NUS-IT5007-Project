@@ -75,13 +75,13 @@ const DisplayWindow = ({ houseList, showInfoWindowId, setShowInfoWindowId, setSe
 
   const getHouseListSorted = () => {
     if (sortType == "price_asc") {
-      setHouseListFiltered(houseListFiltered.sort((a, b) => a.price - b.price));
-    } else if (sortType == "price_desc") {
       setHouseListFiltered(houseListFiltered.sort((a, b) => b.price - a.price));
+    } else if (sortType == "price_desc") {
+      setHouseListFiltered(houseListFiltered.sort((a, b) => a.price - b.price));
     } else if (sortType == "size_asc") {
-      setHouseListFiltered(houseListFiltered.sort((a, b) => a.area - b.area));
-    } else if (sortType == "size_desc") {
       setHouseListFiltered(houseListFiltered.sort((a, b) => b.area - a.area));
+    } else if (sortType == "size_desc") {
+      setHouseListFiltered(houseListFiltered.sort((a, b) => a.area - b.area));
     }
   }
 
@@ -149,6 +149,7 @@ const DisplayWindow = ({ houseList, showInfoWindowId, setShowInfoWindowId, setSe
   // handle viewed and add to history
   const handleView = (id) => async () => {
     setShowInfoWindowId(id);
+    setSelectedId(id);
     // if not logged in as tenant, do nothing
     if (!isTenant) {
       return;
