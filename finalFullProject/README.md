@@ -30,7 +30,9 @@
 * Landing Page (all users)
   * Property listing with details and images
   * Search and filter by MRT, price, property type and # of bedrooms
-* Map View (all users)
+* Map Based Search (all users)
+  * House Information on the left hand side
+  * Google Map with Marker to show all properties in Singapore
 * Properties (all users)
   * Display all properties
   * Like/ Dislike a property for tenant users
@@ -73,10 +75,18 @@
   * Update tenant (UPDATE)
   * Delete tenant (DELETE)
 ##### 2. 3rd Party APIs
-TBD
+* React Google Map APIs
+  * Use "GoogleMap" to show google map
+  * Use "Marker" to label properties on the map
+  * Use "InfoWindow" to show simple house information when the mouse is over an marker on the map
+* React Share
+  * Use "FacebookShareButton" to pop up a facebook post window
 ### 2.2 Pages and Access Rights by User Type <a id='section2.2'></a>
 #### 2.2.1 Guest/ Unauthenticated/ Unregistered Users <a id='section2.2.1'></a>
-* Access landing page and map view.
+* Access landing page.
+* Access map based search with limited functions.
+   * Can not add properties to favorite list
+   * Can not add properties to view history list
 * View all of the properties by clicking `Properties` placed on the top navigation bar.
 * Access `Login` page by clicking the `Log in/ Sign up` button placed on the top-right corner of the page.
    * Switch `tenant`/`agent` login mode by clicking the 2 buttons placed on the top of the input field container. Validation is performed on all input fields.
@@ -84,7 +94,8 @@ TBD
    * **Tenant mode:** The first step is to check for an e-mail address and continue checking for a password if the e-mail exists in the database; if not, continue with the registration.
 #### 2.2.2 Logged in Tenants <a id='section2.2.2'></a>
 *You can test this section with userEmail: `johndoe@example.com` and password: `john`*
-* Access landing page and map view.
+* Access landing page.
+* Access map based search with all functions.
 * Once logged in, tenants can click on the button with their username in the upper right corner to access all tenant-permitted features in a drop-down list.
 * **Properties:** The page lists all the properties. Unlike this page in the above mode (namely 2.1.1), the user can also click the "heart" icon to change the status ("Like"/ "Dislike") of the property. On change of the status, `favorites` and `history` list of `tenants` collection will be updated at the back-end. System will fetch latest data. Besides, users can get the contact information of agent in charge in a pop-up modal.
 * **Favorites:** The page lists all the properties for which the tenant user have clicked on the "heart" icon. There is a slider to toggle between a detailed listing mode with images and a comparison mode that shows only the necessary information in a table. User can also click the "heart" icon to change the status ("Like"/ "Dislike") of the property. On change of the status, `favorites` and `history` list of `tenants` collection will be updated at the back-end. System will fetch latest data. Besides, users can get the contact information of agent in charge in a pop-up modal.
@@ -93,7 +104,10 @@ TBD
 * **Log Out:** Users can log out of their accounts.
 #### 2.2.3 Logged in Agents <a id='section2.2.3'></a>
 *You can test this section with userEmail: `andrewjordan@example.org` and password: `andrew`*
-* Access landing page and map view.
+* Access landing page.
+* Access map based search with limited functions.
+   * Can not add properties to favorite list
+   * Can not add properties to view history list
 * **Properties:** The page lists all the properties. 
 * **Add Property:** The agent user can post new property from this page. Validation is performed on all input fields.
 * **My Posts**: This page lists all the properties posted by the agent user as the responsible agent. The user can also edit or delete properties on this page. On edition and deletion, the data will be fetched again.
@@ -106,7 +120,7 @@ TBD
 
  - Whole Unit: click to see listing of whole unit for rent
  - Rooms: click to see rooms for rent
- - Map-Based Search: click to search properties based on map
+ - Map-Based Search: click to view properties based on map
  - Post: click to post a property
  - Login: click to login
  
@@ -121,43 +135,48 @@ TBD
 Listing of new posts
 
 ### 3.2 Map-Based Search <a id='section3.2'></a>
-In this projet, this is the most important function which allows user to search for rental house in a map view. We use Google Map API to show the map and mark all the properties in Singapore. In this page, there also should have a same navigation bar and search box as the landing page on the top of the website, however we can't intergrate it since the page isn's built by React. And we will fix that later!
-#### 3.2.1 Filter buttom
-There are three type of filter buttoms, including "All Properties", "My Favorite", "View History". And the buttons will be replaced by other designed icons afterword.
-1. For "All Properties", when the users click it, it should show all the rental houses available on the map and also list their brief information in the middle parts. Notes that after we integrate the search box on this page, all properties means the whole filter results of it, not all the house data in database.
-3. For "My Favorite", when the users click it, it should show all the rental houses they liked before on the map and also list their brief information in the middle parts.
-3. For "View History", when the users click it, it should show all the rental houses they viewed before on the map and also list their brief information in the middle parts. And the definition of viewed is when users have clicked the houses' marker before or see the detial infomation about the houses.
+In this projet, this is the most important function which allows user to view for rental house in a map. We use Google Map API to show the map and mark all the properties in Singapore. In this page, there is the same navigation bar as the landing page on the top of the website. On the left hand side we have house information, and on the other side of the web page we have google map.
+#### 3.2.1 Filter Buttons & Sorting Dropdown Button
+There are three type of filter buttons, including "All Properties", "Favorite", "History".
+1. For "All Properties", when the users click it, it should show all the rental houses available on the map and also list their brief information.
+3. For "Favorite", when the users click it, it should show all the rental houses they liked before on the map and also list their brief information.
+3. For "History", when the users click it, it should show all the rental houses they viewed before on the map and also list their brief information. And the definition of viewed is when users have clicked the houses' marker before or see the detial infomation about the houses.
+
+There is a sorting dropdown buttons for user to order properties in different options
+1. For "Monthly Rent (Ascending)", when the users click it, it should show the rental houses list from lowest price to highest price
+2. For "Monthly Rent (Descending)", when the users click it, it should show the rental houses list from highest price to lowest price
+3. For "Area/Size (Ascending)", when the users click it, it should show the rental houses list from smallest size to greatest size
+4. For "Area/Size (Descending)", when the users click it, it should show the rental houses list from greatest size to smallest size
 #### 3.2.2 House Brief Information
-This is the middle part of the page and it shows all the information about the properties. There are two status, one the brief information and the other one is detail information. And the default status (first time you come in this page) is to show all properties' brief information.
+This is the left part of the page and it shows all the information about the properties. There are two status, one the brief information and the other one is detail information. And the default status (first time you come in this page) is to show all properties' brief information.
 1. For brief infomation, it has following components:
-   Information -> One Photo, Title (condo name or address), House Type, Monthly Rent, Bedrooms, Level of Floor, and Size
-   Button -> Like, Share, Show on Map, Show Detail Information (they will be replaced by other designed icon afterword)
-   Bottom Line -> Show users the result numbers of the housing list
+   Upper Line -> Show users the result numbers of the housing list
+   Information -> One Photo, Title (condo name or address), House Type, Monthly Rent, Bedrooms, Bathrooms, and Size
+   Button -> Show Detail Information, Show on Map, Like, Share
    
    What happen when you click on different buttons?<br /><br />
-   a. For "Like", when it is the first time you like the property, the color of the marker on the map will turn to pink which means it becomes your favorite property. If you click it again, the color of the marker turn back to blue which means it is removed from you favorite properties list.<br />
-   b. For "Share", we plan to connect with social medias API and the users can post the rental house information on the platforms. For now, it is not complete yet.<br />
-   c. For "Show on Map", it direct you to the place of that house on the map by using an orange marker.<br />
-   d. For "Show Detail Information", it will give you all the information about that house in the same middle section.
+   a. For "Show Detail Information", it will give you all the information about that house in the same window.<br />
+   b. For "Show on Map", it direct you to the place of that house on the map by using an orange marker.<br />
+   c. For "Like", when it is the first time you like the property, it will store the properties to your favorite list. If you click it again, it will remove from you favorite properties list.<br />
+   d. For "Share", it will connect to social medias API (Facebook) and the users can post the rental house information on the platforms. Since this project is implemented on local machine, we can not attach our actual url to the post, we use and dummy url instead.
 3. For detail information, it has following components:
-   Breif Information (Upper Part) -> Few photos, Title (condo name or address), House Type, Monthly Rent, Bedroom Number, Level of Floor, Size, Adress, Contact Number
+   Breif Information (Upper Part) -> Few photos, Title (condo name or address), House Type, Monthly Rent, Bedroom Number, Bathroom Number, Size, Postal Code
    Detail Information (Lower Part) -> Few detail titles and the descriptions
    Button -> Like, Share, Go Back
 
    What happen when you click on different buttons?<br /><br />
    a. For "Like", the function is the same as stated before in "brief infomation" part.<br />
    b. For "Share", the function is the same as stated before in "brief infomation" part.<br />
-   c. For "Go Back", when the users come to this detail information from clicking "Show Detail Information" button on brief information list, the button become visible. And they can use this button to go back to the brief information list. For instance, the user click on "My Favorite" filter button first and the middle part will show his all favorite properties' brief information. And then the user click the "Show Detail Information" button on either of any properties, the middle part displays the detail information with the "Go Back" button. Thus, the user can go back to where he came from intead of remembering what he was trying to search.
+   c. For "Go Back", the user can use this button to go back to the brief information list. For instance, the user click on "Favorite" filter button first and the left part will show his/her all favorite properties' brief information. And then the user click the "Show Detail Information" button on either of any properties, the left part displays the detail information with the "Go Back" button. Thus, the user can go back to where he came from intead of remembering what he was trying to search.
 #### 3.2.3 Marker on the map
 The default status (first time you come in this page) is to show all properties on the map with the blue marker.
 1. marker color
    blue: the default color of the rental house marker
-   pink: means that you like this rental house
    orange: show you the rental house you are looking at on the moment
 3. mouseover the marker
-   it will give you a simple overview for the house, including title (condo name or address), house type, monthly rent, and number of bedrooms
+   it will give you a simple overview for the house, including title (condo name or address), house type, monthly rent, number of bedrooms, and number of bathrooms
 3. click on marker
-   it will zoom in to the place, show you the detail information about the house in the middle part and the marker turn orange at the same time
+   it will zoom in to the place, show you the detail information about the house in the left part and the marker turn orange at the same time
 4. base operations of the map (provided by Google Map)
    left upper corner: users can choose from "Map" or "Satellite" which provide different points of view for the map
    right upper corner: user can click on the button and view the map in full screen
@@ -208,7 +227,13 @@ The default status (first time you come in this page) is to show all properties 
     </tr>
     <tr>
       <td>LIAO YUEH FAN</td>
-      <td></td>
+      <td>
+	<b>UI Pages</b><br />
+        - Map based search<br />
+	<b>APIs implementation</b><br />
+        - Google Map APIs<br />
+        - React Share APIs<br />
+      </td>
     </tr>
   </table>
 </div>
