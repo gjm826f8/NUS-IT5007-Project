@@ -174,23 +174,37 @@ The default status (first time you come in this page) is to show all properties 
       <th>Tasks</th>
     </tr>
     <tr>
-      <td>LI YUELING</td>
-      <td>
-        - Project environment setting
-        <br />
-        - Tenant service UI&API&back-end 
-        <br/>&emsp;&emsp; (CRUD - Login, Deregister, Show profile, Update profile) 
-        <br /> 
-        - Agent Service UI&API&back-end 
-        <br/>&emsp;&emsp; (RU - Show profile, Update profile) 
-        <br /> 
-        - Property service UI&API&back-end 
-        <br/>&emsp;&emsp;  (CRUD - Show all properties, Show all properties posted by the agent, Agent post new property, Agent edit/ delete property, Show properties in tenant's favorites/ history list, Update tenant's favorites/ history list)        
-      </td>
-    </tr>
-    <tr>
       <td>JIANG XINDOU</td>
       <td></td>
+    </tr>
+    <tr>
+      <td>LI YUELING</td>
+      <td>
+        - Project environment setting<br />
+        <br />
+        <b>UI Pages</b><br />
+        - View all properties in table format page<br />
+        - Login& register page<br />
+        - Show, edit& update profile, deregister page<br />
+        - Agent view all posts, edit/delete property page<br />
+        - Agent add new property page <br />
+        - Tenant show& update history page<br />
+        - Tenant show& update favorites page<br />
+        <br />   
+        <b>MongoDB and GraphQL</b><br />
+        - get all properties<br />
+        - get property<br />
+        - add property<br />
+        - update property<br />
+        - delete property<br />
+        - get agent<br />
+        - get agent by id<br />
+        - update agent<br />
+        - get tenant<br />
+        - add tenant<br />
+        - update tenant<br /> 
+        - delete tenant<br />
+      </td>
     </tr>
     <tr>
       <td>LIAO YUEH FAN</td>

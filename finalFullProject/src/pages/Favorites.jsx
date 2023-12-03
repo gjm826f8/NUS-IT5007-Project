@@ -1,7 +1,7 @@
 // Purpose: Favorites page for the tenant user, shows the tenant's favorites properties
 // Li Yueling
 // First Create: 2023-11-20
-// Function Complete: 2023-12-02
+// Function Complete: 2023-12-03
 
 import React, { useEffect, useState } from 'react';
 import { PropertyTable, Slider, getPropertyQuery, getTenantQuery } from "/src/components";
@@ -15,6 +15,7 @@ function Favorites() {
 
   const [showOnMapId, setShowOnMapId] = useState(0);
   const [showInfoWindowId, setShowInfoWindowId] = useState(0);
+  const [houseListFiltered, setHouseListFiltered] = useState([]);
 
   // fetch tenant favorites list on load, and then fetch the property data
   useEffect(() => {
@@ -70,9 +71,16 @@ function Favorites() {
         <PropertyTable propertyData={userFavorites} />
       ) : (
         <div>
-          {/* Liao's function */}
-          <DisplayWindow houseList={userFavorites} showInfoWindowId={showInfoWindowId} setShowInfoWindowId={setShowInfoWindowId} setShowOnMapId={setShowOnMapId}/>
-          <Map houseList={userFavorites} setShowInfoWindowId={setShowInfoWindowId} showOnMapId={showOnMapId}/>
+          {/* Liao's function (first added:2023-12-02, changedL 2023-12-03)*/}
+          <DisplayWindow 
+            houseList={userFavorites} 
+            showInfoWindowId={showInfoWindowId} 
+            setShowInfoWindowId={setShowInfoWindowId} 
+            setShowOnMapId={setShowOnMapId}
+            houseListFiltered={houseListFiltered} 
+            setHouseListFiltered={setHouseListFiltered}
+          />
+          <Map houseList={houseListFiltered} setShowInfoWindowId={setShowInfoWindowId} showOnMapId={showOnMapId}/>
         </div>
       )}
     </div>
