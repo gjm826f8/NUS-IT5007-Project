@@ -260,4 +260,4 @@ The default status (first time you come in this page) is to show all properties 
 ## 5. Demo Video Link
 - Part 1(Landing_Page_Xindou): https://youtu.be/RPvKX9r4KMY
 - Part 2(Map Based Search Page_Liao Yueh Fan): https://drive.google.com/file/d/1eSHpCd79mdVh33DtLMpMhbK7tEUJFhsv/view?usp=drive_link
-- Part 3: https://drive.google.com/file/d/1_YvyJoOJi2pnttdn726H7YzFW62wrXng/view?usp=sharing
+- Part 3(User Service and Other Property Service_Li Yueling): https://drive.google.com/file/d/1_YvyJoOJi2pnttdn726H7YzFW62wrXng/view?usp=sharing
