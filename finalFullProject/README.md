@@ -197,7 +197,20 @@ The default status (first time you come in this page) is to show all properties 
     </tr>
     <tr>
       <td>JIANG XINDOU</td>
-      <td></td>
+      <td>
+        <br />
+        <b>UI Pages</b><br />
+        - Landing Page<br />
+        <br />   
+        <b>MongoDB and GraphQL</b><br />
+        - get properties by address<br />
+        <b>APIs Implementation</b><br />
+              - Search Property by Address<br />
+              - Search Property by Property Type<br />
+              - Search Property by Bedroom Number<br />
+              - Search Property by Maximum Price<br />
+      </td>
+    </tr>
     </tr>
     <tr>
       <td>LI YUELING</td>
@@ -242,6 +255,6 @@ The default status (first time you come in this page) is to show all properties 
 </div>
 
 ## 5. Demo Video Link
-- Part 1:
+- Part 1(Landing_Page_Xindou): https://youtu.be/RPvKX9r4KMY
 - Part 2:
 - Part 3: https://drive.google.com/file/d/1_YvyJoOJi2pnttdn726H7YzFW62wrXng/view?usp=sharing
