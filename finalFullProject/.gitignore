@@ -4,6 +4,9 @@
 # Ignore everything in the public folder
 public/*
 
+# But include the images directory
+!public/images/
+
 # But allow the index.html file
 !public/index.html
 
