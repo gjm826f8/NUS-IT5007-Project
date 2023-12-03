@@ -227,12 +227,13 @@ The default status (first time you come in this page) is to show all properties 
     </tr>
     <tr>
       <td>LIAO YUEH FAN</td>
+      <td>
 	<b>UI Pages</b><br />
         - Map based search<br />
 	<b>APIs implementation</b><br />
         - Google Map APIs<br />
         - React Share APIs<br />
-      <td></td>
+      </td>
     </tr>
   </table>
 </div>
