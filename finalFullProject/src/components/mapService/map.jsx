@@ -22,7 +22,7 @@ const Map = ({houseList, setShowInfoWindowId, selectedId, setSelectedId}) => {
 
   // Google Map API Key
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: "AIzaSyBrHnN-mtF_XkCy80h7MI2c25mQ6W9qBo8", // GOOGLE_MAP_API_KEY,
+    googleMapsApiKey: "google_api_key", // GOOGLE_MAP_API_KEY,
   });
   // Google Map Center and Zoom decide by selectedId state
   useEffect(() => {
